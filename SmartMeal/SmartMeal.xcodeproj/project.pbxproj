@@ -11,6 +11,12 @@
 		C83477162D6E12AC006ED330 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83477152D6E12AC006ED330 /* ViewController.swift */; };
 		C834771B2D6E12AD006ED330 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C834771A2D6E12AD006ED330 /* Assets.xcassets */; };
 		C834771E2D6E12AD006ED330 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C834771C2D6E12AD006ED330 /* LaunchScreen.storyboard */; };
+		C83477272D6E1416006ED330 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83477262D6E1416006ED330 /* RegistrationViewController.swift */; };
+		C83477292D6E1425006ED330 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83477282D6E1425006ED330 /* LoginViewController.swift */; };
+		C834772B2D6E1A79006ED330 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C834772A2D6E1A79006ED330 /* CustomTextField.swift */; };
+		C834772D2D6E22A3006ED330 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C834772C2D6E22A3006ED330 /* CustomButton.swift */; };
+		C834772F2D6E2574006ED330 /* DividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C834772E2D6E2574006ED330 /* DividerView.swift */; };
+		C83477322D6E2834006ED330 /* ImageAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83477312D6E2834006ED330 /* ImageAssets.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +26,12 @@
 		C834771A2D6E12AD006ED330 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C834771D2D6E12AD006ED330 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C834771F2D6E12AD006ED330 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C83477262D6E1416006ED330 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		C83477282D6E1425006ED330 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		C834772A2D6E1A79006ED330 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		C834772C2D6E22A3006ED330 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		C834772E2D6E2574006ED330 /* DividerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerView.swift; sourceTree = "<group>"; };
+		C83477312D6E2834006ED330 /* ImageAssets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAssets.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +64,8 @@
 		C83477102D6E12AC006ED330 /* SmartMeal */ = {
 			isa = PBXGroup;
 			children = (
+				C83477302D6E2820006ED330 /* Resources */,
+				C83477252D6E13DF006ED330 /* Views */,
 				C83477112D6E12AC006ED330 /* AppDelegate.swift */,
 				C83477152D6E12AC006ED330 /* ViewController.swift */,
 				C834771A2D6E12AD006ED330 /* Assets.xcassets */,
@@ -59,6 +73,26 @@
 				C834771F2D6E12AD006ED330 /* Info.plist */,
 			);
 			path = SmartMeal;
+			sourceTree = "<group>";
+		};
+		C83477252D6E13DF006ED330 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C83477262D6E1416006ED330 /* RegistrationViewController.swift */,
+				C83477282D6E1425006ED330 /* LoginViewController.swift */,
+				C834772A2D6E1A79006ED330 /* CustomTextField.swift */,
+				C834772C2D6E22A3006ED330 /* CustomButton.swift */,
+				C834772E2D6E2574006ED330 /* DividerView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		C83477302D6E2820006ED330 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C83477312D6E2834006ED330 /* ImageAssets.swift */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -131,8 +165,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C83477292D6E1425006ED330 /* LoginViewController.swift in Sources */,
+				C83477272D6E1416006ED330 /* RegistrationViewController.swift in Sources */,
+				C83477322D6E2834006ED330 /* ImageAssets.swift in Sources */,
+				C834772F2D6E2574006ED330 /* DividerView.swift in Sources */,
+				C834772D2D6E22A3006ED330 /* CustomButton.swift in Sources */,
 				C83477162D6E12AC006ED330 /* ViewController.swift in Sources */,
 				C83477122D6E12AC006ED330 /* AppDelegate.swift in Sources */,
+				C834772B2D6E1A79006ED330 /* CustomTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
