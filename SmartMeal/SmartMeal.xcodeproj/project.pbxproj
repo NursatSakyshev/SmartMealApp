@@ -78,11 +78,9 @@
 		C83477252D6E13DF006ED330 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C83477332D6E319A006ED330 /* Components */,
 				C83477262D6E1416006ED330 /* RegistrationViewController.swift */,
 				C83477282D6E1425006ED330 /* LoginViewController.swift */,
-				C834772A2D6E1A79006ED330 /* CustomTextField.swift */,
-				C834772C2D6E22A3006ED330 /* CustomButton.swift */,
-				C834772E2D6E2574006ED330 /* DividerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -93,6 +91,16 @@
 				C83477312D6E2834006ED330 /* ImageAssets.swift */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		C83477332D6E319A006ED330 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				C834772A2D6E1A79006ED330 /* CustomTextField.swift */,
+				C834772C2D6E22A3006ED330 /* CustomButton.swift */,
+				C834772E2D6E2574006ED330 /* DividerView.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

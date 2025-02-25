@@ -37,7 +37,7 @@ class LoginViewController: UIViewController {
     
     lazy var signInButton: CustomButton = {
         let button = CustomButton()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Sign In", for: .normal)
         return button
     }()
@@ -50,11 +50,6 @@ class LoginViewController: UIViewController {
         label.textAlignment = .center
         label.numberOfLines = 0
         return label
-    }()
-    
-    lazy var imageView: UIImageView = {
-        let imageView = UIImageView()
-        return imageView
     }()
     
     lazy var stackView: UIStackView = {
@@ -101,7 +96,7 @@ class LoginViewController: UIViewController {
     }
     
     func setupUI() {
-        [welcomeLabel, imageView, emailTextField, passwordTextField, signInButton, divider, stackView, signInView].forEach {
+        [welcomeLabel, emailTextField, passwordTextField, signInButton, divider, stackView, signInView].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -117,9 +112,6 @@ class LoginViewController: UIViewController {
             welcomeLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
             welcomeLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
             welcomeLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
-            
-            imageView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
-            imageView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
             
             emailTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 26),
             emailTextField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -26),
