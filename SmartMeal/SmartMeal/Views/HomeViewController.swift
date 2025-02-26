@@ -11,6 +11,7 @@ struct Recipe {
     let title: String
     let calories: Int
     let time: Int
+    let description: String
     let imageName: String
 }
 
@@ -18,10 +19,14 @@ class HomeViewController: UIViewController {
     
     //MARK: Test
     private let recipes: [Recipe] = [
-        Recipe(title: "Салат с авокадо", calories: 320, time: 25, imageName: "salad"),
-        Recipe(title: "Паста с лососем", calories: 450, time: 40, imageName: "pasta"),
-        Recipe(title: "Греческий салат", calories: 290, time: 20, imageName: "greek"),
-        Recipe(title: "Куриное филе", calories: 520, time: 35, imageName: "chicken")
+        Recipe(title: "Салат с авокадо", calories: 320, time: 25, description: "some description some description some description some description ", imageName: "salad"),
+        Recipe(title: "Паста с лососем", calories: 450, time: 40,description: "some description some description some description some description ", imageName: "pasta"),
+        Recipe(title: "Греческий салат", calories: 290, time: 20,description: "some description some description some description some description ", imageName: "greek"),
+        Recipe(title: "Куриное филе", calories: 520, time: 35,description: "some description some description some description some description ", imageName: "chicken"),
+        Recipe(title: "Куриное филе", calories: 520, time: 35,description: "some description some description some description some description ", imageName: "chicken"),
+        Recipe(title: "Куриное филе", calories: 520, time: 35,description: "some description some description some description some description ", imageName: "chicken"),
+        Recipe(title: "Куриное филе", calories: 520, time: 35,description: "some description some description some description some description ", imageName: "chicken"),
+        Recipe(title: "Паста с лососем", calories: 450, time: 40,description: "some description some description some description some description ", imageName: "pasta"),
     ]
     
     var collectionView: UICollectionView!
@@ -82,7 +87,7 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        24
+        recipes.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -90,6 +95,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             return UICollectionViewCell()
         }
         cell.imageView.backgroundColor = .blue
+        cell.configure(recipe: recipes[indexPath.row])
         return cell
     }
 }

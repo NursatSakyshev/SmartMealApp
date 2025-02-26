@@ -20,7 +20,6 @@
 		C83477352D6E3A64006ED330 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83477342D6E3A64006ED330 /* HomeViewController.swift */; };
 		C83477372D6E42F4006ED330 /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83477362D6E42F4006ED330 /* SearchTextField.swift */; };
 		C83477392D6EB985006ED330 /* RecipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83477382D6EB985006ED330 /* RecipeCell.swift */; };
-		C834773B2D6F2D59006ED330 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C834773A2D6F2D59006ED330 /* TestViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,7 +38,6 @@
 		C83477342D6E3A64006ED330 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		C83477362D6E42F4006ED330 /* SearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextField.swift; sourceTree = "<group>"; };
 		C83477382D6EB985006ED330 /* RecipeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCell.swift; sourceTree = "<group>"; };
-		C834773A2D6F2D59006ED330 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,7 +88,6 @@
 				C83477262D6E1416006ED330 /* RegistrationViewController.swift */,
 				C83477282D6E1425006ED330 /* LoginViewController.swift */,
 				C83477342D6E3A64006ED330 /* HomeViewController.swift */,
-				C834773A2D6F2D59006ED330 /* TestViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -195,7 +192,6 @@
 				C83477352D6E3A64006ED330 /* HomeViewController.swift in Sources */,
 				C83477162D6E12AC006ED330 /* ViewController.swift in Sources */,
 				C83477122D6E12AC006ED330 /* AppDelegate.swift in Sources */,
-				C834773B2D6F2D59006ED330 /* TestViewController.swift in Sources */,
 				C834772B2D6E1A79006ED330 /* CustomTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

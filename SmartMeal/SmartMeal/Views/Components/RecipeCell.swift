@@ -7,100 +7,6 @@
 
 import UIKit
 
-//class RecipeCell: UICollectionViewCell {
-//    static let identifier = "RecipeCell"
-//    
-//    private let recipeImageView: UIImageView = {
-//        let imageView = UIImageView()
-////        imageView.contentMode = .scaleAspectFill
-//        imageView.clipsToBounds = true
-//        imageView.backgroundColor = .green
-//        imageView.layer.cornerRadius = 12
-//        return imageView
-//    }()
-//    
-//    private let titleLabel: UILabel = {
-//        let label = UILabel()
-//        label.font = UIFont.boldSystemFont(ofSize: 16)
-//        label.numberOfLines = 2
-//        return label
-//    }()
-////    
-////    private let infoStackView: UIStackView = {
-////        let stack = UIStackView()
-////        stack.axis = .horizontal
-////        stack.spacing = 8
-////        return stack
-////    }()
-////    
-//    private let caloriesLabel: UILabel = {
-//        let label = UILabel()
-//        label.font = UIFont.systemFont(ofSize: 12)
-//        label.textColor = .gray
-//        label.text = "🔥 320 ккал"
-//        return label
-//    }()
-//    
-//    private let timeLabel: UILabel = {
-//        let label = UILabel()
-//        label.font = UIFont.systemFont(ofSize: 12)
-//        label.textColor = .gray
-//        label.text = "⏳ 25 мин"
-//        return label
-//    }()
-//    
-//    override init(frame: CGRect) {
-//        super.init(frame: frame)
-////        contentView.layer.cornerRadius = 12
-////        contentView.layer.shadowColor = UIColor.black.cgColor
-////        contentView.layer.shadowOpacity = 0.1
-////        contentView.layer.shadowOffset = CGSize(width: 0, height: 2)
-////        contentView.layer.shadowRadius = 4
-////        contentView.backgroundColor = .white
-////        
-////        infoStackView.addArrangedSubview(caloriesLabel)
-////        infoStackView.addArrangedSubview(timeLabel)
-////        
-////        contentView.addSubview(recipeImageView)
-////        contentView.addSubview(titleLabel)
-////        contentView.addSubview(infoStackView)
-//    }
-//    
-//    func setup() {
-//        contentView.addSubview(recipeImageView)
-//        recipeImageView.translatesAutoresizingMaskIntoConstraints = false
-//        recipeImageView.contentMode = .scaleAspectFit
-//        
-//        clipsToBounds = true
-//        
-//        NSLayoutConstraint.activate([
-//            recipeImageView.heightAnchor.constraint(equalToConstant: 150),
-//            recipeImageView.widthAnchor.constraint(equalToConstant: 150),
-//            
-//            recipeImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
-//            recipeImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
-//            recipeImageView.topAnchor.constraint(equalTo: topAnchor),
-//            recipeImageView.bottomAnchor.constraint(equalTo: bottomAnchor),
-//        ])
-//    }
-//    
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-//    
-//    override func layoutSubviews() {
-//        super.layoutSubviews()
-//        
-//    }
-//    
-//    func configure(with recipe: Recipe) {
-////        recipeImageView.image = UIImage(named: recipe.imageName)
-////        titleLabel.text = recipe.title
-////        caloriesLabel.text = "🔥 \(recipe.calories) ккал"
-////        timeLabel.text = "⏳ \(recipe.time) мин"
-//    }
-//}
-
 class RecipeCell: UICollectionViewCell {
     let imageView = UIImageView()
     
@@ -113,7 +19,7 @@ class RecipeCell: UICollectionViewCell {
         return label
     }()
     
-    private let caloriesTimeLabel: UILabel = {
+    private var caloriesTimeLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = .gray
@@ -139,6 +45,10 @@ class RecipeCell: UICollectionViewCell {
         button.backgroundColor = UIColor(red: 66/255, green: 200/255, blue: 60/255, alpha: 1)
         return button
     }()
+    
+    override func prepareForReuse() {
+        setup()
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -184,5 +94,11 @@ class RecipeCell: UICollectionViewCell {
             detailButton.centerXAnchor.constraint(equalTo: centerXAnchor),
             detailButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
         ])
+    }
+    
+    func configure(recipe: Recipe) {
+        nameLabel.text = recipe.title
+        caloriesTimeLabel.text = "\(recipe.calories)ккал | \(recipe.time) мин"
+        descriptionLabel.text = recipe.description
     }
 }
