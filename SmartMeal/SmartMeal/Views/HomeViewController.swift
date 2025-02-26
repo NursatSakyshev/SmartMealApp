@@ -7,27 +7,18 @@
 
 import UIKit
 
-struct Recipe {
-    let title: String
-    let calories: Int
-    let time: Int
-    let description: String
-    let imageName: String
-}
-
 class HomeViewController: UIViewController {
+    private var viewModel = HomeViewModel()
     
-    //MARK: Test
-    private let recipes: [Recipe] = [
-        Recipe(title: "Салат с авокадо", calories: 320, time: 25, description: "some description some description some description some description ", imageName: "salad"),
-        Recipe(title: "Паста с лососем", calories: 450, time: 40,description: "some description some description some description some description ", imageName: "pasta"),
-        Recipe(title: "Греческий салат", calories: 290, time: 20,description: "some description some description some description some description ", imageName: "greek"),
-        Recipe(title: "Куриное филе", calories: 520, time: 35,description: "some description some description some description some description ", imageName: "chicken"),
-        Recipe(title: "Куриное филе", calories: 520, time: 35,description: "some description some description some description some description ", imageName: "chicken"),
-        Recipe(title: "Куриное филе", calories: 520, time: 35,description: "some description some description some description some description ", imageName: "chicken"),
-        Recipe(title: "Куриное филе", calories: 520, time: 35,description: "some description some description some description some description ", imageName: "chicken"),
-        Recipe(title: "Паста с лососем", calories: 450, time: 40,description: "some description some description some description some description ", imageName: "pasta"),
-    ]
+    private let recommendationLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Recommendations"
+        label.textColor = UIColor(red: 56/255, green: 56/255, blue: 56/255, alpha: 1)
+        label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
+        label.textAlignment = .left
+        label.numberOfLines = 0
+        return label
+    }()
     
     var collectionView: UICollectionView!
     
@@ -38,7 +29,7 @@ class HomeViewController: UIViewController {
         collectionView.showsVerticalScrollIndicator = false
         
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: searchField.bottomAnchor, constant: 100),
+            collectionView.topAnchor.constraint(equalTo: recommendationLabel.bottomAnchor, constant: 40),
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             collectionView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
             collectionView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
@@ -67,11 +58,14 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         setupCollectionView()
+        viewModel.fetchRecipes {
+            self.collectionView.reloadData()
+        }
     }
     
     func setupUI() {
         view.backgroundColor = .white
-        [searchField].forEach {
+        [searchField, recommendationLabel].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview($0)
         }
@@ -81,13 +75,17 @@ class HomeViewController: UIViewController {
             searchField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 25),
             searchField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -25),
             searchField.heightAnchor.constraint(equalToConstant: 50),
+            
+            recommendationLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
+            recommendationLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
+            recommendationLabel.topAnchor.constraint(equalTo: searchField.bottomAnchor, constant: 60),
         ])
     }
 }
 
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        recipes.count
+        viewModel.recipes.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -95,7 +93,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             return UICollectionViewCell()
         }
         cell.imageView.backgroundColor = .blue
-        cell.configure(recipe: recipes[indexPath.row])
+        cell.configure(recipe: viewModel.recipes[indexPath.row])
         return cell
     }
 }

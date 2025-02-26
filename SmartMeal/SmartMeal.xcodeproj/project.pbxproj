@@ -20,6 +20,8 @@
 		C83477352D6E3A64006ED330 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83477342D6E3A64006ED330 /* HomeViewController.swift */; };
 		C83477372D6E42F4006ED330 /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83477362D6E42F4006ED330 /* SearchTextField.swift */; };
 		C83477392D6EB985006ED330 /* RecipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83477382D6EB985006ED330 /* RecipeCell.swift */; };
+		C834773E2D6F70F0006ED330 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = C834773D2D6F70F0006ED330 /* Recipe.swift */; };
+		C83477432D6F715F006ED330 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83477422D6F715F006ED330 /* HomeViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,8 @@
 		C83477342D6E3A64006ED330 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		C83477362D6E42F4006ED330 /* SearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextField.swift; sourceTree = "<group>"; };
 		C83477382D6EB985006ED330 /* RecipeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCell.swift; sourceTree = "<group>"; };
+		C834773D2D6F70F0006ED330 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
+		C83477422D6F715F006ED330 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +74,8 @@
 		C83477102D6E12AC006ED330 /* SmartMeal */ = {
 			isa = PBXGroup;
 			children = (
+				C83477412D6F7152006ED330 /* ViewModels */,
+				C834773C2D6F70DD006ED330 /* Models */,
 				C83477302D6E2820006ED330 /* Resources */,
 				C83477252D6E13DF006ED330 /* Views */,
 				C83477112D6E12AC006ED330 /* AppDelegate.swift */,
@@ -110,6 +116,22 @@
 				C83477382D6EB985006ED330 /* RecipeCell.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		C834773C2D6F70DD006ED330 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C834773D2D6F70F0006ED330 /* Recipe.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C83477412D6F7152006ED330 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				C83477422D6F715F006ED330 /* HomeViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -185,10 +207,12 @@
 				C83477292D6E1425006ED330 /* LoginViewController.swift in Sources */,
 				C83477272D6E1416006ED330 /* RegistrationViewController.swift in Sources */,
 				C83477322D6E2834006ED330 /* ImageAssets.swift in Sources */,
+				C834773E2D6F70F0006ED330 /* Recipe.swift in Sources */,
 				C834772F2D6E2574006ED330 /* DividerView.swift in Sources */,
 				C834772D2D6E22A3006ED330 /* CustomButton.swift in Sources */,
 				C83477372D6E42F4006ED330 /* SearchTextField.swift in Sources */,
 				C83477392D6EB985006ED330 /* RecipeCell.swift in Sources */,
+				C83477432D6F715F006ED330 /* HomeViewModel.swift in Sources */,
 				C83477352D6E3A64006ED330 /* HomeViewController.swift in Sources */,
 				C83477162D6E12AC006ED330 /* ViewController.swift in Sources */,
 				C83477122D6E12AC006ED330 /* AppDelegate.swift in Sources */,
