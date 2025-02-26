@@ -1,15 +1,13 @@
 //
-//  TextField.swift
-//  FinalProject2
+//  SearchTextField.swift
+//  SmartMeal
 //
-//  Created by Nursat Sakyshev on 06.06.2023.
+//  Created by Nursat Sakyshev on 25.02.2025.
 //
 
 import UIKit
 
-class CustomTextField: UITextField {
-    
-    private let accentColor = UIColor.black
+class SearchTextField: UITextField {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -20,16 +18,24 @@ class CustomTextField: UITextField {
         fatalError("init(coder:) has not been implemented")
     }
     
+    let iconView = UIImageView(image: UIImage(systemName: "magnifyingglass"))
+//    let leftPaddingView = UIView()
+    let leftPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 20))
+    
     func setup() {
+        leftPaddingView.addSubview(iconView)
+//        leftPaddingView.backgroundColor = .green
         autocapitalizationType = .none
-        tintColor = UIColor.black
-        layer.borderWidth = 1.0
-        layer.cornerRadius = 30
-        layer.borderColor =  UIColor.gray.cgColor
-        backgroundColor = .white
+        layer.cornerRadius = 24
+        backgroundColor = UIColor(red: 248/255, green: 249/255, blue: 254/255, alpha: 1)
+        leftView = leftPaddingView
+        leftViewMode = .always
+        iconView.contentMode = .scaleAspectFit
+        iconView.frame = CGRect(x: 10, y: 0, width: 20, height: 20)
+        iconView.tintColor = .gray
     }
 
-    var padding = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 5)
+    var padding = UIEdgeInsets(top: 0, left: 46, bottom: 0, right: 5)
 
     override open func textRect(forBounds bounds: CGRect) -> CGRect {
         return bounds.inset(by: padding)
@@ -46,11 +52,6 @@ class CustomTextField: UITextField {
    override func becomeFirstResponder() -> Bool {
        let didSetFirstResponder = super.becomeFirstResponder()
        
-       if didSetFirstResponder {
-           layer.borderColor = accentColor.cgColor
-           layer.borderWidth = 2.0
-       }
-       
        return didSetFirstResponder
    }
    
@@ -63,5 +64,5 @@ class CustomTextField: UITextField {
        
        return didResignFirstResponder
    }
-}
 
+}

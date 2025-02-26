@@ -15,7 +15,7 @@ import UIKit
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow()
         window?.makeKeyAndVisible()
-        window?.rootViewController = RegistrationViewController()
+        window?.rootViewController = HomeViewController()
         return true
     }
 
