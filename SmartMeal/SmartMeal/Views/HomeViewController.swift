@@ -26,13 +26,14 @@ class HomeViewController: UIViewController {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: setupFlowLayout())
         view.addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.showsVerticalScrollIndicator = false
-        
+        collectionView.showsHorizontalScrollIndicator = false
+    
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: recommendationLabel.bottomAnchor, constant: 40),
-            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            collectionView.topAnchor.constraint(equalTo: recommendationLabel.bottomAnchor, constant: 20),
+
             collectionView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
             collectionView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
+            collectionView.heightAnchor.constraint(equalToConstant: 300)
             
         ])
         
@@ -43,16 +44,11 @@ class HomeViewController: UIViewController {
     
     private func setupFlowLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
-        layout.estimatedItemSize = CGSize(width: UIScreen.main.bounds.width - 40, height: 310)
-        layout.minimumLineSpacing = 60
+        layout.scrollDirection = .horizontal
+        layout.estimatedItemSize = CGSize(width: UIScreen.main.bounds.width - 40, height: 300)
+        layout.minimumLineSpacing = 20
         return layout
     }
-    
-    lazy var searchField: SearchTextField = {
-        let textField = SearchTextField()
-        textField.placeholder = "Enter products"
-        return textField
-    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,20 +61,15 @@ class HomeViewController: UIViewController {
     
     func setupUI() {
         view.backgroundColor = .white
-        [searchField, recommendationLabel].forEach {
+        [recommendationLabel].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview($0)
         }
         
         NSLayoutConstraint.activate([
-            searchField.topAnchor.constraint(equalTo: view.topAnchor, constant: 90),
-            searchField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 25),
-            searchField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -25),
-            searchField.heightAnchor.constraint(equalToConstant: 50),
-            
             recommendationLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
             recommendationLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
-            recommendationLabel.topAnchor.constraint(equalTo: searchField.bottomAnchor, constant: 60),
+            recommendationLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60),
         ])
     }
 }
@@ -93,7 +84,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             return UICollectionViewCell()
         }
         cell.imageView.backgroundColor = .blue
-        cell.configure(recipe: viewModel.recipes[indexPath.row])
+        cell.configure(recipe: viewModel.recipes[indexPath.row], imageName: "dishimage1")
         return cell
     }
 }

@@ -25,6 +25,11 @@
 		C83477492D6F8E95006ED330 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C83477482D6F8E95006ED330 /* Assets.xcassets */; };
 		C834774B2D6F98F3006ED330 /* Ingridient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C834774A2D6F98F3006ED330 /* Ingridient.swift */; };
 		C834774D2D6F9BFC006ED330 /* IngridientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C834774C2D6F9BFC006ED330 /* IngridientCell.swift */; };
+		C83477512D70BC48006ED330 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83477502D70BC48006ED330 /* Resources.swift */; };
+		C83477532D70BC7D006ED330 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83477522D70BC7D006ED330 /* TabBarViewController.swift */; };
+		C83477552D70BCD2006ED330 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83477542D70BCD2006ED330 /* ProfileViewController.swift */; };
+		C83477572D70BCFA006ED330 /* FavoritesViewControler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83477562D70BCFA006ED330 /* FavoritesViewControler.swift */; };
+		C89B86E42D70C65400C175CB /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89B86E32D70C65400C175CB /* SearchViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +53,11 @@
 		C83477482D6F8E95006ED330 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C834774A2D6F98F3006ED330 /* Ingridient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingridient.swift; sourceTree = "<group>"; };
 		C834774C2D6F9BFC006ED330 /* IngridientCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngridientCell.swift; sourceTree = "<group>"; };
+		C83477502D70BC48006ED330 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
+		C83477522D70BC7D006ED330 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		C83477542D70BCD2006ED330 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		C83477562D70BCFA006ED330 /* FavoritesViewControler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewControler.swift; sourceTree = "<group>"; };
+		C89B86E32D70C65400C175CB /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,11 +105,15 @@
 		C83477252D6E13DF006ED330 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C83477562D70BCFA006ED330 /* FavoritesViewControler.swift */,
 				C83477332D6E319A006ED330 /* Components */,
 				C83477262D6E1416006ED330 /* RegistrationViewController.swift */,
 				C83477282D6E1425006ED330 /* LoginViewController.swift */,
 				C83477342D6E3A64006ED330 /* HomeViewController.swift */,
 				C83477442D6F86FC006ED330 /* DetailViewController.swift */,
+				C83477522D70BC7D006ED330 /* TabBarViewController.swift */,
+				C83477542D70BCD2006ED330 /* ProfileViewController.swift */,
+				C89B86E32D70C65400C175CB /* SearchViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -108,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				C83477312D6E2834006ED330 /* ImageAssets.swift */,
+				C83477502D70BC48006ED330 /* Resources.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -217,16 +232,21 @@
 				C83477272D6E1416006ED330 /* RegistrationViewController.swift in Sources */,
 				C83477322D6E2834006ED330 /* ImageAssets.swift in Sources */,
 				C834773E2D6F70F0006ED330 /* Recipe.swift in Sources */,
+				C83477532D70BC7D006ED330 /* TabBarViewController.swift in Sources */,
 				C834772F2D6E2574006ED330 /* DividerView.swift in Sources */,
 				C834772D2D6E22A3006ED330 /* CustomButton.swift in Sources */,
 				C83477372D6E42F4006ED330 /* SearchTextField.swift in Sources */,
 				C83477472D6F8BF0006ED330 /* TextWithIcon.swift in Sources */,
+				C83477552D70BCD2006ED330 /* ProfileViewController.swift in Sources */,
 				C834774D2D6F9BFC006ED330 /* IngridientCell.swift in Sources */,
+				C83477512D70BC48006ED330 /* Resources.swift in Sources */,
 				C834774B2D6F98F3006ED330 /* Ingridient.swift in Sources */,
 				C83477392D6EB985006ED330 /* RecipeCell.swift in Sources */,
 				C83477432D6F715F006ED330 /* HomeViewModel.swift in Sources */,
+				C89B86E42D70C65400C175CB /* SearchViewController.swift in Sources */,
 				C83477352D6E3A64006ED330 /* HomeViewController.swift in Sources */,
 				C83477122D6E12AC006ED330 /* AppDelegate.swift in Sources */,
+				C83477572D70BCFA006ED330 /* FavoritesViewControler.swift in Sources */,
 				C834772B2D6E1A79006ED330 /* CustomTextField.swift in Sources */,
 				C83477452D6F86FC006ED330 /* DetailViewController.swift in Sources */,
 			);

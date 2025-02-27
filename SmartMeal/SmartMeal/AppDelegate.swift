@@ -11,11 +11,13 @@ import UIKit
  class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    let tabBarVC = TabBarController()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
         window = UIWindow()
         window?.makeKeyAndVisible()
-        window?.rootViewController = DetailViewController()
+        window?.rootViewController = tabBarVC
         return true
     }
 

@@ -14,10 +14,26 @@ class RecipeCell: UICollectionViewCell {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 16)
         label.numberOfLines = 2
-        label.text = "Hello world text"
         label.textColor = .black
         return label
     }()
+    //MARK: favorite button
+    let favoriteButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "heart"), for: .normal) // Обычная иконка
+        button.tintColor = .white
+        button.addTarget(self, action: #selector(favoriteTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    var isFavorite = false
+    
+    @objc func favoriteTapped() {
+        isFavorite.toggle()
+        
+        let imageName = isFavorite ? "heart.fill" : "heart"
+        favoriteButton.setImage(UIImage(systemName: imageName), for: .normal)
+    }
     
     private var caloriesTimeLabel: UILabel = {
         let label = UILabel()
@@ -25,25 +41,6 @@ class RecipeCell: UICollectionViewCell {
         label.textColor = .gray
         label.text = "320 ккал | 25 мин"
         return label
-    }()
-    
-    private let descriptionLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 12)
-        label.textColor = .gray
-        label.text = "some description some description some description some description some description"
-        label.numberOfLines = 2
-        return label
-    }()
-    
-    lazy var detailButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Detail", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 20
-        button.isHidden = false
-        button.backgroundColor = UIColor(red: 66/255, green: 200/255, blue: 60/255, alpha: 1)
-        return button
     }()
     
     override func prepareForReuse() {
@@ -60,18 +57,19 @@ class RecipeCell: UICollectionViewCell {
     }
     
     func setup() {
-        [imageView, nameLabel, caloriesTimeLabel, descriptionLabel, detailButton].forEach {
+        [imageView, nameLabel, caloriesTimeLabel, favoriteButton].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             contentView.addSubview($0)
         }
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 12
         
         clipsToBounds = true
         contentView.clipsToBounds = true
         
         NSLayoutConstraint.activate([
-            imageView.heightAnchor.constraint(equalToConstant: 160),
+            imageView.heightAnchor.constraint(equalToConstant: 200),
             imageView.widthAnchor.constraint(equalToConstant: 160),
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: trailingAnchor),
@@ -85,20 +83,16 @@ class RecipeCell: UICollectionViewCell {
             caloriesTimeLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
             caloriesTimeLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 10),
             
-            descriptionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
-            descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
-            descriptionLabel.topAnchor.constraint(equalTo: caloriesTimeLabel.bottomAnchor, constant: 10),
-            
-            detailButton.heightAnchor.constraint(equalToConstant: 40),
-            detailButton.widthAnchor.constraint(equalToConstant: 140),
-            detailButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            detailButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
+            favoriteButton.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            favoriteButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -10),
+            favoriteButton.heightAnchor.constraint(equalToConstant: 20),
+            favoriteButton.widthAnchor.constraint(equalToConstant: 22)
         ])
     }
     
-    func configure(recipe: Recipe) {
+    func configure(recipe: Recipe, imageName: String) {
         nameLabel.text = recipe.title
         caloriesTimeLabel.text = "\(recipe.calories)ккал | \(recipe.time) мин"
-        descriptionLabel.text = recipe.description
+        imageView.image = UIImage(named: imageName)
     }
 }

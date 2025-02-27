@@ -8,22 +8,30 @@
 import UIKit
 
 class SearchViewController: UIViewController {
-
+    
+    lazy var searchField: SearchTextField = {
+        let textField = SearchTextField()
+        textField.placeholder = "Enter products"
+        return textField
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        // Do any additional setup after loading the view.
+        setupUI()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func setupUI() {
+        [searchField].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview($0)
+        }
+        
+        NSLayoutConstraint.activate([
+            searchField.topAnchor.constraint(equalTo: view.topAnchor, constant: 90),
+            searchField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 25),
+            searchField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -25),
+            searchField.heightAnchor.constraint(equalToConstant: 50),
+        ])
     }
-    */
-
 }
