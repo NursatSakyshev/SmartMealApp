@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		C83477122D6E12AC006ED330 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83477112D6E12AC006ED330 /* AppDelegate.swift */; };
-		C83477162D6E12AC006ED330 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83477152D6E12AC006ED330 /* ViewController.swift */; };
 		C834771E2D6E12AD006ED330 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C834771C2D6E12AD006ED330 /* LaunchScreen.storyboard */; };
 		C83477272D6E1416006ED330 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83477262D6E1416006ED330 /* RegistrationViewController.swift */; };
 		C83477292D6E1425006ED330 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83477282D6E1425006ED330 /* LoginViewController.swift */; };
@@ -31,7 +30,6 @@
 /* Begin PBXFileReference section */
 		C834770E2D6E12AC006ED330 /* SmartMeal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartMeal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C83477112D6E12AC006ED330 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C83477152D6E12AC006ED330 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C834771D2D6E12AD006ED330 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C834771F2D6E12AD006ED330 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C83477262D6E1416006ED330 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
@@ -87,7 +85,6 @@
 				C83477302D6E2820006ED330 /* Resources */,
 				C83477252D6E13DF006ED330 /* Views */,
 				C83477112D6E12AC006ED330 /* AppDelegate.swift */,
-				C83477152D6E12AC006ED330 /* ViewController.swift */,
 				C834771C2D6E12AD006ED330 /* LaunchScreen.storyboard */,
 				C834771F2D6E12AD006ED330 /* Info.plist */,
 				C83477482D6F8E95006ED330 /* Assets.xcassets */,
@@ -229,7 +226,6 @@
 				C83477392D6EB985006ED330 /* RecipeCell.swift in Sources */,
 				C83477432D6F715F006ED330 /* HomeViewModel.swift in Sources */,
 				C83477352D6E3A64006ED330 /* HomeViewController.swift in Sources */,
-				C83477162D6E12AC006ED330 /* ViewController.swift in Sources */,
 				C83477122D6E12AC006ED330 /* AppDelegate.swift in Sources */,
 				C834772B2D6E1A79006ED330 /* CustomTextField.swift in Sources */,
 				C83477452D6F86FC006ED330 /* DetailViewController.swift in Sources */,

@@ -21,7 +21,6 @@ class DetailViewController: UIViewController {
     
     lazy var imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .blue
         return imageView
     }()
     
@@ -57,6 +56,43 @@ class DetailViewController: UIViewController {
         return label
     }()
     
+    private let scrollView = UIScrollView()
+    private let contentView = UIView()
+    
+    func configureScrollView() {
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.showsVerticalScrollIndicator = true
+        scrollView.alwaysBounceVertical = true
+    }
+    
+    func configureContentView() {
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.backgroundColor = .white
+        
+        [imageView, nameLabel, stackView, descriptionLabel, recipeDescription, ingredientsLabel].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            contentView.addSubview($0)
+        }
+    }
+    
+    func prepareScrollView() {
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        
+        NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            
+            contentView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
+        ])
+    }
+    
     private func setupTableView() {
         tableView = UITableView()
         tableView.dataSource = self
@@ -64,15 +100,15 @@ class DetailViewController: UIViewController {
         tableView.isUserInteractionEnabled = false
         tableView.register(IngridientCell.self, forCellReuseIdentifier: IngridientCell.identifier)
         
-        view.addSubview(tableView)
-        tableView.backgroundColor = .green
+        contentView.addSubview(tableView)
         tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            tableView.leftAnchor.constraint(equalTo: contentView.leftAnchor),
+            tableView.rightAnchor.constraint(equalTo: contentView.rightAnchor),
             tableView.topAnchor.constraint(equalTo: ingredientsLabel.bottomAnchor, constant: 20),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            tableView.heightAnchor.constraint(equalToConstant: CGFloat(ingridients.count * 50)),
         ])
     }
     
@@ -101,29 +137,29 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureScrollView()
+        configureContentView()
+        prepareScrollView()
         setupUI()
         setupTableView()
     }
     
     func setupUI() {
         view.backgroundColor = .white
-        [imageView, nameLabel, stackView, descriptionLabel, recipeDescription, ingredientsLabel].forEach {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            view.addSubview($0)
-        }
-        
+
         [timeLabel, difficultyLabel, portionsLabel].forEach {
             stackView.addArrangedSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
+        imageView.image = UIImage(named: "DishImage")
         
         NSLayoutConstraint.activate([
-            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             imageView.heightAnchor.constraint(equalToConstant: 240),
             
-            nameLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
+            nameLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16),
             nameLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10),
             
             stackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
@@ -144,6 +180,7 @@ class DetailViewController: UIViewController {
 }
 
 
+//MARK: Extension
 extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         ingridients.count
