@@ -20,7 +20,7 @@ class RecipeCell: UICollectionViewCell {
     //MARK: favorite button
     let favoriteButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "heart"), for: .normal) // Обычная иконка
+        button.setImage(UIImage(systemName: "heart"), for: .normal)
         button.tintColor = .white
         button.addTarget(self, action: #selector(favoriteTapped), for: .touchUpInside)
         return button
@@ -39,7 +39,6 @@ class RecipeCell: UICollectionViewCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = .gray
-        label.text = "320 ккал | 25 мин"
         return label
     }()
     
@@ -90,9 +89,8 @@ class RecipeCell: UICollectionViewCell {
         ])
     }
     
-    func configure(recipe: Recipe, imageName: String) {
-        nameLabel.text = recipe.title
-        caloriesTimeLabel.text = "\(recipe.calories)ккал | \(recipe.time) мин"
-        imageView.image = UIImage(named: imageName)
+    func configure(with viewModel: CollectionViewCellModel) {
+        nameLabel.text = viewModel.name
+        caloriesTimeLabel.text = "\(viewModel.calories) ккал | \(viewModel.time)"
     }
 }
