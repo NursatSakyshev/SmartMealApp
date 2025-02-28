@@ -30,6 +30,10 @@
 		C83477552D70BCD2006ED330 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83477542D70BCD2006ED330 /* ProfileViewController.swift */; };
 		C83477572D70BCFA006ED330 /* FavoritesViewControler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83477562D70BCFA006ED330 /* FavoritesViewControler.swift */; };
 		C89B86E42D70C65400C175CB /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89B86E32D70C65400C175CB /* SearchViewController.swift */; };
+		C89B86E62D714C5600C175CB /* RecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89B86E52D714C5600C175CB /* RecipeTableViewCell.swift */; };
+		C89B86E92D715D4100C175CB /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89B86E82D715D4100C175CB /* ApiService.swift */; };
+		C89B86EB2D7186F100C175CB /* TableViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89B86EA2D7186F100C175CB /* TableViewCellModel.swift */; };
+		C89B86ED2D71870700C175CB /* CollectionViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89B86EC2D71870700C175CB /* CollectionViewCellModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +62,10 @@
 		C83477542D70BCD2006ED330 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		C83477562D70BCFA006ED330 /* FavoritesViewControler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewControler.swift; sourceTree = "<group>"; };
 		C89B86E32D70C65400C175CB /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		C89B86E52D714C5600C175CB /* RecipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeTableViewCell.swift; sourceTree = "<group>"; };
+		C89B86E82D715D4100C175CB /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
+		C89B86EA2D7186F100C175CB /* TableViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellModel.swift; sourceTree = "<group>"; };
+		C89B86EC2D71870700C175CB /* CollectionViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +98,7 @@
 		C83477102D6E12AC006ED330 /* SmartMeal */ = {
 			isa = PBXGroup;
 			children = (
+				C89B86E72D715D3300C175CB /* Services */,
 				C83477412D6F7152006ED330 /* ViewModels */,
 				C834773C2D6F70DD006ED330 /* Models */,
 				C83477302D6E2820006ED330 /* Resources */,
@@ -137,6 +146,7 @@
 				C83477382D6EB985006ED330 /* RecipeCell.swift */,
 				C83477462D6F8BF0006ED330 /* TextWithIcon.swift */,
 				C834774C2D6F9BFC006ED330 /* IngridientCell.swift */,
+				C89B86E52D714C5600C175CB /* RecipeTableViewCell.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -154,8 +164,18 @@
 			isa = PBXGroup;
 			children = (
 				C83477422D6F715F006ED330 /* HomeViewModel.swift */,
+				C89B86EA2D7186F100C175CB /* TableViewCellModel.swift */,
+				C89B86EC2D71870700C175CB /* CollectionViewCellModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		C89B86E72D715D3300C175CB /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				C89B86E82D715D4100C175CB /* ApiService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,11 +251,14 @@
 				C83477292D6E1425006ED330 /* LoginViewController.swift in Sources */,
 				C83477272D6E1416006ED330 /* RegistrationViewController.swift in Sources */,
 				C83477322D6E2834006ED330 /* ImageAssets.swift in Sources */,
+				C89B86EB2D7186F100C175CB /* TableViewCellModel.swift in Sources */,
 				C834773E2D6F70F0006ED330 /* Recipe.swift in Sources */,
 				C83477532D70BC7D006ED330 /* TabBarViewController.swift in Sources */,
 				C834772F2D6E2574006ED330 /* DividerView.swift in Sources */,
 				C834772D2D6E22A3006ED330 /* CustomButton.swift in Sources */,
 				C83477372D6E42F4006ED330 /* SearchTextField.swift in Sources */,
+				C89B86ED2D71870700C175CB /* CollectionViewCellModel.swift in Sources */,
+				C89B86E62D714C5600C175CB /* RecipeTableViewCell.swift in Sources */,
 				C83477472D6F8BF0006ED330 /* TextWithIcon.swift in Sources */,
 				C83477552D70BCD2006ED330 /* ProfileViewController.swift in Sources */,
 				C834774D2D6F9BFC006ED330 /* IngridientCell.swift in Sources */,
@@ -245,6 +268,7 @@
 				C83477432D6F715F006ED330 /* HomeViewModel.swift in Sources */,
 				C89B86E42D70C65400C175CB /* SearchViewController.swift in Sources */,
 				C83477352D6E3A64006ED330 /* HomeViewController.swift in Sources */,
+				C89B86E92D715D4100C175CB /* ApiService.swift in Sources */,
 				C83477122D6E12AC006ED330 /* AppDelegate.swift in Sources */,
 				C83477572D70BCFA006ED330 /* FavoritesViewControler.swift in Sources */,
 				C834772B2D6E1A79006ED330 /* CustomTextField.swift in Sources */,

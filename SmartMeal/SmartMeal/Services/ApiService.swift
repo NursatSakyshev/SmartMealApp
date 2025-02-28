@@ -9,23 +9,24 @@ import Foundation
 
 class APIService {
     func getData(completion : @escaping ([[Recipe]]) -> ()) {
-        completion([getRecommendations(), getPopular(), getQuickEasy(), getHealthy()])
+        let recommendations = getRecommendations()
+          let popular = getPopular()
+          let quickEasy = getQuickEasy()
+          let healthy = getHealthy()
+        
+        completion([recommendations, popular, quickEasy, healthy])
     }
     
     func getRecommendations() -> [Recipe] {
-        [
-            Recipe.recipes[0], Recipe.recipes[4], Recipe.recipes[0], Recipe.recipes[1]
-        ]
+        return Array(Recipe.recipes.prefix(2))
     }
     
     func getPopular() -> [Recipe] {
-        [
-            Recipe.recipes[0], Recipe.recipes[1]
-        ]
+        return Array(Recipe.recipes.shuffled().prefix(5))  
     }
     
     func getQuickEasy() -> [Recipe] {
-        Recipe.recipes
+        return Array(Recipe.recipes.suffix(3))
     }
     
     func getHealthy() -> [Recipe] {

@@ -12,6 +12,7 @@ class TableViewCellModel {
     var recipes: [Recipe]!
     
     init(recipes: [Recipe]) {
+        print(recipes.count)
         self.recipes = recipes
         recipes.forEach {
             collecionViewCellModels.append(CollectionViewCellModel(recipe: $0))

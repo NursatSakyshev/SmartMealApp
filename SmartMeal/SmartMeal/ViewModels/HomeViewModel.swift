@@ -16,19 +16,19 @@ class HomeViewModel {
     var bind : (() -> Void) = {}
    
     func getTableCellModel(at indexPath: IndexPath) -> TableViewCellModel {
-         return self.tableViewCellModels[indexPath.row]
+         return self.tableViewCellModels[indexPath.section]
      }
     
     init() {
         callFuncToGetData()
     }
     
-    
     func callFuncToGetData() {
         self.apiService.getData { (recipies) in
             recipies.forEach {
                 self.tableViewCellModels.append(TableViewCellModel(recipes: $0))
             }
+            
             self.bind()
         }
     }

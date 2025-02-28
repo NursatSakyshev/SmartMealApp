@@ -8,6 +8,8 @@
 import UIKit
 
 class RecipeCell: UICollectionViewCell {
+    static var identifier = "RecipeCell"
+    
     let imageView = UIImageView()
     
     private let nameLabel: UILabel = {

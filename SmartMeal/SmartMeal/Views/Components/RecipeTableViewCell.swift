@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RecipeCategoryCell: UITableViewCell {
+class RecipeTableViewCell: UITableViewCell {
     
     var collectionView: UICollectionView!
     private var recipesViewModels: [CollectionViewCellModel] = []
@@ -25,9 +25,14 @@ class RecipeCategoryCell: UITableViewCell {
                collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
         
-        collectionView.register(RecipeCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.register(RecipeCell.self, forCellWithReuseIdentifier: RecipeCell.identifier)
         collectionView.dataSource = self
         collectionView.delegate = self
+    }
+    
+    
+    func recipeViewModel(at indexPath: IndexPath) -> CollectionViewCellModel {
+        return self.recipesViewModels[indexPath.row]
     }
     
     private func setupFlowLayout() -> UICollectionViewFlowLayout {
@@ -55,7 +60,7 @@ class RecipeCategoryCell: UITableViewCell {
 
 }
 
-extension RecipeCategoryCell: UICollectionViewDelegate, UICollectionViewDataSource {
+extension RecipeTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return recipesViewModels.count
     }
@@ -65,10 +70,11 @@ extension RecipeCategoryCell: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? RecipeCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecipeCell.identifier, for: indexPath) as? RecipeCell else {
             return UICollectionViewCell()
         }
-        cell.configure(with: recipesViewModels[indexPath.row])
+        let viewModel = recipeViewModel(at: indexPath)
+        cell.configure(with: viewModel)
         return cell
     }
 }

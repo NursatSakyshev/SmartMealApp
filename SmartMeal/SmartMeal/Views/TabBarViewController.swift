@@ -39,7 +39,7 @@ final class TabBarController: UITabBarController {
         let homeViewController = HomeViewController()
         let profileViewController = ProfileViewController()
         let savedViewController = FavoritesViewController()
-        let searchViewController = SearchViewController()
+        let searchViewController = DetailViewController()
         
         let navVC1 = UINavigationController(rootViewController: homeViewController)
         let navVC2 = UINavigationController(rootViewController: searchViewController)

@@ -9,7 +9,6 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
-//    private let categories = ["Recommendations", "Popular", "Quick & Easy", "Healthy Choices"]
     private var viewModel: HomeViewModel!
     
     private func bindViewModel() {
@@ -33,7 +32,7 @@ class HomeViewController: UIViewController {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(RecipeCategoryCell.self, forCellReuseIdentifier: "RecipeCategoryCell")
+        tableView.register(RecipeTableViewCell.self, forCellReuseIdentifier: "RecipeCategoryCell")
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -86,7 +85,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeCategoryCell", for: indexPath) as? RecipeCategoryCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeCategoryCell", for: indexPath) as? RecipeTableViewCell else {
             return UITableViewCell()
         }
         let viewModel = viewModel.getTableCellModel(at: indexPath)
