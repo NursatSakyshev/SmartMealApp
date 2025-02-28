@@ -25,4 +25,8 @@ class CollectionViewCellModel {
     var time: Int {
         return recipe.time
     }
+    
+    var imageUrl: String {
+        return recipe.imageUrl!
+    }
 }

@@ -8,6 +8,7 @@
 import UIKit
 
 class RecipeCell: UICollectionViewCell {
+
     static var identifier = "RecipeCell"
     
     let imageView = UIImageView()
@@ -93,6 +94,7 @@ class RecipeCell: UICollectionViewCell {
     
     func configure(with viewModel: CollectionViewCellModel) {
         nameLabel.text = viewModel.name
-        caloriesTimeLabel.text = "\(viewModel.calories) ккал | \(viewModel.time)"
+        caloriesTimeLabel.text = "\(viewModel.calories) ккал | \(viewModel.time) мин"
+        imageView.downloaded(from: viewModel.imageUrl)
     }
 }

@@ -34,6 +34,7 @@
 		C89B86E92D715D4100C175CB /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89B86E82D715D4100C175CB /* ApiService.swift */; };
 		C89B86EB2D7186F100C175CB /* TableViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89B86EA2D7186F100C175CB /* TableViewCellModel.swift */; };
 		C89B86ED2D71870700C175CB /* CollectionViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89B86EC2D71870700C175CB /* CollectionViewCellModel.swift */; };
+		C89B86F32D722C4800C175CB /* UIImageView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89B86F22D722C4800C175CB /* UIImageView + Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,7 @@
 		C89B86E82D715D4100C175CB /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		C89B86EA2D7186F100C175CB /* TableViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellModel.swift; sourceTree = "<group>"; };
 		C89B86EC2D71870700C175CB /* CollectionViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellModel.swift; sourceTree = "<group>"; };
+		C89B86F22D722C4800C175CB /* UIImageView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView + Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 		C83477102D6E12AC006ED330 /* SmartMeal */ = {
 			isa = PBXGroup;
 			children = (
+				C89B86F12D722C3300C175CB /* Extensions */,
 				C89B86E72D715D3300C175CB /* Services */,
 				C83477412D6F7152006ED330 /* ViewModels */,
 				C834773C2D6F70DD006ED330 /* Models */,
@@ -178,6 +181,14 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		C89B86F12D722C3300C175CB /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C89B86F22D722C4800C175CB /* UIImageView + Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -256,6 +267,7 @@
 				C83477532D70BC7D006ED330 /* TabBarViewController.swift in Sources */,
 				C834772F2D6E2574006ED330 /* DividerView.swift in Sources */,
 				C834772D2D6E22A3006ED330 /* CustomButton.swift in Sources */,
+				C89B86F32D722C4800C175CB /* UIImageView + Extension.swift in Sources */,
 				C83477372D6E42F4006ED330 /* SearchTextField.swift in Sources */,
 				C89B86ED2D71870700C175CB /* CollectionViewCellModel.swift in Sources */,
 				C89B86E62D714C5600C175CB /* RecipeTableViewCell.swift in Sources */,

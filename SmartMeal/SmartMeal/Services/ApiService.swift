@@ -6,31 +6,48 @@
 //
 
 import Foundation
+import UIKit
 
 class APIService {
-    func getData(completion : @escaping ([[Recipe]]) -> ()) {
-        let recommendations = getRecommendations()
-          let popular = getPopular()
-          let quickEasy = getQuickEasy()
-          let healthy = getHealthy()
+    static let shared = APIService()
+    func getRecommendations(completion: @escaping ([Recipe]) -> Void) {
+        completion(Array(Recipe.recipes.prefix(2)))
+    }
+    
+    private let imageCache = NSCache<NSString, NSData>()
+    
+    func getPopular(completion: @escaping ([Recipe]) -> Void) {
+        completion(Array(Recipe.recipes.shuffled().prefix(3)))
+    }
+    
+    func getQuickEasy(completion: @escaping ([Recipe]) -> Void) {
+        completion(Array(Recipe.recipes.suffix(3)))
+    }
+    
+    func getHealthy(completion: @escaping ([Recipe]) -> Void) {
+        completion(Recipe.recipes)
+    }
+    
+    func fetchImageData(from url: String, completion: @escaping (Data?) -> Void) {
+        let key = url as NSString
         
-        completion([recommendations, popular, quickEasy, healthy])
-    }
-    
-    func getRecommendations() -> [Recipe] {
-        return Array(Recipe.recipes.prefix(2))
-    }
-    
-    func getPopular() -> [Recipe] {
-        return Array(Recipe.recipes.shuffled().prefix(5))  
-    }
-    
-    func getQuickEasy() -> [Recipe] {
-        return Array(Recipe.recipes.suffix(3))
-    }
-    
-    func getHealthy() -> [Recipe] {
-        Recipe.recipes
+        if let cachedData = imageCache.object(forKey: key) {
+            print("cash")
+            completion(cachedData as Data)
+            return
+        }
+        
+        guard let imageURL = URL(string: url) else {
+            completion(nil)
+            return
+        }
+        
+        DispatchQueue.global().async {
+            let data = try? Data(contentsOf: imageURL)
+            DispatchQueue.main.async {
+                completion(data)
+            }
+        }
     }
 }
 

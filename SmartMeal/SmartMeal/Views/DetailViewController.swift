@@ -113,7 +113,7 @@ class DetailViewController: UIViewController {
     }
     
     private var timeLabel: TextWithIcon = {
-        let timeLabel = TextWithIcon(text: "1 час 30 мин", with: ImageAssets.users)
+        let timeLabel = TextWithIcon(text: "1 час 30 мин", with: ImageAssets.clock)
         return timeLabel
     }()
     

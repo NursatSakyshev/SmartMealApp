@@ -24,11 +24,33 @@ class HomeViewModel {
     }
     
     func callFuncToGetData() {
-        self.apiService.getData { (recipies) in
-            recipies.forEach {
-                self.tableViewCellModels.append(TableViewCellModel(recipes: $0))
-            }
-            
+        let group = DispatchGroup() 
+        
+        group.enter()
+        APIService.shared.getRecommendations {
+            self.tableViewCellModels.append(TableViewCellModel(recipes: $0))
+            group.leave()
+        }
+        
+        group.enter()
+        APIService.shared.getPopular {
+            self.tableViewCellModels.append(TableViewCellModel(recipes: $0))
+            group.leave()
+        }
+        
+        group.enter()
+        APIService.shared.getQuickEasy {
+            self.tableViewCellModels.append(TableViewCellModel(recipes: $0))
+            group.leave()
+        }
+        
+        group.enter()
+        APIService.shared.getHealthy {
+            self.tableViewCellModels.append(TableViewCellModel(recipes: $0))
+            group.leave()
+        }
+        
+        group.notify(queue: .main) {
             self.bind()
         }
     }
@@ -37,26 +59,3 @@ class HomeViewModel {
 
 
 
-
-
-
-
-
-
-
-
-///    var recipesByCategory: [[Recipe]] = [] {
-//         didSet {
-//             self.bind()
-//         }
-//     }
-
-
-
-
-
-//    func fetchRecipes(completion: @escaping () -> Void) {
-//        // Здесь загружаешь рецепты из API или базы данных
-//        self.recipes = Recipe.recipes
-//        completion()
-//    }
