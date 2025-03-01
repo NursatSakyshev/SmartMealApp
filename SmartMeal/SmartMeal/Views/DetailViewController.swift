@@ -8,17 +8,10 @@
 import UIKit
 
 class DetailViewController: UIViewController {
+    var viewModel: DetailViewModel!
     
     //MARK: Test
-    var ingridients = [
-        Ingridient(name: "Свекла", amount: 500, unit: "кг"),
-        Ingridient(name: "Капуста", amount: 230, unit: "г"),
-        Ingridient(name: "Морковь", amount: 150, unit: "кг"),
-        Ingridient(name: "Кортофель", amount: 200, unit: "кг"),
-        Ingridient(name: "Лук", amount: 100, unit: "кг"),
-        Ingridient(name: "Томатная паста", amount: 50, unit: "мл"),
-    ]
-    
+   
     lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         return imageView
@@ -29,7 +22,6 @@ class DetailViewController: UIViewController {
     private var nameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
-        label.text = "Классический борщ"
         return label
     }()
     
@@ -52,7 +44,6 @@ class DetailViewController: UIViewController {
         label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = .gray
         label.numberOfLines = 0
-        label.text = "Борщ - это традиционный славянский суп, известный своим насыщенным вкусом и ярким цветом. Это блюдо не только вкусное, но и питательное, идеально подходящее для холодных дней."
         return label
     }()
     
@@ -63,6 +54,12 @@ class DetailViewController: UIViewController {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.showsVerticalScrollIndicator = true
         scrollView.alwaysBounceVertical = true
+    }
+    
+    func updateUI() {
+        nameLabel.text = viewModel.recipe.title
+        recipeDescription.text = viewModel.recipe.description
+        imageView.loadImage(from: viewModel.recipe.imageUrl!)
     }
     
     func configureContentView() {
@@ -108,7 +105,7 @@ class DetailViewController: UIViewController {
             tableView.rightAnchor.constraint(equalTo: contentView.rightAnchor),
             tableView.topAnchor.constraint(equalTo: ingredientsLabel.bottomAnchor, constant: 20),
             tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            tableView.heightAnchor.constraint(equalToConstant: CGFloat(ingridients.count * 50)),
+            tableView.heightAnchor.constraint(equalToConstant: CGFloat(viewModel.ingridients.count * 50)),
         ])
     }
     
@@ -137,6 +134,7 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        updateUI()
         configureScrollView()
         configureContentView()
         prepareScrollView()
@@ -151,7 +149,6 @@ class DetailViewController: UIViewController {
             stackView.addArrangedSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
-        imageView.image = UIImage(named: "DishImage")
         
         NSLayoutConstraint.activate([
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -183,14 +180,14 @@ class DetailViewController: UIViewController {
 //MARK: Extension
 extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        ingridients.count
+        viewModel.ingridients.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: IngridientCell.identifier, for: indexPath) as? IngridientCell else {
             return UITableViewCell()
         }
-        cell.configure(ingridient: ingridients[indexPath.row])
+        cell.configure(ingridient: viewModel.ingridients[indexPath.row])
         return cell
     }
 }

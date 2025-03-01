@@ -21,4 +21,10 @@ class HomeCoordinator: Coordinator {
         vc.viewModel = viewModel
         navigationController.pushViewController(vc, animated: false)
     }
+    
+    func showDetail(for recipe: Recipe) {
+        let detailVC = DetailViewController()
+        detailVC.viewModel = DetailViewModel(recipe: recipe)
+        navigationController.pushViewController(detailVC, animated: true)
+    }
 }

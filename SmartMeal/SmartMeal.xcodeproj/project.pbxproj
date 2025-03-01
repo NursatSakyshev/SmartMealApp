@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C80735692D72FF4100531AB8 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80735682D72FF4100531AB8 /* DetailViewModel.swift */; };
 		C83477122D6E12AC006ED330 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83477112D6E12AC006ED330 /* AppDelegate.swift */; };
 		C834771E2D6E12AD006ED330 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C834771C2D6E12AD006ED330 /* LaunchScreen.storyboard */; };
 		C83477272D6E1416006ED330 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83477262D6E1416006ED330 /* RegistrationViewController.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C80735682D72FF4100531AB8 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		C834770E2D6E12AC006ED330 /* SmartMeal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartMeal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C83477112D6E12AC006ED330 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C834771D2D6E12AD006ED330 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 				C83477422D6F715F006ED330 /* HomeViewModel.swift */,
 				C89B86EA2D7186F100C175CB /* TableViewCellModel.swift */,
 				C89B86EC2D71870700C175CB /* CollectionViewCellModel.swift */,
+				C80735682D72FF4100531AB8 /* DetailViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 				C834774D2D6F9BFC006ED330 /* IngridientCell.swift in Sources */,
 				C83477512D70BC48006ED330 /* Resources.swift in Sources */,
 				C89B87032D729C2200C175CB /* ProfileCoordinator.swift in Sources */,
+				C80735692D72FF4100531AB8 /* DetailViewModel.swift in Sources */,
 				C834774B2D6F98F3006ED330 /* Ingridient.swift in Sources */,
 				C89B87052D72CEF600C175CB /* Coordinated.swift in Sources */,
 				C83477392D6EB985006ED330 /* RecipeCell.swift in Sources */,

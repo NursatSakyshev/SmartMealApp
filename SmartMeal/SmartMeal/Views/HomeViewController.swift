@@ -33,6 +33,7 @@ class HomeViewController: UIViewController, Coordinated {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(RecipeTableViewCell.self, forCellReuseIdentifier: "RecipeCategoryCell")
+
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -41,16 +42,6 @@ class HomeViewController: UIViewController, Coordinated {
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
-    
-    private let recommendationLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Recommendations"
-        label.textColor = UIColor(red: 56/255, green: 56/255, blue: 56/255, alpha: 1)
-        label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
-        label.textAlignment = .left
-        label.numberOfLines = 0
-        return label
-    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,21 +52,16 @@ class HomeViewController: UIViewController, Coordinated {
     
     func setupUI() {
         view.backgroundColor = .white
-        [recommendationLabel].forEach {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            view.addSubview($0)
-        }
-        
-        NSLayoutConstraint.activate([
-            recommendationLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
-            recommendationLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
-            recommendationLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60),
-        ])
     }
 }
 
 
-extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
+extension HomeViewController: UITableViewDelegate, UITableViewDataSource, RecipeTableViewCellDelegate {
+    func didSelectRecipe(_ recipe: Recipe) {
+        guard let coordinator = coordinator as? HomeCoordinator else { return }
+        coordinator.showDetail(for: recipe)
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return viewModel.categories.count
     }
@@ -88,6 +74,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeCategoryCell", for: indexPath) as? RecipeTableViewCell else {
             return UITableViewCell()
         }
+        cell.delegate = self
         let viewModel = viewModel.getTableCellModel(at: indexPath)
         cell.configure(with: viewModel)
         return cell
@@ -125,3 +112,4 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         return 40
     }
 }
+

@@ -31,28 +31,5 @@ final class TabBarController: UITabBarController {
         tabBar.layer.borderColor = Resources.Colors.separator.cgColor
         tabBar.layer.borderWidth = 1
         tabBar.layer.masksToBounds = true
-//        let homeViewController = HomeViewController()
-//        let profileViewController = ProfileViewController()
-//        let savedViewController = FavoritesViewController()
-//        let searchViewController = DetailViewController()
-//        
-//        let navVC1 = UINavigationController(rootViewController: homeViewController)
-//        let navVC2 = UINavigationController(rootViewController: searchViewController)
-//        let navVC3 = UINavigationController(rootViewController: savedViewController)
-//        let navVC4 = UINavigationController(rootViewController: profileViewController)
-        
-        
-        
-//        navVC1.tabBarItem = UITabBarItem(title: Resources.Strings.TabBar.home, image: Resources.Images.TabBar.home, tag: Tabs.home.rawValue)
-//        navVC2.tabBarItem = UITabBarItem(title: Resources.Strings.TabBar.search, image: Resources.Images.TabBar.search, tag: Tabs.search.rawValue)
-//        navVC3.tabBarItem = UITabBarItem(title: Resources.Strings.TabBar.favorites, image: Resources.Images.TabBar.favorites, tag: Tabs.favorites.rawValue)
-//        navVC4.tabBarItem = UITabBarItem(title: Resources.Strings.TabBar.profile, image: Resources.Images.TabBar.profile, tag: Tabs.profile.rawValue)
-        
-//        setViewControllers([
-//            navVC1,
-//            navVC2,
-//            navVC3,
-//            navVC4,
-//        ], animated: true)
     }
 }

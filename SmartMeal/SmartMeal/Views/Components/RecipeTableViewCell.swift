@@ -8,6 +8,7 @@
 import UIKit
 
 class RecipeTableViewCell: UITableViewCell {
+    var delegate: RecipeTableViewCellDelegate!
     
     var collectionView: UICollectionView!
     private var recipesViewModels: [CollectionViewCellModel] = []
@@ -77,5 +78,14 @@ extension RecipeTableViewCell: UICollectionViewDelegate, UICollectionViewDataSou
         cell.configure(with: viewModel)
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let viewModel = recipeViewModel(at: indexPath)
+        delegate.didSelectRecipe(viewModel.recipe)
+    }
 }
 
+
+protocol RecipeTableViewCellDelegate: AnyObject {
+    func didSelectRecipe(_ recipe: Recipe)
+}
