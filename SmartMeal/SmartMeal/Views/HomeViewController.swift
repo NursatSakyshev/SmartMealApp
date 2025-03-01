@@ -9,10 +9,10 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
-    private var viewModel: HomeViewModel!
+    var viewModel: HomeViewModel!
+    var coordinator: Coordinator?
     
     private func bindViewModel() {
-        viewModel = HomeViewModel()
         viewModel.bind = { [weak self] in
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
