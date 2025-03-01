@@ -20,13 +20,11 @@ class TabBarCoordinator: Coordinator {
         childCoordinators.append(homeCoordinator)
         homeCoordinator.start()
         
-        
         let searchNavigationController = UINavigationController()
         searchNavigationController.tabBarItem = UITabBarItem(title: Resources.Strings.TabBar.search, image: Resources.Images.TabBar.search, tag: Tabs.search.rawValue)
         let searchCoordinator = SearchCoordinator(navigationController: searchNavigationController)
         childCoordinators.append(searchCoordinator)
         searchCoordinator.start()
-        
         
         let favoritesNavigationController = UINavigationController()
         favoritesNavigationController.tabBarItem = UITabBarItem(title: Resources.Strings.TabBar.favorites, image: Resources.Images.TabBar.favorites, tag: Tabs.favorites.rawValue)
@@ -48,6 +46,11 @@ class TabBarCoordinator: Coordinator {
         ]
         navigationController.viewControllers = [tabBar]
     }
+    
+    func removeChild(_ coordinator: Coordinator?) {
+         guard let coordinator = coordinator else { return }
+         childCoordinators.removeAll { $0 === coordinator }
+     }
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController

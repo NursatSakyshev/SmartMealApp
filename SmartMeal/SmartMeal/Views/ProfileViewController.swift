@@ -7,8 +7,9 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
-
+class ProfileViewController: UIViewController, Coordinated {
+    weak var coordinator: Coordinator?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white

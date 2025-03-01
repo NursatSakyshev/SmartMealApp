@@ -7,7 +7,8 @@
 
 import UIKit
 
-class SearchViewController: UIViewController {
+class SearchViewController: UIViewController, Coordinated {
+    weak var coordinator: Coordinator?
     
     lazy var searchField: SearchTextField = {
         let textField = SearchTextField()

@@ -7,10 +7,10 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, Coordinated {
     
     var viewModel: HomeViewModel!
-    var coordinator: Coordinator?
+    weak var coordinator: Coordinator?
     
     private func bindViewModel() {
         viewModel.bind = { [weak self] in

@@ -9,7 +9,8 @@ import Foundation
 
 import UIKit
 
-class FavoritesViewController: UIViewController {
+class FavoritesViewController: UIViewController, Coordinated {
+    weak var coordinator: Coordinator?
 
     override func viewDidLoad() {
         super.viewDidLoad()
