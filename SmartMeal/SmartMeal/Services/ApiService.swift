@@ -11,7 +11,7 @@ import UIKit
 class APIService {
     static let shared = APIService()
     func getRecommendations(completion: @escaping ([Recipe]) -> Void) {
-        completion(Array(Recipe.recipes.prefix(2)))
+        completion(Array(Recipe.recipes.prefix(1)))
     }
     
     private let imageCache = NSCache<NSString, NSData>()

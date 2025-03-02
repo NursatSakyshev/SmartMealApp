@@ -7,11 +7,14 @@
 
 import UIKit
 
-class SearchCoordinator: Coordinator {
+class SearchCoordinator: NavigationCoordinator {
+    var childCoordinators = [Coordinator]()
+    
     var navigationController: UINavigationController
     
     func start() {
-        
+        let vc = SearchViewController()
+        navigationController.pushViewController(vc, animated: true)
     }
     
     init(navigationController: UINavigationController) {

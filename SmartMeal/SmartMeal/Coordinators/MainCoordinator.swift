@@ -10,9 +10,11 @@ import UIKit
 class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
     
     var childCoordinators = [Coordinator]()
+    var window: UIWindow!
     var navigationController: UINavigationController
     
-    init(navigationController: UINavigationController) {
+    init(window: UIWindow, navigationController: UINavigationController) {
+        self.window = window
         self.navigationController = navigationController
         super.init()
         self.navigationController.delegate = self
@@ -23,7 +25,7 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
     }
     
     func navigateToTabBar(){
-        let tabBarVC = TabBarCoordinator(navigationController: navigationController)
+        let tabBarVC = TabBarCoordinator(window: window)
         tabBarVC.start()
         childCoordinators.append(tabBarVC)
     }

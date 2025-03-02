@@ -59,7 +59,7 @@ class DetailViewController: UIViewController {
     func updateUI() {
         nameLabel.text = viewModel.recipe.title
         recipeDescription.text = viewModel.recipe.description
-        imageView.loadImage(from: viewModel.recipe.imageUrl!)
+        imageView.downloaded(from: viewModel.recipe.imageUrl!)
     }
     
     func configureContentView() {

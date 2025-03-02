@@ -7,7 +7,9 @@
 
 import UIKit
 
-class HomeCoordinator: Coordinator {
+class HomeCoordinator: NavigationCoordinator {
+    var childCoordinators = [Coordinator]()
+    
     var navigationController: UINavigationController
     
     init(navigationController: UINavigationController) {
@@ -19,7 +21,7 @@ class HomeCoordinator: Coordinator {
         let viewModel = HomeViewModel()
         vc.coordinator = self
         vc.viewModel = viewModel
-        navigationController.pushViewController(vc, animated: false)
+        navigationController.setViewControllers([vc], animated: false)
     }
     
     func showDetail(for recipe: Recipe) {

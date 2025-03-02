@@ -26,6 +26,10 @@ class CollectionViewCellModel {
         return recipe.time
     }
     
+    var isFavorite: Bool {
+        return false
+    }
+    
     var imageUrl: String {
         return recipe.imageUrl!
     }

@@ -7,7 +7,9 @@
 
 import UIKit
 
-class ProfileCoordinator: Coordinator {
+class ProfileCoordinator: NavigationCoordinator {
+    var childCoordinators = [Coordinator]()
+    
     var navigationController: UINavigationController
     
     init(navigationController: UINavigationController) {

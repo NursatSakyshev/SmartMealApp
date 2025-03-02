@@ -8,12 +8,13 @@
 import UIKit
 
 class TabBarCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
-    var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
+    
+    var childCoordinators = [Coordinator]()
+    var window: UIWindow!
     
     func start() {
         let tabBar = TabBarController()
-        self.navigationController.delegate = self
         
         let homeNavigationController = UINavigationController()
         homeNavigationController.delegate = self
@@ -47,9 +48,10 @@ class TabBarCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
             homeNavigationController,
             searchNavigationController,
             favoritesNavigationController,
-            profileNavigationController
+            profileNavigationController,
         ]
-        navigationController.viewControllers = [tabBar]
+        window.rootViewController = tabBar
+//        navigationController.viewControllers = [tabBar]
     }
     
     func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
@@ -69,7 +71,8 @@ class TabBarCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
          childCoordinators.removeAll { $0 === coordinator }
      }
     
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
+    init(window: UIWindow) {
+        self.window = window
+        navigationController = UINavigationController()
     }
 }

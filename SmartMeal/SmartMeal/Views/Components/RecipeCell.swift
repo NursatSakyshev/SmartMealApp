@@ -46,7 +46,7 @@ class RecipeCell: UICollectionViewCell {
     }()
     
     override func prepareForReuse() {
-        setup()
+//        setup()
     }
     
     override init(frame: CGRect) {
@@ -96,5 +96,7 @@ class RecipeCell: UICollectionViewCell {
         nameLabel.text = viewModel.name
         caloriesTimeLabel.text = "\(viewModel.calories) ккал | \(viewModel.time) мин"
         imageView.downloaded(from: viewModel.imageUrl)
+        let imageName = viewModel.isFavorite ? "heart.fill" : "heart"
+        favoriteButton.setImage(UIImage(systemName: imageName), for: .normal)
     }
 }

@@ -45,6 +45,7 @@ class HomeViewController: UIViewController, Coordinated {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(coordinator)
         setupUI()
         setupTableView()
         bindViewModel()
@@ -58,7 +59,9 @@ class HomeViewController: UIViewController, Coordinated {
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource, RecipeTableViewCellDelegate {
     func didSelectRecipe(_ recipe: Recipe) {
-        guard let coordinator = coordinator as? HomeCoordinator else { return }
+        guard let coordinator = coordinator as? HomeCoordinator else {
+            return
+        }
         coordinator.showDetail(for: recipe)
     }
     

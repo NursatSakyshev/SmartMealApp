@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C80735692D72FF4100531AB8 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80735682D72FF4100531AB8 /* DetailViewModel.swift */; };
+		C82B44592D740BEB009B020D /* NavigatorCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82B44582D740BEB009B020D /* NavigatorCoordinator.swift */; };
 		C83477122D6E12AC006ED330 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83477112D6E12AC006ED330 /* AppDelegate.swift */; };
 		C834771E2D6E12AD006ED330 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C834771C2D6E12AD006ED330 /* LaunchScreen.storyboard */; };
 		C83477272D6E1416006ED330 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83477262D6E1416006ED330 /* RegistrationViewController.swift */; };
@@ -48,6 +49,7 @@
 
 /* Begin PBXFileReference section */
 		C80735682D72FF4100531AB8 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
+		C82B44582D740BEB009B020D /* NavigatorCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigatorCoordinator.swift; sourceTree = "<group>"; };
 		C834770E2D6E12AC006ED330 /* SmartMeal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartMeal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C83477112D6E12AC006ED330 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C834771D2D6E12AD006ED330 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 			children = (
 				C89B86F62D7291D600C175CB /* Coordinator.swift */,
 				C89B87042D72CEF600C175CB /* Coordinated.swift */,
+				C82B44582D740BEB009B020D /* NavigatorCoordinator.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -314,6 +317,7 @@
 				C834772F2D6E2574006ED330 /* DividerView.swift in Sources */,
 				C834772D2D6E22A3006ED330 /* CustomButton.swift in Sources */,
 				C89B86F72D7291D600C175CB /* Coordinator.swift in Sources */,
+				C82B44592D740BEB009B020D /* NavigatorCoordinator.swift in Sources */,
 				C89B87012D729C1500C175CB /* FavoritesCoordinator.swift in Sources */,
 				C89B86F32D722C4800C175CB /* UIImageView + Extension.swift in Sources */,
 				C83477372D6E42F4006ED330 /* SearchTextField.swift in Sources */,
@@ -480,6 +484,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3M74SQVZWS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SmartMeal/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -507,6 +512,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3M74SQVZWS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SmartMeal/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
