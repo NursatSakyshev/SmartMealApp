@@ -7,8 +7,10 @@
 
 import Foundation
 
-class CollectionViewCellModel {
+class CollectionCellViewModel {
     var recipe: Recipe!
+    
+    var didUpdate: (() -> Void)?
     
     init(recipe: Recipe) {
         self.recipe = recipe
@@ -27,10 +29,15 @@ class CollectionViewCellModel {
     }
     
     var isFavorite: Bool {
-        return false
+        return recipe.isFavorite
     }
     
     var imageUrl: String {
         return recipe.imageUrl!
     }
+    
+    func toggleFavorite() {
+         recipe.isFavorite.toggle()
+         didUpdate?()
+     }
 }

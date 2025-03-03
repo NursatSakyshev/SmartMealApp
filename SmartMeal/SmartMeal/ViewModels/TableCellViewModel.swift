@@ -7,7 +7,7 @@
 
 import Foundation
 
-class TableViewCellModel {
+class TableCellViewModel {
     var collecionViewCellModels: [CollectionViewCellModel] = []
     var recipes: [Recipe]!
     
