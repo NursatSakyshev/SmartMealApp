@@ -39,7 +39,8 @@ extension UIImageView {
             
             let cachedResponse = CachedURLResponse(response: httpURLResponse, data: data)
             URLCache.shared.storeCachedResponse(cachedResponse, for: request)
-            
+//            URLCache.shared.memoryCapacity = 50 * 1024 * 1024
+//            URLCache.shared.diskCapacity = 200 * 1024 * 1024
             DispatchQueue.main.async { [weak self] in
                 self?.image = image
             }

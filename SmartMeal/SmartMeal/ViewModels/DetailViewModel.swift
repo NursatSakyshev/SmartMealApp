@@ -15,6 +15,18 @@ class DetailViewModel {
         return recipe.ingridients
     }
     
+    var time: Int {
+        return recipe.time
+    }
+    
+    var difficulty: String {
+        return recipe.difficulty
+    }
+    
+    var servings: Int {
+        return recipe.servings
+    }
+    
     init(recipe: Recipe) {
         self.recipe = recipe
     }

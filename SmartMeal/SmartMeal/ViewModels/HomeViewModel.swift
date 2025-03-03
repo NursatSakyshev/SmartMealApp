@@ -8,19 +8,17 @@
 import Foundation
 
 class HomeViewModel {
-    var tableViewCellModels: [TableViewCellModel] = []
+    var tableViewCellModels: [TableCellViewModel] = []
     let categories = ["Recommendations", "Popular", "Quick & Easy", "Healthy Choices"]
-    
-    private var apiService = APIService()
     
     var bind : (() -> Void) = {}
    
-    func getTableCellModel(at indexPath: IndexPath) -> TableViewCellModel {
-         return self.tableViewCellModels[indexPath.section]
+    func getTableCellModel(at indexPath: IndexPath) -> TableCellViewModel {
+        return self.tableViewCellModels[indexPath.section]
      }
     
     init() {
-        callFuncToGetData()
+        self.callFuncToGetData()
     }
     
     func callFuncToGetData() {
@@ -28,25 +26,25 @@ class HomeViewModel {
         
         group.enter()
         APIService.shared.getRecommendations {
-            self.tableViewCellModels.append(TableViewCellModel(recipes: $0))
+            self.tableViewCellModels.append(TableCellViewModel(recipes: $0))
             group.leave()
         }
         
         group.enter()
         APIService.shared.getPopular {
-            self.tableViewCellModels.append(TableViewCellModel(recipes: $0))
+            self.tableViewCellModels.append(TableCellViewModel(recipes: $0))
             group.leave()
         }
         
         group.enter()
         APIService.shared.getQuickEasy {
-            self.tableViewCellModels.append(TableViewCellModel(recipes: $0))
+            self.tableViewCellModels.append(TableCellViewModel(recipes: $0))
             group.leave()
         }
         
         group.enter()
         APIService.shared.getHealthy {
-            self.tableViewCellModels.append(TableViewCellModel(recipes: $0))
+            self.tableViewCellModels.append(TableCellViewModel(recipes: $0))
             group.leave()
         }
         

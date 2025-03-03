@@ -8,7 +8,6 @@
 import UIKit
 
 class TabBarCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
-    var navigationController: UINavigationController
     
     var childCoordinators = [Coordinator]()
     var window: UIWindow!
@@ -51,7 +50,6 @@ class TabBarCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
             profileNavigationController,
         ]
         window.rootViewController = tabBar
-//        navigationController.viewControllers = [tabBar]
     }
     
     func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
@@ -60,7 +58,6 @@ class TabBarCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
         if navigationController.viewControllers.contains(fromViewController) {
             return
         }
-
         if let coordinatedVC = fromViewController as? UIViewController & Coordinated {
             removeChild(coordinatedVC.coordinator)
         }
@@ -73,6 +70,5 @@ class TabBarCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
     
     init(window: UIWindow) {
         self.window = window
-        navigationController = UINavigationController()
     }
 }

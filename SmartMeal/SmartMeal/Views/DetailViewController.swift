@@ -10,10 +10,10 @@ import UIKit
 class DetailViewController: UIViewController {
     var viewModel: DetailViewModel!
     
-    //MARK: Test
-   
     lazy var imageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -77,12 +77,12 @@ class DetailViewController: UIViewController {
         scrollView.addSubview(contentView)
         
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
-            contentView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
             contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
@@ -109,20 +109,11 @@ class DetailViewController: UIViewController {
         ])
     }
     
-    private var timeLabel: TextWithIcon = {
-        let timeLabel = TextWithIcon(text: "1 час 30 мин", with: ImageAssets.clock)
-        return timeLabel
-    }()
+    private var timeLabel: TextWithIcon!
     
-    private var difficultyLabel: TextWithIcon = {
-        let timeLabel = TextWithIcon(text: "Средняя сложность", with: ImageAssets.difficulty)
-        return timeLabel
-    }()
+    private var difficultyLabel: TextWithIcon!
     
-    private var portionsLabel: TextWithIcon = {
-        let timeLabel = TextWithIcon(text: "4 порции", with: ImageAssets.users)
-        return timeLabel
-    }()
+    private var servingsLabel: TextWithIcon!
     
     lazy var stackView: UIStackView = {
         let stackView = UIStackView()
@@ -144,8 +135,14 @@ class DetailViewController: UIViewController {
     
     func setupUI() {
         view.backgroundColor = .white
+        navigationController?.navigationBar.isTranslucent = true
+        scrollView.contentInsetAdjustmentBehavior = .never
+        
+        timeLabel = TextWithIcon(text: "\(viewModel.time) мин", with: ImageAssets.clock)
+        difficultyLabel = TextWithIcon(text: "\(viewModel.difficulty) сложность", with: ImageAssets.difficulty)
+        servingsLabel = TextWithIcon(text: "\(viewModel.servings) порций", with: ImageAssets.users)
 
-        [timeLabel, difficultyLabel, portionsLabel].forEach {
+        [timeLabel, difficultyLabel, servingsLabel].forEach {
             stackView.addArrangedSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -154,7 +151,7 @@ class DetailViewController: UIViewController {
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            imageView.heightAnchor.constraint(equalToConstant: 240),
+            imageView.heightAnchor.constraint(equalToConstant: 300),
             
             nameLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16),
             nameLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10),

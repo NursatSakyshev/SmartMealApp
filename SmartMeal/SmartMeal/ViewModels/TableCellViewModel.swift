@@ -8,18 +8,18 @@
 import Foundation
 
 class TableCellViewModel {
-    var collecionViewCellModels: [CollectionViewCellModel] = []
+    var collecionViewCellModels: [CollectionCellViewModel] = []
     var recipes: [Recipe]!
     
     init(recipes: [Recipe]) {
         print(recipes.count)
         self.recipes = recipes
         recipes.forEach {
-            collecionViewCellModels.append(CollectionViewCellModel(recipe: $0))
+            collecionViewCellModels.append(CollectionCellViewModel(recipe: $0))
         }
     }
     
-    func recipeViewModel(at indexPath: IndexPath) -> CollectionViewCellModel {
+    func recipeViewModel(at indexPath: IndexPath) -> CollectionCellViewModel {
         return self.collecionViewCellModels[indexPath.row]
     }
 }

@@ -32,7 +32,6 @@ class APIService {
         let key = url as NSString
         
         if let cachedData = imageCache.object(forKey: key) {
-            print("cash")
             completion(cachedData as Data)
             return
         }

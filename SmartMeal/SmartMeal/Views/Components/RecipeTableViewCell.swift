@@ -11,7 +11,7 @@ class RecipeTableViewCell: UITableViewCell {
     var delegate: RecipeTableViewCellDelegate!
     
     var collectionView: UICollectionView!
-    private var recipesViewModels: [CollectionViewCellModel] = []
+    private var recipesViewModels: [CollectionCellViewModel] = []
     
     private func setupCollectionView() {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: setupFlowLayout())
@@ -32,7 +32,7 @@ class RecipeTableViewCell: UITableViewCell {
     }
     
     
-    func recipeViewModel(at indexPath: IndexPath) -> CollectionViewCellModel {
+    func recipeViewModel(at indexPath: IndexPath) -> CollectionCellViewModel {
         return self.recipesViewModels[indexPath.row]
     }
     
@@ -54,7 +54,7 @@ class RecipeTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(with viewModel: TableViewCellModel) {
+    func configure(with viewModel: TableCellViewModel) {
         self.recipesViewModels = viewModel.collecionViewCellModels
         collectionView.reloadData()
     }
@@ -70,7 +70,7 @@ extension RecipeTableViewCell: UICollectionViewDelegate, UICollectionViewDataSou
         setupCollectionView()
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_  collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecipeCell.identifier, for: indexPath) as? RecipeCell else {
             return UICollectionViewCell()
         }

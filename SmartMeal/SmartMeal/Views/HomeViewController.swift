@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController, Coordinated {
+class HomeViewController: UIViewController {
     
     var viewModel: HomeViewModel!
     weak var coordinator: Coordinator?
@@ -45,7 +45,6 @@ class HomeViewController: UIViewController, Coordinated {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(coordinator)
         setupUI()
         setupTableView()
         bindViewModel()

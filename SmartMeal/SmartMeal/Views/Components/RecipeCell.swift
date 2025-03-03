@@ -8,6 +8,8 @@
 import UIKit
 
 class RecipeCell: UICollectionViewCell {
+    
+    var viewModel: CollectionCellViewModel!
 
     static var identifier = "RecipeCell"
     
@@ -20,22 +22,24 @@ class RecipeCell: UICollectionViewCell {
         label.textColor = .black
         return label
     }()
-    //MARK: favorite button
+    
     let favoriteButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "heart"), for: .normal)
-        button.tintColor = .white
+        button.layer.cornerRadius = 15
+        button.tintColor = .black
+        button.backgroundColor = .white
         button.addTarget(self, action: #selector(favoriteTapped), for: .touchUpInside)
         return button
     }()
     
-    var isFavorite = false
-    
     @objc func favoriteTapped() {
-        isFavorite.toggle()
-        
-        let imageName = isFavorite ? "heart.fill" : "heart"
-        favoriteButton.setImage(UIImage(systemName: imageName), for: .normal)
+        viewModel.toggleFavorite()
+    }
+    
+    private func updateFavoriteButton() {
+        let image = UIImage(systemName: viewModel.isFavorite ? "bookmark.fill" : "bookmark")?
+            .withConfiguration(UIImage.SymbolConfiguration(pointSize: 15))
+        favoriteButton.setImage(image, for: .normal)
     }
     
     private var caloriesTimeLabel: UILabel = {
@@ -46,7 +50,6 @@ class RecipeCell: UICollectionViewCell {
     }()
     
     override func prepareForReuse() {
-//        setup()
     }
     
     override init(frame: CGRect) {
@@ -72,7 +75,7 @@ class RecipeCell: UICollectionViewCell {
         
         NSLayoutConstraint.activate([
             imageView.heightAnchor.constraint(equalToConstant: 200),
-            imageView.widthAnchor.constraint(equalToConstant: 160),
+            imageView.widthAnchor.constraint(equalToConstant: 180),
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: trailingAnchor),
             imageView.topAnchor.constraint(equalTo: topAnchor),
@@ -85,18 +88,23 @@ class RecipeCell: UICollectionViewCell {
             caloriesTimeLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
             caloriesTimeLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 10),
             
-            favoriteButton.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            favoriteButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -10),
-            favoriteButton.heightAnchor.constraint(equalToConstant: 20),
-            favoriteButton.widthAnchor.constraint(equalToConstant: 22)
+            favoriteButton.topAnchor.constraint(equalTo: topAnchor, constant: 5),
+            favoriteButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -5),
+            favoriteButton.heightAnchor.constraint(equalToConstant: 30),
+            favoriteButton.widthAnchor.constraint(equalToConstant: 30)
         ])
     }
     
-    func configure(with viewModel: CollectionViewCellModel) {
+    func configure(with viewModel: CollectionCellViewModel) {
+        self.viewModel = viewModel
         nameLabel.text = viewModel.name
         caloriesTimeLabel.text = "\(viewModel.calories) ккал | \(viewModel.time) мин"
-        imageView.downloaded(from: viewModel.imageUrl)
-        let imageName = viewModel.isFavorite ? "heart.fill" : "heart"
-        favoriteButton.setImage(UIImage(systemName: imageName), for: .normal)
+//        imageView.downloaded(from: viewModel.imageUrl)
+        imageView.backgroundColor = .red
+        updateFavoriteButton()
+        
+        viewModel.didUpdate = { [weak self] in
+            self?.updateFavoriteButton()
+        }
     }
 }
