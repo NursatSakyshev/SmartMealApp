@@ -32,15 +32,17 @@ class RecipeCell: UICollectionViewCell {
         return button
     }()
     
-    @objc func favoriteTapped() {
-        viewModel.toggleFavorite()
+    private func bindViewModel() {
+        viewModel?.isFavorite.bind { [weak self] isFavorite in
+            self?.favoriteButton.isSelected = isFavorite
+        }
     }
     
-    private func updateFavoriteButton() {
-        let image = UIImage(systemName: viewModel.isFavorite ? "bookmark.fill" : "bookmark")?
-            .withConfiguration(UIImage.SymbolConfiguration(pointSize: 15))
-        favoriteButton.setImage(image, for: .normal)
+    @objc func favoriteTapped() {
+        viewModel.toggleFavorite()
+        updateFavoriteButton()
     }
+
     
     private var caloriesTimeLabel: UILabel = {
         let label = UILabel()
@@ -55,6 +57,13 @@ class RecipeCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
+        bindViewModel()
+    }
+    
+    private func updateFavoriteButton() {
+        let image = UIImage(systemName: viewModel.isFavorite.value ? "bookmark.fill" : "bookmark")?
+            .withConfiguration(UIImage.SymbolConfiguration(pointSize: 15))
+        favoriteButton.setImage(image, for: .normal)
     }
     
     required init?(coder: NSCoder) {
@@ -74,8 +83,8 @@ class RecipeCell: UICollectionViewCell {
         contentView.clipsToBounds = true
         
         NSLayoutConstraint.activate([
-            imageView.heightAnchor.constraint(equalToConstant: 200),
-            imageView.widthAnchor.constraint(equalToConstant: 180),
+            imageView.heightAnchor.constraint(equalToConstant: 180),
+            imageView.widthAnchor.constraint(equalToConstant: 160),
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: trailingAnchor),
             imageView.topAnchor.constraint(equalTo: topAnchor),
@@ -99,12 +108,8 @@ class RecipeCell: UICollectionViewCell {
         self.viewModel = viewModel
         nameLabel.text = viewModel.name
         caloriesTimeLabel.text = "\(viewModel.calories) ккал | \(viewModel.time) мин"
-//        imageView.downloaded(from: viewModel.imageUrl)
-        imageView.backgroundColor = .red
+        imageView.loadImage(from: viewModel.imageUrl)
         updateFavoriteButton()
-        
-        viewModel.didUpdate = { [weak self] in
-            self?.updateFavoriteButton()
-        }
+//        imageView.backgroundColor = .red
     }
 }

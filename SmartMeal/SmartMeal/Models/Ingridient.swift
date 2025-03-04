@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Ingridient {
+struct Ingridient: Codable {
     let name: String
     let amount: Int
     let unit: String
