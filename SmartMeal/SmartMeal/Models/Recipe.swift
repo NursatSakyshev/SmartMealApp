@@ -7,13 +7,12 @@
 
 import Foundation
 
-struct Recipe {
+struct Recipe: Codable {
     let title: String
     let calories: Int
     let time: Int
     let description: String
     let imageUrl: String?
-    var isFavorite: Bool = false
     let ingridients: [Ingridient]
     let difficulty: String
     let servings: Int
