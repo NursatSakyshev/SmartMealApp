@@ -47,6 +47,9 @@
 		C89B87012D729C1500C175CB /* FavoritesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89B87002D729C1500C175CB /* FavoritesCoordinator.swift */; };
 		C89B87032D729C2200C175CB /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89B87022D729C2200C175CB /* ProfileCoordinator.swift */; };
 		C89B87052D72CEF600C175CB /* Coordinated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89B87042D72CEF600C175CB /* Coordinated.swift */; };
+		C8EA4A972D769ADB00337A8E /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8EA4A962D769ADB00337A8E /* FavoritesManager.swift */; };
+		C8EA4A992D769C9C00337A8E /* Dynamic.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8EA4A982D769C9C00337A8E /* Dynamic.swift */; };
+		C8EA4A9B2D76CBF200337A8E /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8EA4A9A2D76CBF200337A8E /* FavoritesViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,6 +95,9 @@
 		C89B87002D729C1500C175CB /* FavoritesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCoordinator.swift; sourceTree = "<group>"; };
 		C89B87022D729C2200C175CB /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		C89B87042D72CEF600C175CB /* Coordinated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinated.swift; sourceTree = "<group>"; };
+		C8EA4A962D769ADB00337A8E /* FavoritesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesManager.swift; sourceTree = "<group>"; };
+		C8EA4A982D769C9C00337A8E /* Dynamic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dynamic.swift; sourceTree = "<group>"; };
+		C8EA4A9A2D76CBF200337A8E /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,10 +148,10 @@
 		C83477252D6E13DF006ED330 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				C83477562D70BCFA006ED330 /* FavoritesViewControler.swift */,
 				C83477332D6E319A006ED330 /* Components */,
 				C83477262D6E1416006ED330 /* RegistrationViewController.swift */,
 				C83477282D6E1425006ED330 /* LoginViewController.swift */,
+				C83477562D70BCFA006ED330 /* FavoritesViewControler.swift */,
 				C83477342D6E3A64006ED330 /* HomeViewController.swift */,
 				C83477442D6F86FC006ED330 /* DetailViewController.swift */,
 				C83477522D70BC7D006ED330 /* TabBarViewController.swift */,
@@ -194,8 +200,9 @@
 				C89B86EA2D7186F100C175CB /* TableCellViewModel.swift */,
 				C83477422D6F715F006ED330 /* HomeViewModel.swift */,
 				C89B86EC2D71870700C175CB /* CollectionCellViewModel.swift */,
-				C80735682D72FF4100531AB8 /* DetailViewModel.swift */,
 				C82B445A2D7585AC009B020D /* SearchViewModel.swift */,
+				C80735682D72FF4100531AB8 /* DetailViewModel.swift */,
+				C8EA4A9A2D76CBF200337A8E /* FavoritesViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -204,6 +211,8 @@
 			isa = PBXGroup;
 			children = (
 				C89B86E82D715D4100C175CB /* ApiService.swift */,
+				C8EA4A962D769ADB00337A8E /* FavoritesManager.swift */,
+				C8EA4A982D769C9C00337A8E /* Dynamic.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -326,12 +335,14 @@
 				C834772D2D6E22A3006ED330 /* CustomButton.swift in Sources */,
 				C89B86F72D7291D600C175CB /* Coordinator.swift in Sources */,
 				C82B44592D740BEB009B020D /* NavigatorCoordinator.swift in Sources */,
+				C8EA4A9B2D76CBF200337A8E /* FavoritesViewModel.swift in Sources */,
 				C89B87012D729C1500C175CB /* FavoritesCoordinator.swift in Sources */,
 				C89B86F32D722C4800C175CB /* UIImageView + Extension.swift in Sources */,
 				C83477372D6E42F4006ED330 /* SearchTextField.swift in Sources */,
 				C89B86ED2D71870700C175CB /* CollectionCellViewModel.swift in Sources */,
 				C89B86E62D714C5600C175CB /* RecipeTableViewCell.swift in Sources */,
 				C83477472D6F8BF0006ED330 /* TextWithIcon.swift in Sources */,
+				C8EA4A992D769C9C00337A8E /* Dynamic.swift in Sources */,
 				C83477552D70BCD2006ED330 /* ProfileViewController.swift in Sources */,
 				C89B86FD2D729BDE00C175CB /* HomeCoordinator.swift in Sources */,
 				C834774D2D6F9BFC006ED330 /* IngridientCell.swift in Sources */,
@@ -348,6 +359,7 @@
 				C83477122D6E12AC006ED330 /* AppDelegate.swift in Sources */,
 				C83477572D70BCFA006ED330 /* FavoritesViewControler.swift in Sources */,
 				C834772B2D6E1A79006ED330 /* CustomTextField.swift in Sources */,
+				C8EA4A972D769ADB00337A8E /* FavoritesManager.swift in Sources */,
 				C83477452D6F86FC006ED330 /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

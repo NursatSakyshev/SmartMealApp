@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FavoritesCoordinator: NavigationCoordinator {
+class FavoritesCoordinator: NavigationCoordinator, DetailShowable {
     var childCoordinators = [Coordinator]()
     
     var navigationController: UINavigationController
@@ -17,8 +17,11 @@ class FavoritesCoordinator: NavigationCoordinator {
     }
     
     func start() {
-        
+        let vc = FavoritesViewController()
+        let viewModel = FavoritesViewModel()
+        vc.viewModel = viewModel
+        vc.coordinator = self
+        navigationController.pushViewController(vc, animated: true)
     }
-    
     
 }
