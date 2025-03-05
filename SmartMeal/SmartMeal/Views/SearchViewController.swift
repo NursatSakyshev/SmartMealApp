@@ -35,8 +35,8 @@ class SearchViewController: UIViewController, Coordinated {
         
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: recommendationLabel.bottomAnchor, constant: 30),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 11),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -11),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         
@@ -48,7 +48,6 @@ class SearchViewController: UIViewController, Coordinated {
     private func setupFlowLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.estimatedItemSize = CGSize(width: UIScreen.main.bounds.width, height: 300)
         return layout
     }
     
@@ -77,7 +76,7 @@ class SearchViewController: UIViewController, Coordinated {
     }
 }
 
-extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         viewModel.collectionCellViewModels.count
     }
@@ -99,5 +98,10 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
             return
         }
         coordinator.showDetail(for: viewModel.recipe)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let size = (view.frame.width/2)
+        return CGSize(width: size - 15, height: 300)
     }
 }

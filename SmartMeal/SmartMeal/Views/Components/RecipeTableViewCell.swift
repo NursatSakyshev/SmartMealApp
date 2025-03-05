@@ -39,8 +39,6 @@ class RecipeTableViewCell: UITableViewCell {
     private func setupFlowLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.estimatedItemSize = CGSize(width: UIScreen.main.bounds.width - 40, height: 300)
-        layout.minimumLineSpacing = 20
         return layout
     }
     
@@ -67,7 +65,6 @@ extension RecipeTableViewCell: UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     override func prepareForReuse() {
-        setupCollectionView()
     }
     
     func collectionView(_  collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -88,4 +85,10 @@ extension RecipeTableViewCell: UICollectionViewDelegate, UICollectionViewDataSou
 
 protocol RecipeTableViewCellDelegate: AnyObject {
     func didSelectRecipe(_ recipe: Recipe)
+}
+
+extension RecipeTableViewCell: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        CGSize(width: 160, height: 300)
+    }
 }

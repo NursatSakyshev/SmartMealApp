@@ -8,12 +8,22 @@
 import Foundation
 
 class CollectionCellViewModel {
-    var recipe: Recipe!
-    
-    var didUpdate: (() -> Void)?
+    private var favoritesManager = FavoritesManager.shared
+    var recipe: Recipe! 
+    var isFavorite: Dynamic<Bool>
     
     init(recipe: Recipe) {
         self.recipe = recipe
+        isFavorite = Dynamic(favoritesManager.isFavorite(recipe))
+    }
+    
+    func toggleFavorite() {
+        if isFavorite.value {
+            favoritesManager.removeFromFavorites(recipe)
+        } else {
+            favoritesManager.addToFavorites(recipe)
+        }
+        isFavorite.value.toggle()
     }
     
     var name: String {
@@ -28,16 +38,7 @@ class CollectionCellViewModel {
         return recipe.time
     }
     
-    var isFavorite: Bool {
-        return recipe.isFavorite
-    }
-    
     var imageUrl: String {
         return recipe.imageUrl!
     }
-    
-    func toggleFavorite() {
-         recipe.isFavorite.toggle()
-         didUpdate?()
-     }
 }

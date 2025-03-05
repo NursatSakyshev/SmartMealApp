@@ -10,7 +10,7 @@ import UIKit
 class RecipeCell: UICollectionViewCell {
     
     var viewModel: CollectionCellViewModel!
-
+    
     static var identifier = "RecipeCell"
     
     let imageView = UIImageView()
@@ -42,7 +42,7 @@ class RecipeCell: UICollectionViewCell {
         viewModel.toggleFavorite()
         updateFavoriteButton()
     }
-
+    
     
     private var caloriesTimeLabel: UILabel = {
         let label = UILabel()
@@ -52,6 +52,7 @@ class RecipeCell: UICollectionViewCell {
     }()
     
     override func prepareForReuse() {
+        setup()
     }
     
     override init(frame: CGRect) {
@@ -75,6 +76,7 @@ class RecipeCell: UICollectionViewCell {
             $0.translatesAutoresizingMaskIntoConstraints = false
             contentView.addSubview($0)
         }
+        
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 12
@@ -83,11 +85,11 @@ class RecipeCell: UICollectionViewCell {
         contentView.clipsToBounds = true
         
         NSLayoutConstraint.activate([
-            imageView.heightAnchor.constraint(equalToConstant: 180),
-            imageView.widthAnchor.constraint(equalToConstant: 160),
+//            imageView.heightAnchor.constraint(equalToConstant: 180),
+            imageView.topAnchor.constraint(equalTo: topAnchor),
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            imageView.topAnchor.constraint(equalTo: topAnchor),
+            imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 9.0 / 8.0),
             
             nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
             nameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
@@ -108,8 +110,8 @@ class RecipeCell: UICollectionViewCell {
         self.viewModel = viewModel
         nameLabel.text = viewModel.name
         caloriesTimeLabel.text = "\(viewModel.calories) ккал | \(viewModel.time) мин"
-        imageView.loadImage(from: viewModel.imageUrl)
+        //        imageView.loadImage(from: viewModel.imageUrl)
         updateFavoriteButton()
-//        imageView.backgroundColor = .red
+        imageView.backgroundColor = .red
     }
 }
