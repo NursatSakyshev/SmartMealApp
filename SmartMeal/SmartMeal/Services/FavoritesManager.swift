@@ -15,7 +15,11 @@ extension Notification.Name {
 class FavoritesManager {
     static let shared = FavoritesManager()
     private let favoritesKey = "favoriteRecipes"
-    private init() {}
+    var onFavoritesUpdated: (() -> Void)?
+    private init() { 
+//        onFavoritesUpdated?()
+        NotificationCenter.default.post(name: .favoritesUpdated, object: nil)
+    }
 
     func isFavorite(_ recipe: Recipe) -> Bool {
         let favorites = getFavorites()
@@ -27,6 +31,7 @@ class FavoritesManager {
         favorites.append(recipe)
         saveFavorites(favorites)
         NotificationCenter.default.post(name: .favoritesUpdated, object: nil)
+        onFavoritesUpdated?()
     }
 
     func removeFromFavorites(_ recipe: Recipe) {
@@ -34,6 +39,7 @@ class FavoritesManager {
         favorites.removeAll { $0.title == recipe.title }
         saveFavorites(favorites)
         NotificationCenter.default.post(name: .favoritesUpdated, object: nil)
+        onFavoritesUpdated?()
     }
 
     func getFavorites() -> [Recipe] {
@@ -50,3 +56,4 @@ class FavoritesManager {
         }
     }
 }
+
