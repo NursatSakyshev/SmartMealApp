@@ -16,20 +16,15 @@ class FavoritesViewModel {
         return self.collectionCellViewModels.value[indexPath.row]
      }
     
-    var onFavoritesUpdated: (() -> Void)?
     
     init() {
         loadFavorites()
-        FavoritesManager.shared.onFavoritesUpdated = { [weak self] in
-            self?.loadFavorites()
-        }
     }
+
     
     func loadFavorites() {
         favoriteRecipes = favoritesManager.getFavorites()
         collectionCellViewModels.value = favoriteRecipes.map { CollectionCellViewModel(recipe: $0) }
-        print(favoriteRecipes.count)
-        onFavoritesUpdated?()
     }
     
     func removeFromFavorites(_ recipe: Recipe) {
@@ -37,7 +32,6 @@ class FavoritesViewModel {
         favoriteRecipes.removeAll { recipe in
             recipe.title == recipe.title
         }
-        print(favoriteRecipes.count)
         loadFavorites()
     }
 }

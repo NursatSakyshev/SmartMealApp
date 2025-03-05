@@ -43,6 +43,7 @@ class FavoritesViewController: UIViewController, Coordinated {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadFavorites), name: .favoritesUpdated, object: nil)
         view.backgroundColor = .white
         setupCollectionView()
         bindViewModel()
@@ -51,6 +52,10 @@ class FavoritesViewController: UIViewController, Coordinated {
     
     @objc private func reloadFavorites() {
         viewModel.loadFavorites()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .favoritesUpdated, object: nil)
     }
     
     private func bindViewModel() {
