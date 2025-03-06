@@ -9,7 +9,7 @@ import Foundation
 
 class SearchViewModel {
     var collectionCellViewModels: [CollectionCellViewModel] = []
-    var popularRecipes: [Recipe]!
+    var popularRecipes: Dynamic<[Recipe]> = Dynamic([])
     
     func getCollectionCellViewModel(at indexPath: IndexPath) -> CollectionCellViewModel {
          return self.collectionCellViewModels[indexPath.row]
@@ -17,14 +17,21 @@ class SearchViewModel {
     
     init() {
         callFuncToGetData()
-        popularRecipes.forEach {
-            collectionCellViewModels.append(CollectionCellViewModel(recipe: $0))
-        }
+        NotificationCenter.default.addObserver(self, selector: #selector(updateFavorites), name: .favoritesUpdated, object: nil)
+    }
+    
+    private func updateCollectionViewModels() {
+        collectionCellViewModels = popularRecipes.value.map { CollectionCellViewModel(recipe: $0) }
+    }
+    
+    @objc private func updateFavorites() {
+        updateCollectionViewModels()
     }
     
     func callFuncToGetData() {
-        APIService.shared.getQuickEasy {
-            self.popularRecipes = $0
+        APIService.shared.getQuickEasy { [weak self] in
+            self?.popularRecipes.value = $0
+            self?.updateCollectionViewModels()
         }
     }
 }

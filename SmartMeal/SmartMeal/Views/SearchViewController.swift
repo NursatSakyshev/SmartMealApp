@@ -56,7 +56,17 @@ class SearchViewController: UIViewController, Coordinated {
         view.backgroundColor = .white
         setupUI()
         setupCollectionView()
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadFavorites), name: .favoritesUpdated, object: nil)
+        
+        viewModel.popularRecipes.bind { _ in
+            self.collectionView.reloadData()
+        }
     }
+    
+    @objc private func reloadFavorites() {
+        self.collectionView.reloadData()
+    }
+    
     
     func setupUI() {
         [searchField, recommendationLabel].forEach {
