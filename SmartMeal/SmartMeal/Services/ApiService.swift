@@ -11,21 +11,21 @@ import UIKit
 class APIService {
     static let shared = APIService()
     func getRecommendations(completion: @escaping ([Recipe]) -> Void) {
-        completion(Array(Recipe.recipes.prefix(1)))
+        completion(Array(Recipe.recipes.prefix(3)))
     }
     
     private let imageCache = NSCache<NSString, NSData>()
     
     func getPopular(completion: @escaping ([Recipe]) -> Void) {
-        completion(Array(Recipe.recipes.shuffled().prefix(3)))
+        completion(Array(Recipe.recipes.dropFirst(3).prefix(3)))
     }
     
     func getQuickEasy(completion: @escaping ([Recipe]) -> Void) {
-        completion(Array(Recipe.recipes.suffix(3)))
+        completion(Array(Recipe.recipes.dropFirst(6).prefix(3)))
     }
     
     func getHealthy(completion: @escaping ([Recipe]) -> Void) {
-        completion(Recipe.recipes)
+        completion(Array(Recipe.recipes.dropFirst(9).prefix(3)))
     }
     
     func fetchImageData(from url: String, completion: @escaping (Data?) -> Void) {

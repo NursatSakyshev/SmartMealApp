@@ -34,7 +34,7 @@ class RecipeCell: UICollectionViewCell {
     
     private func bindViewModel() {
         viewModel?.isFavorite.bind { [weak self] isFavorite in
-            self?.favoriteButton.isSelected = isFavorite
+            self?.updateFavoriteButton()
         }
     }
     
@@ -65,6 +65,7 @@ class RecipeCell: UICollectionViewCell {
         let image = UIImage(systemName: viewModel.isFavorite.value ? "bookmark.fill" : "bookmark")?
             .withConfiguration(UIImage.SymbolConfiguration(pointSize: 15))
         favoriteButton.setImage(image, for: .normal)
+        NotificationCenter.default.post(name: .homeUpdated, object: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -110,6 +111,7 @@ class RecipeCell: UICollectionViewCell {
         nameLabel.text = viewModel.name
         caloriesTimeLabel.text = "\(viewModel.calories) ккал | \(viewModel.time) мин"
         //        imageView.loadImage(from: viewModel.imageUrl)
+        bindViewModel()
         updateFavoriteButton()
         imageView.backgroundColor = .red
     }

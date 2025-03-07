@@ -9,6 +9,7 @@ import UIKit
 
 extension Notification.Name {
     static let favoritesUpdated = Notification.Name("favoritesUpdated")
+    static let homeUpdated = Notification.Name("homeUpdated")
 }
 
 
@@ -16,9 +17,9 @@ class FavoritesManager {
     static let shared = FavoritesManager()
     private let favoritesKey = "favoriteRecipes"
     var onFavoritesUpdated: (() -> Void)?
-    private init() { 
+    private init() {
 //        onFavoritesUpdated?()
-        NotificationCenter.default.post(name: .favoritesUpdated, object: nil)
+//        NotificationCenter.default.post(name: .favoritesUpdated, object: nil)
     }
 
     func isFavorite(_ recipe: Recipe) -> Bool {

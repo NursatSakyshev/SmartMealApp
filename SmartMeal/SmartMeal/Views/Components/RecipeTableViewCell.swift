@@ -18,6 +18,7 @@ class RecipeTableViewCell: UITableViewCell {
         contentView.addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.showsHorizontalScrollIndicator = false
+
     
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: contentView.topAnchor),
@@ -46,6 +47,25 @@ class RecipeTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupCollectionView()
+        NotificationCenter.default.addObserver(self, selector: #selector(updateFavorites), name: .favoritesUpdated, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateFavorites), name: .homeUpdated, object: nil)
+    }
+    
+    @objc private func updateFavorites() {
+        var indexPathsToReload: [IndexPath] = []
+        
+        for (index, viewModel) in recipesViewModels.enumerated() {
+            let newValue = FavoritesManager.shared.isFavorite(viewModel.recipe)
+            
+            if viewModel.isFavorite.value != newValue {
+                viewModel.isFavorite.value = newValue
+                indexPathsToReload.append(IndexPath(item: index, section: 0))
+            }
+        }
+
+        DispatchQueue.main.async {
+            self.collectionView.reloadItems(at: indexPathsToReload)
+        }
     }
     
     required init?(coder: NSCoder) {

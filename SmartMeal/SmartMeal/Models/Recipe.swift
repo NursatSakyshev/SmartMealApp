@@ -86,5 +86,36 @@ extension Recipe {
             Ingridient(name: "Оливковое масло", amount: 20, unit: "мл"),
             Ingridient(name: "Лимонный сок", amount: 10, unit: "мл"),
         ], difficulty: "easy", servings: 4),
+        Recipe(title: "Цезарь с курицей", calories: 320, time: 25, description: "Популярный салат с курицей, пармезаном и сухариками.", imageUrl: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/caesar-salad.jpg", ingridients: [
+            Ingridient(name: "Куриное филе", amount: 200, unit: "г"),
+            Ingridient(name: "Салат ромэн", amount: 150, unit: "г"),
+            Ingridient(name: "Пармезан", amount: 50, unit: "г"),
+            Ingridient(name: "Сухарики", amount: 50, unit: "г"),
+            Ingridient(name: "Соус Цезарь", amount: 30, unit: "мл"),
+        ], difficulty: "medium", servings: 2),
+
+        Recipe(title: "Паста Карбонара", calories: 600, time: 30, description: "Итальянская паста с беконом и сливочным соусом.", imageUrl: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/carbonara.jpg", ingridients: [
+            Ingridient(name: "Спагетти", amount: 200, unit: "г"),
+            Ingridient(name: "Бекон", amount: 100, unit: "г"),
+            Ingridient(name: "Яйца", amount: 2, unit: "шт"),
+            Ingridient(name: "Пармезан", amount: 50, unit: "г"),
+            Ingridient(name: "Сливки", amount: 100, unit: "мл"),
+        ], difficulty: "medium", servings: 2),
+
+        Recipe(title: "Шакшука", calories: 350, time: 20, description: "Пряное блюдо из яиц в томатном соусе.", imageUrl: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/shakshuka.jpg", ingridients: [
+            Ingridient(name: "Яйца", amount: 3, unit: "шт"),
+            Ingridient(name: "Помидоры", amount: 300, unit: "г"),
+            Ingridient(name: "Лук", amount: 100, unit: "г"),
+            Ingridient(name: "Чеснок", amount: 10, unit: "г"),
+            Ingridient(name: "Паприка", amount: 5, unit: "г"),
+        ], difficulty: "easy", servings: 2),
+
+        Recipe(title: "Омлет с овощами", calories: 280, time: 15, description: "Питательный омлет с овощами на завтрак.", imageUrl: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/omelette.jpg", ingridients: [
+            Ingridient(name: "Яйца", amount: 3, unit: "шт"),
+            Ingridient(name: "Помидоры", amount: 100, unit: "г"),
+            Ingridient(name: "Болгарский перец", amount: 100, unit: "г"),
+            Ingridient(name: "Сыр", amount: 50, unit: "г"),
+            Ingridient(name: "Зелень", amount: 20, unit: "г"),
+        ], difficulty: "easy", servings: 1),
     ]
 }

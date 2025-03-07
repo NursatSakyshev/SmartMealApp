@@ -48,7 +48,22 @@ class HomeViewController: UIViewController {
         setupUI()
         setupTableView()
         bindViewModel()
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadHomeScreen), name: .favoritesUpdated, object: nil)
     }
+    
+    @objc private func reloadHomeScreen() {
+        DispatchQueue.main.async {
+//            self.tableView.reloadData()
+        }
+    }
+    
+    @objc private func reloadFavorites() {
+        self.tableView.reloadData()
+    }
+    
+//    deinit {
+//        NotificationCenter.default.removeObserver(self, name: .favoritesUpdated, object: nil)
+//    }
     
     func setupUI() {
         view.backgroundColor = .white
