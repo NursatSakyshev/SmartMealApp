@@ -48,7 +48,7 @@ class RecipeTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupCollectionView()
         NotificationCenter.default.addObserver(self, selector: #selector(updateFavorites), name: .favoritesUpdated, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(updateFavorites), name: .homeUpdated, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(updateFavorites), name: .homeUpdated, object: nil)
     }
     
     @objc private func updateFavorites() {

@@ -40,7 +40,6 @@ class RecipeCell: UICollectionViewCell {
     
     @objc func favoriteTapped() {
         viewModel.toggleFavorite()
-        updateFavoriteButton()
     }
     
     

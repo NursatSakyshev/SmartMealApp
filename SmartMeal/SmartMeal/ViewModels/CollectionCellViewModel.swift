@@ -23,7 +23,8 @@ class CollectionCellViewModel {
         } else {
             favoritesManager.addToFavorites(recipe)
         }
-        isFavorite.value.toggle()
+        
+        isFavorite.value = favoritesManager.isFavorite(recipe)
     }
     
     var name: String {
