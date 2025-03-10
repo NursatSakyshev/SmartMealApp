@@ -6,14 +6,18 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class RegistrationViewController: UIViewController {
+    
+    var viewModel: RegistrationViewModel!
     
     lazy var nameTextField: CustomTextField = {
         let textField = CustomTextField()
         textField.placeholder = "Full Name"
         return textField
     }()
+    
     
     lazy var appleIcon: UIImageView = {
         let imageView = UIImageView()
@@ -31,6 +35,7 @@ class RegistrationViewController: UIViewController {
     
     lazy var passwordTextField: CustomTextField = {
         let textField = CustomTextField()
+        textField.isSecureTextEntry = true
         textField.placeholder = "Password"
         return textField
     }()
@@ -104,9 +109,31 @@ class RegistrationViewController: UIViewController {
         view.backgroundColor = .white
         
         setupUI()
+        setupBindings()
+    }
+    
+    private func setupBindings() {
+        viewModel.onSuccess = { [weak self] in
+            print("Регистрация успешна!")
+        }
+        viewModel.onError = {
+            self.showAlert(message: "error")
+        }
+    }
+    
+    @objc func signInButtonTapped() {
+        guard let email = emailTextField.text, !email.isEmpty,
+              let password = passwordTextField.text, !password.isEmpty,
+              let fullName = nameTextField.text, !fullName .isEmpty else {
+            return
+        }
+        
+        viewModel.register(email: email, password: password)
     }
     
     func setupUI() {
+        signInButton.addTarget(self, action: #selector(signInButtonTapped), for: .touchUpInside)
+        
         [welcomeLabel, imageView, emailTextField, nameTextField, passwordTextField, signInButton, divider, stackView, signInView].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -163,3 +190,13 @@ class RegistrationViewController: UIViewController {
         ])
     }
 }
+
+extension RegistrationViewController {
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
+        self.present(alert, animated: true)
+    }
+    
+}
+ 

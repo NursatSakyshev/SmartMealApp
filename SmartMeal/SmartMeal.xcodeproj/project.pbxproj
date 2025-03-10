@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B4934FCC15252140255F7F4 /* Pods_SmartMeal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D814957169852D888BF770AA /* Pods_SmartMeal.framework */; };
 		C80735692D72FF4100531AB8 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80735682D72FF4100531AB8 /* DetailViewModel.swift */; };
 		C82B44592D740BEB009B020D /* NavigatorCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82B44582D740BEB009B020D /* NavigatorCoordinator.swift */; };
 		C82B445B2D7585AC009B020D /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82B445A2D7585AC009B020D /* SearchViewModel.swift */; };
@@ -53,9 +54,12 @@
 		C8F078C52D7E7C7E0045FA4B /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F078C42D7E7C7E0045FA4B /* OnboardingViewController.swift */; };
 		C8F078C72D7EA7800045FA4B /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F078C62D7EA7800045FA4B /* OnboardingCoordinator.swift */; };
 		C8F078C92D7EBA720045FA4B /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F078C82D7EBA720045FA4B /* AuthCoordinator.swift */; };
+		C8F078CD2D7F036C0045FA4B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C8F078CC2D7F036C0045FA4B /* GoogleService-Info.plist */; };
+		C8F078CF2D7F0D3C0045FA4B /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F078CE2D7F0D3C0045FA4B /* RegistrationViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B77533CDD2D1B9D89675F6CA /* Pods-SmartMeal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartMeal.release.xcconfig"; path = "Target Support Files/Pods-SmartMeal/Pods-SmartMeal.release.xcconfig"; sourceTree = "<group>"; };
 		C80735682D72FF4100531AB8 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		C82B44582D740BEB009B020D /* NavigatorCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigatorCoordinator.swift; sourceTree = "<group>"; };
 		C82B445A2D7585AC009B020D /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
@@ -104,6 +108,10 @@
 		C8F078C42D7E7C7E0045FA4B /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		C8F078C62D7EA7800045FA4B /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
 		C8F078C82D7EBA720045FA4B /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
+		C8F078CC2D7F036C0045FA4B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C8F078CE2D7F0D3C0045FA4B /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
+		CEAA9104F8D20BB8045A20C5 /* Pods-SmartMeal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartMeal.debug.xcconfig"; path = "Target Support Files/Pods-SmartMeal/Pods-SmartMeal.debug.xcconfig"; sourceTree = "<group>"; };
+		D814957169852D888BF770AA /* Pods_SmartMeal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartMeal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,17 +119,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B4934FCC15252140255F7F4 /* Pods_SmartMeal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		13A9F20EF2A55F2EC4EEBAB4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CEAA9104F8D20BB8045A20C5 /* Pods-SmartMeal.debug.xcconfig */,
+				B77533CDD2D1B9D89675F6CA /* Pods-SmartMeal.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		6EC2DDF4874502EF6388A67B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D814957169852D888BF770AA /* Pods_SmartMeal.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C83477052D6E12AC006ED330 = {
 			isa = PBXGroup;
 			children = (
 				C83477102D6E12AC006ED330 /* SmartMeal */,
 				C834770F2D6E12AC006ED330 /* Products */,
+				13A9F20EF2A55F2EC4EEBAB4 /* Pods */,
+				6EC2DDF4874502EF6388A67B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -144,6 +172,7 @@
 				C83477302D6E2820006ED330 /* Resources */,
 				C83477252D6E13DF006ED330 /* Views */,
 				C83477112D6E12AC006ED330 /* AppDelegate.swift */,
+				C8F078CC2D7F036C0045FA4B /* GoogleService-Info.plist */,
 				C834771C2D6E12AD006ED330 /* LaunchScreen.storyboard */,
 				C834771F2D6E12AD006ED330 /* Info.plist */,
 				C83477482D6F8E95006ED330 /* Assets.xcassets */,
@@ -210,6 +239,7 @@
 				C82B445A2D7585AC009B020D /* SearchViewModel.swift */,
 				C80735682D72FF4100531AB8 /* DetailViewModel.swift */,
 				C8EA4A9A2D76CBF200337A8E /* FavoritesViewModel.swift */,
+				C8F078CE2D7F0D3C0045FA4B /* RegistrationViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -266,9 +296,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C83477222D6E12AD006ED330 /* Build configuration list for PBXNativeTarget "SmartMeal" */;
 			buildPhases = (
+				166EFF2E0830CF635FA968E3 /* [CP] Check Pods Manifest.lock */,
 				C834770A2D6E12AC006ED330 /* Sources */,
 				C834770B2D6E12AC006ED330 /* Frameworks */,
 				C834770C2D6E12AC006ED330 /* Resources */,
+				106CDE8F50EF6062B27CAC66 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -318,11 +350,54 @@
 			buildActionMask = 2147483647;
 			files = (
 				C83477492D6F8E95006ED330 /* Assets.xcassets in Resources */,
+				C8F078CD2D7F036C0045FA4B /* GoogleService-Info.plist in Resources */,
 				C834771E2D6E12AD006ED330 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		106CDE8F50EF6062B27CAC66 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SmartMeal/Pods-SmartMeal-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SmartMeal/Pods-SmartMeal-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SmartMeal/Pods-SmartMeal-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		166EFF2E0830CF635FA968E3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SmartMeal-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C834770A2D6E12AC006ED330 /* Sources */ = {
@@ -339,6 +414,7 @@
 				C89B86EB2D7186F100C175CB /* TableCellViewModel.swift in Sources */,
 				C89B86FB2D7298F000C175CB /* TabBarCoordinator.swift in Sources */,
 				C834773E2D6F70F0006ED330 /* Recipe.swift in Sources */,
+				C8F078CF2D7F0D3C0045FA4B /* RegistrationViewModel.swift in Sources */,
 				C83477532D70BC7D006ED330 /* TabBarViewController.swift in Sources */,
 				C89B86FF2D729C0100C175CB /* SearchCoordinator.swift in Sources */,
 				C834772F2D6E2574006ED330 /* DividerView.swift in Sources */,
@@ -427,7 +503,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -490,7 +566,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -511,6 +587,7 @@
 		};
 		C83477232D6E12AD006ED330 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CEAA9104F8D20BB8045A20C5 /* Pods-SmartMeal.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -539,6 +616,7 @@
 		};
 		C83477242D6E12AD006ED330 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B77533CDD2D1B9D89675F6CA /* Pods-SmartMeal.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

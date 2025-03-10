@@ -15,6 +15,8 @@ class AuthCoordinator: Coordinator {
     
     func start() {
         let vc = RegistrationViewController()
+        let viewModel = RegistrationViewModel()
+        vc.viewModel = viewModel
         window.rootViewController = UINavigationController(rootViewController: vc)
     }
     
