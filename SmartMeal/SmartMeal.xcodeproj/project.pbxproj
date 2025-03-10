@@ -52,6 +52,7 @@
 		C8EA4A9B2D76CBF200337A8E /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8EA4A9A2D76CBF200337A8E /* FavoritesViewModel.swift */; };
 		C8F078C52D7E7C7E0045FA4B /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F078C42D7E7C7E0045FA4B /* OnboardingViewController.swift */; };
 		C8F078C72D7EA7800045FA4B /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F078C62D7EA7800045FA4B /* OnboardingCoordinator.swift */; };
+		C8F078C92D7EBA720045FA4B /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F078C82D7EBA720045FA4B /* AuthCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -102,6 +103,7 @@
 		C8EA4A9A2D76CBF200337A8E /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
 		C8F078C42D7E7C7E0045FA4B /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		C8F078C62D7EA7800045FA4B /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
+		C8F078C82D7EBA720045FA4B /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,6 +243,7 @@
 				C89B86FA2D7298F000C175CB /* TabBarCoordinator.swift */,
 				C89B86FC2D729BDE00C175CB /* HomeCoordinator.swift */,
 				C8F078C62D7EA7800045FA4B /* OnboardingCoordinator.swift */,
+				C8F078C82D7EBA720045FA4B /* AuthCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 				C83477272D6E1416006ED330 /* RegistrationViewController.swift in Sources */,
 				C83477322D6E2834006ED330 /* ImageAssets.swift in Sources */,
 				C82B445B2D7585AC009B020D /* SearchViewModel.swift in Sources */,
+				C8F078C92D7EBA720045FA4B /* AuthCoordinator.swift in Sources */,
 				C89B86EB2D7186F100C175CB /* TableCellViewModel.swift in Sources */,
 				C89B86FB2D7298F000C175CB /* TabBarCoordinator.swift in Sources */,
 				C834773E2D6F70F0006ED330 /* Recipe.swift in Sources */,

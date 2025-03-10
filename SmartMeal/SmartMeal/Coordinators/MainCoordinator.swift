@@ -22,12 +22,22 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
     
     func start() {
         let hasSeenOnboarding = UserDefaults.standard.bool(forKey: "hasSeenOnboarding")
+        let isLoggedIn = UserDefaults.standard.bool(forKey: "isLoggedIn")
         
-        if hasSeenOnboarding {
-            navigateToTabBar()
-        } else {
+        if !hasSeenOnboarding {
             showOnboardingScreen()
+        } else if !isLoggedIn {
+            showAuth()
+        } else {
+            navigateToTabBar()
         }
+    }
+    
+    func showAuth() {
+        let authVC = AuthCoordinator(window: window)
+        authVC.parentCoordinator = self
+        authVC.start()
+        childCoordinators.append(authVC)
     }
     
     func showOnboardingScreen() {
