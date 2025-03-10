@@ -56,6 +56,7 @@
 		C8F078C92D7EBA720045FA4B /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F078C82D7EBA720045FA4B /* AuthCoordinator.swift */; };
 		C8F078CD2D7F036C0045FA4B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C8F078CC2D7F036C0045FA4B /* GoogleService-Info.plist */; };
 		C8F078CF2D7F0D3C0045FA4B /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F078CE2D7F0D3C0045FA4B /* RegistrationViewModel.swift */; };
+		C8F078D12D7F13C90045FA4B /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F078D02D7F13C90045FA4B /* LoginViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -110,6 +111,7 @@
 		C8F078C82D7EBA720045FA4B /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		C8F078CC2D7F036C0045FA4B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C8F078CE2D7F0D3C0045FA4B /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
+		C8F078D02D7F13C90045FA4B /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		CEAA9104F8D20BB8045A20C5 /* Pods-SmartMeal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartMeal.debug.xcconfig"; path = "Target Support Files/Pods-SmartMeal/Pods-SmartMeal.debug.xcconfig"; sourceTree = "<group>"; };
 		D814957169852D888BF770AA /* Pods_SmartMeal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartMeal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -240,6 +242,7 @@
 				C80735682D72FF4100531AB8 /* DetailViewModel.swift */,
 				C8EA4A9A2D76CBF200337A8E /* FavoritesViewModel.swift */,
 				C8F078CE2D7F0D3C0045FA4B /* RegistrationViewModel.swift */,
+				C8F078D02D7F13C90045FA4B /* LoginViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -404,6 +407,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8F078D12D7F13C90045FA4B /* LoginViewModel.swift in Sources */,
 				C83477292D6E1425006ED330 /* LoginViewController.swift in Sources */,
 				C82B445D2D758B8F009B020D /* DetailShowable.swift in Sources */,
 				C89B86F92D72922800C175CB /* MainCoordinator.swift in Sources */,

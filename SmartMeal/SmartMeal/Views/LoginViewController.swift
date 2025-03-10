@@ -9,6 +9,9 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    var viewModel: LoginViewModel!
+    var coordinator: Coordinator?
+    
     lazy var emailTextField: CustomTextField = {
         let textField = CustomTextField()
         textField.placeholder = "Enter Username Or Email"
@@ -93,9 +96,21 @@ class LoginViewController: UIViewController {
         view.backgroundColor = .white
         
         setupUI()
+        setupBindings()
+    }
+    
+    private func setupBindings() {
+        viewModel.onSuccess = { [weak self] in
+            print("Вход успешен!")
+        }
+        viewModel.onError = { errorMessage in
+            print("Ошибка: \(errorMessage)")
+        }
     }
     
     func setupUI() {
+        signInButton.addTarget(self, action: #selector(signIn), for: .touchUpInside)
+        textButton.addTarget(self, action: #selector(textButtonTapped), for: .touchUpInside)
         [welcomeLabel, emailTextField, passwordTextField, signInButton, divider, stackView, signInView].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -145,5 +160,20 @@ class LoginViewController: UIViewController {
             signInView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             signInView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -60)
         ])
+    }
+}
+
+extension LoginViewController {
+    @objc func signIn(_ sender: UIButton) {
+        guard let email = emailTextField.text, !email.isEmpty,
+              let password = passwordTextField.text, !password.isEmpty else {
+            return
+        }
+        viewModel.login(email: email, password: password)
+    }
+    
+    @objc func textButtonTapped() {
+        guard let coordinator = coordinator as? AuthCoordinator else { return }
+        coordinator.goToRegister()
     }
 }

@@ -11,6 +11,7 @@ import FirebaseAuth
 class RegistrationViewController: UIViewController {
     
     var viewModel: RegistrationViewModel!
+    var coordinator: Coordinator?
     
     lazy var nameTextField: CustomTextField = {
         let textField = CustomTextField()
@@ -132,7 +133,9 @@ class RegistrationViewController: UIViewController {
     }
     
     func setupUI() {
+        self.navigationItem.hidesBackButton = true
         signInButton.addTarget(self, action: #selector(signInButtonTapped), for: .touchUpInside)
+        textButton.addTarget(self, action: #selector(textButtonTapped), for: .touchUpInside)
         
         [welcomeLabel, imageView, emailTextField, nameTextField, passwordTextField, signInButton, divider, stackView, signInView].forEach {
             view.addSubview($0)
@@ -198,5 +201,9 @@ extension RegistrationViewController {
         self.present(alert, animated: true)
     }
     
+    @objc func textButtonTapped() {
+        guard let coordinator = coordinator as? AuthCoordinator else { return }
+        coordinator.goToLogin()
+    }
 }
  
