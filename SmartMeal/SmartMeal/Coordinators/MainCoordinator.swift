@@ -21,7 +21,20 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
     }
     
     func start() {
-        navigateToTabBar()
+        let hasSeenOnboarding = UserDefaults.standard.bool(forKey: "hasSeenOnboarding")
+        
+        if hasSeenOnboarding {
+            navigateToTabBar()
+        } else {
+            showOnboardingScreen()
+        }
+    }
+    
+    func showOnboardingScreen() {
+        let onboardingVC = OnboardingCoordinator(window: window)
+        onboardingVC.parentCoordinator = self
+        onboardingVC.start()
+        childCoordinators.append(onboardingVC)
     }
     
     func navigateToTabBar(){
