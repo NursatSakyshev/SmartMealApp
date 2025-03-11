@@ -9,6 +9,19 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    private let activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
+    
+    private let loadingView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+        view.isHidden = true
+        return view
+    }()
+    
     var viewModel: LoginViewModel!
     var coordinator: Coordinator?
     var login: (() -> ())?
@@ -101,9 +114,20 @@ class LoginViewController: UIViewController {
     }
     
     private func setupBindings() {
+        viewModel.isLoading = { [weak self] isLoading in
+            DispatchQueue.main.async {
+                if isLoading {
+                    self?.loadingView.isHidden = false
+                    self?.activityIndicator.startAnimating()
+                }
+                else {
+                    self?.loadingView.isHidden = true
+                    self?.activityIndicator.stopAnimating()
+                }
+            }
+        }
+        
         viewModel.onSuccess = { [weak self] in
-//            print("Вход успешен!")
-//            self?.coordinator?.start()
             self?.login?()
         }
         viewModel.onError = { errorMessage in
@@ -114,7 +138,7 @@ class LoginViewController: UIViewController {
     func setupUI() {
         signInButton.addTarget(self, action: #selector(signIn), for: .touchUpInside)
         textButton.addTarget(self, action: #selector(textButtonTapped), for: .touchUpInside)
-        [welcomeLabel, emailTextField, passwordTextField, signInButton, divider, stackView, signInView].forEach {
+        [welcomeLabel, emailTextField, passwordTextField, signInButton, divider, stackView, signInView, activityIndicator].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -125,6 +149,8 @@ class LoginViewController: UIViewController {
         stackView.addArrangedSubview(googleIcon)
         stackView.addArrangedSubview(appleIcon)
         
+        view.addSubview(loadingView)
+        loadingView.frame = view.bounds
         NSLayoutConstraint.activate([
             welcomeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             welcomeLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
@@ -161,7 +187,10 @@ class LoginViewController: UIViewController {
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             signInView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            signInView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -60)
+            signInView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -60),
+            
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
     }
 }
