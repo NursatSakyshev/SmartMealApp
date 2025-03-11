@@ -11,6 +11,7 @@ class LoginViewController: UIViewController {
     
     var viewModel: LoginViewModel!
     var coordinator: Coordinator?
+    var login: (() -> ())?
     
     lazy var emailTextField: CustomTextField = {
         let textField = CustomTextField()
@@ -101,7 +102,9 @@ class LoginViewController: UIViewController {
     
     private func setupBindings() {
         viewModel.onSuccess = { [weak self] in
-            print("Вход успешен!")
+//            print("Вход успешен!")
+//            self?.coordinator?.start()
+            self?.login?()
         }
         viewModel.onError = { errorMessage in
             print("Ошибка: \(errorMessage)")

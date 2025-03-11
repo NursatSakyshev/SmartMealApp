@@ -16,6 +16,9 @@ class AuthCoordinator: NavigationCoordinator {
     
     func start() {
         let vc = LoginViewController()
+        vc.login = { [weak self] in
+            self?.parentCoordinator?.start()
+        }
         vc.coordinator = self
         let viewModel = LoginViewModel()
         vc.viewModel = viewModel

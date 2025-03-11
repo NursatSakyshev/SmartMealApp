@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
     
@@ -21,12 +22,13 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
     }
     
     func start() {
+//        try? Auth.auth().signOut()
         let hasSeenOnboarding = UserDefaults.standard.bool(forKey: "hasSeenOnboarding")
-        let isLoggedIn = UserDefaults.standard.bool(forKey: "isLoggedIn")
+        let user = FirebaseAuth.Auth.auth().currentUser
         
         if !hasSeenOnboarding {
             showOnboardingScreen()
-        } else if !isLoggedIn {
+        } else if user == nil {
             showAuth()
         } else {
             navigateToTabBar()
