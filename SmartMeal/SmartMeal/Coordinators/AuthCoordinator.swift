@@ -32,6 +32,9 @@ class AuthCoordinator: NavigationCoordinator {
     
     func goToRegister() {
         let vc = RegistrationViewController()
+        vc.login = { [weak self] in
+            self?.parentCoordinator?.start()
+        }
         vc.coordinator = self
         let viewModel = RegistrationViewModel()
         vc.viewModel = viewModel

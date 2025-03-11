@@ -10,8 +10,22 @@ import FirebaseAuth
 
 class RegistrationViewController: UIViewController {
     
+    private let activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
+    
+    private let loadingView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+        view.isHidden = true
+        return view
+    }()
+    
     var viewModel: RegistrationViewModel!
     var coordinator: Coordinator?
+    var login: (() -> ())?
     
     lazy var nameTextField: CustomTextField = {
         let textField = CustomTextField()
@@ -114,8 +128,21 @@ class RegistrationViewController: UIViewController {
     }
     
     private func setupBindings() {
+        viewModel.isLoading = { [weak self] isLoading in
+            DispatchQueue.main.async {
+                if isLoading {
+                    self?.loadingView.isHidden = false
+                    self?.activityIndicator.startAnimating()
+                }
+                else {
+                    self?.loadingView.isHidden = true
+                    self?.activityIndicator.stopAnimating()
+                }
+            }
+        }
+        
         viewModel.onSuccess = { [weak self] in
-            print("Регистрация успешна!")
+            self?.login?()
         }
         viewModel.onError = {
             self.showAlert(message: "error")
@@ -137,7 +164,7 @@ class RegistrationViewController: UIViewController {
         signInButton.addTarget(self, action: #selector(signInButtonTapped), for: .touchUpInside)
         textButton.addTarget(self, action: #selector(textButtonTapped), for: .touchUpInside)
         
-        [welcomeLabel, imageView, emailTextField, nameTextField, passwordTextField, signInButton, divider, stackView, signInView].forEach {
+        [welcomeLabel, imageView, emailTextField, nameTextField, passwordTextField, signInButton, divider, stackView, signInView, activityIndicator].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -147,6 +174,9 @@ class RegistrationViewController: UIViewController {
         
         stackView.addArrangedSubview(googleIcon)
         stackView.addArrangedSubview(appleIcon)
+        
+        view.addSubview(loadingView)
+        loadingView.frame = view.bounds
         
         NSLayoutConstraint.activate([
             welcomeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -189,7 +219,10 @@ class RegistrationViewController: UIViewController {
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             signInView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            signInView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -60)
+            signInView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -60),
+            
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
     }
 }
