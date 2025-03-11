@@ -6,7 +6,8 @@ target 'SmartMeal' do
   use_frameworks!
 
   # Pods for SmartMeal
+
 pod 'Firebase/Core'
 pod 'Firebase/Auth'
-
+pod 'Firebase/Firestore'
 end

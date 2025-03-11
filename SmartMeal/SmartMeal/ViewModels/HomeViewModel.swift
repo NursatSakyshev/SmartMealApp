@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FirebaseFirestore
 
 class HomeViewModel {
     var tableViewCellModels: [TableCellViewModel] = []
@@ -14,7 +15,8 @@ class HomeViewModel {
     var bind : (() -> Void) = {}
    
     func getTableCellModel(at indexPath: IndexPath) -> TableCellViewModel {
-        return self.tableViewCellModels[indexPath.section]
+        guard indexPath.section < tableViewCellModels.count else { return TableCellViewModel(recipes: []) }
+          return tableViewCellModels[indexPath.section]
      }
     
     init() {
@@ -37,13 +39,13 @@ class HomeViewModel {
         }
         
         group.enter()
-        APIService.shared.getQuickEasy {
+        APIService.shared.getHealthy {
             self.tableViewCellModels.append(TableCellViewModel(recipes: $0))
             group.leave()
         }
         
         group.enter()
-        APIService.shared.getHealthy {
+        APIService.shared.getQuickEasy {
             self.tableViewCellModels.append(TableCellViewModel(recipes: $0))
             group.leave()
         }

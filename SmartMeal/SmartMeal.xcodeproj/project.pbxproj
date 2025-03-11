@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4B4934FCC15252140255F7F4 /* Pods_SmartMeal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D814957169852D888BF770AA /* Pods_SmartMeal.framework */; };
+		878729D4982111059F19A95A /* Pods_SmartMeal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B138D5449D17E97E27349530 /* Pods_SmartMeal.framework */; };
 		C80735692D72FF4100531AB8 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80735682D72FF4100531AB8 /* DetailViewModel.swift */; };
 		C82B44592D740BEB009B020D /* NavigatorCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82B44582D740BEB009B020D /* NavigatorCoordinator.swift */; };
 		C82B445B2D7585AC009B020D /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82B445A2D7585AC009B020D /* SearchViewModel.swift */; };
@@ -62,7 +62,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B77533CDD2D1B9D89675F6CA /* Pods-SmartMeal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartMeal.release.xcconfig"; path = "Target Support Files/Pods-SmartMeal/Pods-SmartMeal.release.xcconfig"; sourceTree = "<group>"; };
+		A5F3AD1BC7AF34E4ABE92AB1 /* Pods-SmartMeal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartMeal.debug.xcconfig"; path = "Target Support Files/Pods-SmartMeal/Pods-SmartMeal.debug.xcconfig"; sourceTree = "<group>"; };
+		B138D5449D17E97E27349530 /* Pods_SmartMeal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartMeal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C80735682D72FF4100531AB8 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		C82B44582D740BEB009B020D /* NavigatorCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigatorCoordinator.swift; sourceTree = "<group>"; };
 		C82B445A2D7585AC009B020D /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
@@ -116,8 +117,7 @@
 		C8F078CC2D7F036C0045FA4B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C8F078CE2D7F0D3C0045FA4B /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		C8F078D02D7F13C90045FA4B /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
-		CEAA9104F8D20BB8045A20C5 /* Pods-SmartMeal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartMeal.debug.xcconfig"; path = "Target Support Files/Pods-SmartMeal/Pods-SmartMeal.debug.xcconfig"; sourceTree = "<group>"; };
-		D814957169852D888BF770AA /* Pods_SmartMeal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartMeal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0F766DE27EFE84A3A1F2569 /* Pods-SmartMeal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartMeal.release.xcconfig"; path = "Target Support Files/Pods-SmartMeal/Pods-SmartMeal.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,7 +125,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4B4934FCC15252140255F7F4 /* Pods_SmartMeal.framework in Frameworks */,
+				878729D4982111059F19A95A /* Pods_SmartMeal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,18 +135,10 @@
 		13A9F20EF2A55F2EC4EEBAB4 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				CEAA9104F8D20BB8045A20C5 /* Pods-SmartMeal.debug.xcconfig */,
-				B77533CDD2D1B9D89675F6CA /* Pods-SmartMeal.release.xcconfig */,
+				A5F3AD1BC7AF34E4ABE92AB1 /* Pods-SmartMeal.debug.xcconfig */,
+				D0F766DE27EFE84A3A1F2569 /* Pods-SmartMeal.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		6EC2DDF4874502EF6388A67B /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				D814957169852D888BF770AA /* Pods_SmartMeal.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		C83477052D6E12AC006ED330 = {
@@ -155,7 +147,7 @@
 				C83477102D6E12AC006ED330 /* SmartMeal */,
 				C834770F2D6E12AC006ED330 /* Products */,
 				13A9F20EF2A55F2EC4EEBAB4 /* Pods */,
-				6EC2DDF4874502EF6388A67B /* Frameworks */,
+				F352316468ECA2DCBD350899 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -298,6 +290,14 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
+		F352316468ECA2DCBD350899 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B138D5449D17E97E27349530 /* Pods_SmartMeal.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -305,11 +305,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C83477222D6E12AD006ED330 /* Build configuration list for PBXNativeTarget "SmartMeal" */;
 			buildPhases = (
-				166EFF2E0830CF635FA968E3 /* [CP] Check Pods Manifest.lock */,
+				A6C628595B76EB8812FB3CB2 /* [CP] Check Pods Manifest.lock */,
 				C834770A2D6E12AC006ED330 /* Sources */,
 				C834770B2D6E12AC006ED330 /* Frameworks */,
 				C834770C2D6E12AC006ED330 /* Resources */,
-				106CDE8F50EF6062B27CAC66 /* [CP] Embed Pods Frameworks */,
+				6CD6BF578837104C9BB908E5 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -367,7 +367,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		106CDE8F50EF6062B27CAC66 /* [CP] Embed Pods Frameworks */ = {
+		6CD6BF578837104C9BB908E5 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -384,7 +384,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SmartMeal/Pods-SmartMeal-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		166EFF2E0830CF635FA968E3 /* [CP] Check Pods Manifest.lock */ = {
+		A6C628595B76EB8812FB3CB2 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -599,7 +599,7 @@
 		};
 		C83477232D6E12AD006ED330 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CEAA9104F8D20BB8045A20C5 /* Pods-SmartMeal.debug.xcconfig */;
+			baseConfigurationReference = A5F3AD1BC7AF34E4ABE92AB1 /* Pods-SmartMeal.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -628,7 +628,7 @@
 		};
 		C83477242D6E12AD006ED330 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B77533CDD2D1B9D89675F6CA /* Pods-SmartMeal.release.xcconfig */;
+			baseConfigurationReference = D0F766DE27EFE84A3A1F2569 /* Pods-SmartMeal.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
