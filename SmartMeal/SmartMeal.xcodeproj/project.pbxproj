@@ -48,6 +48,8 @@
 		C89B87012D729C1500C175CB /* FavoritesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89B87002D729C1500C175CB /* FavoritesCoordinator.swift */; };
 		C89B87032D729C2200C175CB /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89B87022D729C2200C175CB /* ProfileCoordinator.swift */; };
 		C89B87052D72CEF600C175CB /* Coordinated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89B87042D72CEF600C175CB /* Coordinated.swift */; };
+		C8BB08122D7FDB1F00E6016E /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BB08112D7FDB1F00E6016E /* ProfileViewModel.swift */; };
+		C8BB08142D7FDE2B00E6016E /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BB08132D7FDE2B00E6016E /* RoundedView.swift */; };
 		C8EA4A972D769ADB00337A8E /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8EA4A962D769ADB00337A8E /* FavoritesManager.swift */; };
 		C8EA4A992D769C9C00337A8E /* Dynamic.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8EA4A982D769C9C00337A8E /* Dynamic.swift */; };
 		C8EA4A9B2D76CBF200337A8E /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8EA4A9A2D76CBF200337A8E /* FavoritesViewModel.swift */; };
@@ -103,6 +105,8 @@
 		C89B87002D729C1500C175CB /* FavoritesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCoordinator.swift; sourceTree = "<group>"; };
 		C89B87022D729C2200C175CB /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		C89B87042D72CEF600C175CB /* Coordinated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinated.swift; sourceTree = "<group>"; };
+		C8BB08112D7FDB1F00E6016E /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		C8BB08132D7FDE2B00E6016E /* RoundedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
 		C8EA4A962D769ADB00337A8E /* FavoritesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesManager.swift; sourceTree = "<group>"; };
 		C8EA4A982D769C9C00337A8E /* Dynamic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dynamic.swift; sourceTree = "<group>"; };
 		C8EA4A9A2D76CBF200337A8E /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
@@ -219,6 +223,7 @@
 				C83477462D6F8BF0006ED330 /* TextWithIcon.swift */,
 				C834774C2D6F9BFC006ED330 /* IngridientCell.swift */,
 				C89B86E52D714C5600C175CB /* RecipeTableViewCell.swift */,
+				C8BB08132D7FDE2B00E6016E /* RoundedView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -243,6 +248,7 @@
 				C8EA4A9A2D76CBF200337A8E /* FavoritesViewModel.swift */,
 				C8F078CE2D7F0D3C0045FA4B /* RegistrationViewModel.swift */,
 				C8F078D02D7F13C90045FA4B /* LoginViewModel.swift */,
+				C8BB08112D7FDB1F00E6016E /* ProfileViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -415,6 +421,7 @@
 				C83477322D6E2834006ED330 /* ImageAssets.swift in Sources */,
 				C82B445B2D7585AC009B020D /* SearchViewModel.swift in Sources */,
 				C8F078C92D7EBA720045FA4B /* AuthCoordinator.swift in Sources */,
+				C8BB08142D7FDE2B00E6016E /* RoundedView.swift in Sources */,
 				C89B86EB2D7186F100C175CB /* TableCellViewModel.swift in Sources */,
 				C89B86FB2D7298F000C175CB /* TabBarCoordinator.swift in Sources */,
 				C834773E2D6F70F0006ED330 /* Recipe.swift in Sources */,
@@ -429,6 +436,7 @@
 				C89B87012D729C1500C175CB /* FavoritesCoordinator.swift in Sources */,
 				C89B86F32D722C4800C175CB /* UIImageView + Extension.swift in Sources */,
 				C83477372D6E42F4006ED330 /* SearchTextField.swift in Sources */,
+				C8BB08122D7FDB1F00E6016E /* ProfileViewModel.swift in Sources */,
 				C89B86ED2D71870700C175CB /* CollectionCellViewModel.swift in Sources */,
 				C89B86E62D714C5600C175CB /* RecipeTableViewCell.swift in Sources */,
 				C83477472D6F8BF0006ED330 /* TextWithIcon.swift in Sources */,
