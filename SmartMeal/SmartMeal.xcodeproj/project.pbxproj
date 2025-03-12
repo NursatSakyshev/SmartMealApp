@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		878729D4982111059F19A95A /* Pods_SmartMeal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B138D5449D17E97E27349530 /* Pods_SmartMeal.framework */; };
+		C80374EC2D8159AF00A5662C /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80374EB2D8159AF00A5662C /* HeaderView.swift */; };
 		C80735692D72FF4100531AB8 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80735682D72FF4100531AB8 /* DetailViewModel.swift */; };
 		C82B44592D740BEB009B020D /* NavigatorCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82B44582D740BEB009B020D /* NavigatorCoordinator.swift */; };
 		C82B445B2D7585AC009B020D /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82B445A2D7585AC009B020D /* SearchViewModel.swift */; };
@@ -64,6 +65,7 @@
 /* Begin PBXFileReference section */
 		A5F3AD1BC7AF34E4ABE92AB1 /* Pods-SmartMeal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartMeal.debug.xcconfig"; path = "Target Support Files/Pods-SmartMeal/Pods-SmartMeal.debug.xcconfig"; sourceTree = "<group>"; };
 		B138D5449D17E97E27349530 /* Pods_SmartMeal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartMeal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C80374EB2D8159AF00A5662C /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		C80735682D72FF4100531AB8 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		C82B44582D740BEB009B020D /* NavigatorCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigatorCoordinator.swift; sourceTree = "<group>"; };
 		C82B445A2D7585AC009B020D /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				C834774C2D6F9BFC006ED330 /* IngridientCell.swift */,
 				C89B86E52D714C5600C175CB /* RecipeTableViewCell.swift */,
 				C8BB08132D7FDE2B00E6016E /* RoundedView.swift */,
+				C80374EB2D8159AF00A5662C /* HeaderView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -433,6 +436,7 @@
 				C89B86F72D7291D600C175CB /* Coordinator.swift in Sources */,
 				C82B44592D740BEB009B020D /* NavigatorCoordinator.swift in Sources */,
 				C8EA4A9B2D76CBF200337A8E /* FavoritesViewModel.swift in Sources */,
+				C80374EC2D8159AF00A5662C /* HeaderView.swift in Sources */,
 				C89B87012D729C1500C175CB /* FavoritesCoordinator.swift in Sources */,
 				C89B86F32D722C4800C175CB /* UIImageView + Extension.swift in Sources */,
 				C83477372D6E42F4006ED330 /* SearchTextField.swift in Sources */,

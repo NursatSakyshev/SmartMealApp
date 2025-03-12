@@ -12,14 +12,6 @@ class SearchViewController: UIViewController, Coordinated {
     var collectionView: UICollectionView!
     var viewModel: SearchViewModel!
     
-    let recommendationLabel: UILabel = {
-        let label = UILabel()
-        label.text = "For You"
-        label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
-        label.textColor = .black
-        return label
-    }()
-    
     lazy var searchField: SearchTextField = {
         let textField = SearchTextField()
         textField.placeholder = "Enter products"
@@ -34,12 +26,13 @@ class SearchViewController: UIViewController, Coordinated {
         
         
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: recommendationLabel.bottomAnchor, constant: 30),
+            collectionView.topAnchor.constraint(equalTo: searchField.bottomAnchor, constant: 30),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
         
+        collectionView.register(HeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderView.identifier)
         collectionView.register(RecipeCell.self, forCellWithReuseIdentifier: RecipeCell.identifier)
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -69,7 +62,7 @@ class SearchViewController: UIViewController, Coordinated {
     
     
     func setupUI() {
-        [searchField, recommendationLabel].forEach {
+        [searchField].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview($0)
         }
@@ -79,9 +72,6 @@ class SearchViewController: UIViewController, Coordinated {
             searchField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 25),
             searchField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -25),
             searchField.heightAnchor.constraint(equalToConstant: 50),
-            
-            recommendationLabel.topAnchor.constraint(equalTo: searchField.bottomAnchor, constant: 40),
-            recommendationLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16)
         ])
     }
 }
@@ -113,5 +103,17 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let size = (view.frame.width/2)
         return CGSize(width: size - 15, height: 300)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionView.elementKindSectionHeader {
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HeaderView.identifier, for: indexPath) as! HeaderView
+              return header
+          }
+          return UICollectionReusableView()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: 50)
     }
 }

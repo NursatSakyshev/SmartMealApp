@@ -110,8 +110,7 @@ class RecipeCell: UICollectionViewCell {
         self.viewModel = viewModel
         nameLabel.text = viewModel.name
         caloriesTimeLabel.text = "\(viewModel.calories) ккал | \(viewModel.time) мин"
-//                imageView.loadImage(from: viewModel.imageUrl)
-        imageView.sd_setImage(with: URL(string: viewModel.imageUrl), placeholderImage: UIImage(named: "dishImage1"))
+        imageView.sd_setImage(with: URL(string: viewModel.imageUrl))
         bindViewModel()
         updateFavoriteButton()
         imageView.backgroundColor = .red
