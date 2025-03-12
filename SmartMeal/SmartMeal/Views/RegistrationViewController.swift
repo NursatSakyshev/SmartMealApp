@@ -144,8 +144,8 @@ class RegistrationViewController: UIViewController {
         viewModel.onSuccess = { [weak self] in
             self?.login?()
         }
-        viewModel.onError = {
-            self.showAlert(message: "error")
+        viewModel.onError = { [weak self] in
+            self?.showAlert(message: "error")
         }
     }
     
@@ -156,7 +156,7 @@ class RegistrationViewController: UIViewController {
             return
         }
         
-        viewModel.register(email: email, password: password)
+        viewModel.register(fullname: fullName, email: email, password: password)
     }
     
     func setupUI() {

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		878729D4982111059F19A95A /* Pods_SmartMeal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B138D5449D17E97E27349530 /* Pods_SmartMeal.framework */; };
 		C80374EC2D8159AF00A5662C /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80374EB2D8159AF00A5662C /* HeaderView.swift */; };
+		C80374EE2D815EC400A5662C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80374ED2D815EC400A5662C /* User.swift */; };
 		C80735692D72FF4100531AB8 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80735682D72FF4100531AB8 /* DetailViewModel.swift */; };
 		C82B44592D740BEB009B020D /* NavigatorCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82B44582D740BEB009B020D /* NavigatorCoordinator.swift */; };
 		C82B445B2D7585AC009B020D /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82B445A2D7585AC009B020D /* SearchViewModel.swift */; };
@@ -66,6 +67,7 @@
 		A5F3AD1BC7AF34E4ABE92AB1 /* Pods-SmartMeal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartMeal.debug.xcconfig"; path = "Target Support Files/Pods-SmartMeal/Pods-SmartMeal.debug.xcconfig"; sourceTree = "<group>"; };
 		B138D5449D17E97E27349530 /* Pods_SmartMeal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartMeal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C80374EB2D8159AF00A5662C /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		C80374ED2D815EC400A5662C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C80735682D72FF4100531AB8 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		C82B44582D740BEB009B020D /* NavigatorCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigatorCoordinator.swift; sourceTree = "<group>"; };
 		C82B445A2D7585AC009B020D /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 			children = (
 				C834773D2D6F70F0006ED330 /* Recipe.swift */,
 				C834774A2D6F98F3006ED330 /* Ingridient.swift */,
+				C80374ED2D815EC400A5662C /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -444,6 +447,7 @@
 				C89B86ED2D71870700C175CB /* CollectionCellViewModel.swift in Sources */,
 				C89B86E62D714C5600C175CB /* RecipeTableViewCell.swift in Sources */,
 				C83477472D6F8BF0006ED330 /* TextWithIcon.swift in Sources */,
+				C80374EE2D815EC400A5662C /* User.swift in Sources */,
 				C8EA4A992D769C9C00337A8E /* Dynamic.swift in Sources */,
 				C83477552D70BCD2006ED330 /* ProfileViewController.swift in Sources */,
 				C8F078C72D7EA7800045FA4B /* OnboardingCoordinator.swift in Sources */,

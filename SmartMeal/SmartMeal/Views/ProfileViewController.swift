@@ -11,7 +11,6 @@ class ProfileViewController: UIViewController, Coordinated {
     weak var coordinator: Coordinator?
     var viewModel: ProfileViewModel!
 
-    
     private let profileImageView: UIImageView = {
         let view = UIImageView()
         view.backgroundColor = UIColor(red: 246/255, green: 246/255, blue: 246/255, alpha: 1)
@@ -41,10 +40,23 @@ class ProfileViewController: UIViewController, Coordinated {
         return view
     }()
     
+    func setupBindings() {
+        viewModel.fullName.bind({ [weak self] fullName in
+            self?.nameLabel.text = fullName
+        })
+        
+        viewModel.email.bind({ [weak self] email in
+            self?.emailLabel.text = email
+        })
+        
+        viewModel.fetchUserData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(red: 246/255, green: 246/255, blue: 246/255, alpha: 1)
         setupUI()
+        setupBindings()
     }
     
     func setupUI() {
