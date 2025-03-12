@@ -7,6 +7,7 @@
 
 import Foundation
 import FirebaseFirestore
+import FirebaseStorage
 
 class HomeViewModel {
     var tableViewCellModels: [TableCellViewModel] = []
@@ -27,6 +28,7 @@ class HomeViewModel {
         let group = DispatchGroup() 
         
         group.enter()
+        
         APIService.shared.getRecommendations {
             self.tableViewCellModels.append(TableCellViewModel(recipes: $0))
             group.leave()

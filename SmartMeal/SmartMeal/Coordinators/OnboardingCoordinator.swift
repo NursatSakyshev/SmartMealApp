@@ -17,7 +17,7 @@ class OnboardingCoordinator: Coordinator {
         let onboardingVC = OnboardingViewController()
         onboardingVC.onFinish = { [weak self] in
             UserDefaults.standard.set(true, forKey: "hasSeenOnboarding")
-            print("onfinish")
+//            print("onfinish")
             self?.parentCoordinator?.start()
         }
         window.rootViewController = onboardingVC

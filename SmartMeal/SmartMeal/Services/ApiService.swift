@@ -22,19 +22,31 @@ class APIService {
             var loadedRecipes: [Recipe] = []
             let dispatchGroup = DispatchGroup()
             
-            for document in snapshot!.documents {
+            for (index, document) in snapshot!.documents.enumerated() {
                 dispatchGroup.enter()
                 let data = document.data()
                 
+                let id = document.documentID
                 let title = data["title"] as? String ?? ""
                 let calories = data["calories"] as? Int ?? 0
                 let time = data["time"] as? Int ?? 0
                 let description = data["description"] as? String ?? ""
-                let imageUrl = data["imageUrl"] as? String
+                var imageUrl = data["imageUrl"] as? String
                 let difficulty = data["difficulty"] as? String ?? ""
                 let servings = data["servings"] as? Int ?? 0
                 
                 var ingredients: [Ingridient] = []
+//                
+//                let image = UIImage(named: "dishImage\(index + 1)")
+////                print("index \(index + 1)")
+////                    guard let image = image else { print("image error at: \(index)"); return }
+//                if image == nil {
+//                    print("image error at: \(index + 1)"); return
+//                }
+//                uploadImage(image: image!, recipeId: id) { url in
+//                    print("url saved:\(index + 1)")
+////                    imageUrl = url
+//                }
                 
                 
                 self.db.collection("recipes").document(document.documentID).collection("ingredients").getDocuments { (ingredientSnapshot, error) in
@@ -48,7 +60,7 @@ class APIService {
                             ingredients.append(ingredient)
                         }
                     }
-                    let recipe = Recipe(title: title, calories: calories, time: time, description: description, imageUrl: imageUrl, ingridients: ingredients, difficulty: difficulty, servings: servings)
+                    let recipe = Recipe(id: id, title: title, calories: calories, time: time, description: description, imageUrl: imageUrl, ingridients: ingredients, difficulty: difficulty, servings: servings)
                     loadedRecipes.append(recipe)
                     dispatchGroup.leave()
                 }
@@ -75,6 +87,7 @@ class APIService {
                 dispatchGroup.enter()
                 let data = document.data()
                 
+                let id = data["id"] as? String ?? ""
                 let title = data["title"] as? String ?? ""
                 let calories = data["calories"] as? Int ?? 0
                 let time = data["time"] as? Int ?? 0
@@ -97,7 +110,7 @@ class APIService {
                             ingredients.append(ingredient)
                         }
                     }
-                    let recipe = Recipe(title: title, calories: calories, time: time, description: description, imageUrl: imageUrl, ingridients: ingredients, difficulty: difficulty, servings: servings)
+                    let recipe = Recipe(id: id, title: title, calories: calories, time: time, description: description, imageUrl: imageUrl, ingridients: ingredients, difficulty: difficulty, servings: servings)
                     loadedRecipes.append(recipe)
                     dispatchGroup.leave()
                 }
@@ -108,98 +121,101 @@ class APIService {
         }
     }
     
+  
     func getQuickEasy(completion: @escaping ([Recipe]) -> Void) {
-        db.collection("recipes").getDocuments { (snapshot, error) in
-            if let error = error {
-                print("Ошибка загрузки: \(error.localizedDescription)")
-                return
-            }
+               db.collection("recipes").getDocuments { (snapshot, error) in
+        if let error = error {
+            print("Ошибка загрузки: \(error.localizedDescription)")
+            return
+        }
+        
+        var loadedRecipes: [Recipe] = []
+        let dispatchGroup = DispatchGroup()
+        
+        for document in snapshot!.documents {
+            dispatchGroup.enter()
+            let data = document.data()
             
-            var loadedRecipes: [Recipe] = []
-            let dispatchGroup = DispatchGroup()
+            let id = document.documentID
+            let title = data["title"] as? String ?? ""
+            let calories = data["calories"] as? Int ?? 0
+            let time = data["time"] as? Int ?? 0
+            let description = data["description"] as? String ?? ""
+            let imageUrl = data["imageUrl"] as? String
+            let difficulty = data["difficulty"] as? String ?? ""
+            let servings = data["servings"] as? Int ?? 0
             
-            for document in snapshot!.documents {
-                dispatchGroup.enter()
-                let data = document.data()
-                
-                let title = data["title"] as? String ?? ""
-                let calories = data["calories"] as? Int ?? 0
-                let time = data["time"] as? Int ?? 0
-                let description = data["description"] as? String ?? ""
-                let imageUrl = data["imageUrl"] as? String
-                let difficulty = data["difficulty"] as? String ?? ""
-                let servings = data["servings"] as? Int ?? 0
-                
-                var ingredients: [Ingridient] = []
-                
-                
-                self.db.collection("recipes").document(document.documentID).collection("ingredients").getDocuments { (ingredientSnapshot, error) in
-                    if let ingredientSnapshot = ingredientSnapshot {
-                        for ingredientDoc in ingredientSnapshot.documents {
-                            let ingredientData = ingredientDoc.data()
-                            let name = ingredientData["name"] as? String ?? ""
-                            let amount = ingredientData["amount"] as? Int ?? 0
-                            let unit = ingredientData["unit"] as? String ?? ""
-                            let ingredient = Ingridient(name: name, amount: amount, unit: unit)
-                            ingredients.append(ingredient)
-                        }
+            var ingredients: [Ingridient] = []
+            
+            
+            self.db.collection("recipes").document(document.documentID).collection("ingredients").getDocuments { (ingredientSnapshot, error) in
+                if let ingredientSnapshot = ingredientSnapshot {
+                    for ingredientDoc in ingredientSnapshot.documents {
+                        let ingredientData = ingredientDoc.data()
+                        let name = ingredientData["name"] as? String ?? ""
+                        let amount = ingredientData["amount"] as? Int ?? 0
+                        let unit = ingredientData["unit"] as? String ?? ""
+                        let ingredient = Ingridient(name: name, amount: amount, unit: unit)
+                        ingredients.append(ingredient)
                     }
-                    let recipe = Recipe(title: title, calories: calories, time: time, description: description, imageUrl: imageUrl, ingridients: ingredients, difficulty: difficulty, servings: servings)
-                    loadedRecipes.append(recipe)
-                    dispatchGroup.leave()
                 }
-            }
-            dispatchGroup.notify(queue: .main) {
-                completion(Array(loadedRecipes.dropFirst(6).prefix(3)))
+                let recipe = Recipe(id: id, title: title, calories: calories, time: time, description: description, imageUrl: imageUrl, ingridients: ingredients, difficulty: difficulty, servings: servings)
+                loadedRecipes.append(recipe)
+                dispatchGroup.leave()
             }
         }
+        dispatchGroup.notify(queue: .main) {
+            completion(Array(loadedRecipes.dropFirst(6).prefix(3)))
+        }
+    }
     }
     
     func getHealthy(completion: @escaping ([Recipe]) -> Void) {
-        db.collection("recipes").getDocuments { (snapshot, error) in
-            if let error = error {
-                print("Ошибка загрузки: \(error.localizedDescription)")
-                return
-            }
+              db.collection("recipes").getDocuments { (snapshot, error) in
+        if let error = error {
+            print("Ошибка загрузки: \(error.localizedDescription)")
+            return
+        }
+        
+        var loadedRecipes: [Recipe] = []
+        let dispatchGroup = DispatchGroup()
+        
+        for document in snapshot!.documents {
+            dispatchGroup.enter()
+            let data = document.data()
             
-            var loadedRecipes: [Recipe] = []
-            let dispatchGroup = DispatchGroup()
+            let id = document.documentID
+            let title = data["title"] as? String ?? ""
+            let calories = data["calories"] as? Int ?? 0
+            let time = data["time"] as? Int ?? 0
+            let description = data["description"] as? String ?? ""
+            let imageUrl = data["imageUrl"] as? String
+            let difficulty = data["difficulty"] as? String ?? ""
+            let servings = data["servings"] as? Int ?? 0
             
-            for document in snapshot!.documents {
-                dispatchGroup.enter()
-                let data = document.data()
-                
-                let title = data["title"] as? String ?? ""
-                let calories = data["calories"] as? Int ?? 0
-                let time = data["time"] as? Int ?? 0
-                let description = data["description"] as? String ?? ""
-                let imageUrl = data["imageUrl"] as? String
-                let difficulty = data["difficulty"] as? String ?? ""
-                let servings = data["servings"] as? Int ?? 0
-                
-                var ingredients: [Ingridient] = []
-                
-                
-                self.db.collection("recipes").document(document.documentID).collection("ingredients").getDocuments { (ingredientSnapshot, error) in
-                    if let ingredientSnapshot = ingredientSnapshot {
-                        for ingredientDoc in ingredientSnapshot.documents {
-                            let ingredientData = ingredientDoc.data()
-                            let name = ingredientData["name"] as? String ?? ""
-                            let amount = ingredientData["amount"] as? Int ?? 0
-                            let unit = ingredientData["unit"] as? String ?? ""
-                            let ingredient = Ingridient(name: name, amount: amount, unit: unit)
-                            ingredients.append(ingredient)
-                        }
+            var ingredients: [Ingridient] = []
+            
+            
+            self.db.collection("recipes").document(document.documentID).collection("ingredients").getDocuments { (ingredientSnapshot, error) in
+                if let ingredientSnapshot = ingredientSnapshot {
+                    for ingredientDoc in ingredientSnapshot.documents {
+                        let ingredientData = ingredientDoc.data()
+                        let name = ingredientData["name"] as? String ?? ""
+                        let amount = ingredientData["amount"] as? Int ?? 0
+                        let unit = ingredientData["unit"] as? String ?? ""
+                        let ingredient = Ingridient(name: name, amount: amount, unit: unit)
+                        ingredients.append(ingredient)
                     }
-                    let recipe = Recipe(title: title, calories: calories, time: time, description: description, imageUrl: imageUrl, ingridients: ingredients, difficulty: difficulty, servings: servings)
-                    loadedRecipes.append(recipe)
-                    dispatchGroup.leave()
                 }
-            }
-            dispatchGroup.notify(queue: .main) {
-                completion(Array(loadedRecipes.suffix(3)))
+                let recipe = Recipe(id: id, title: title, calories: calories, time: time, description: description, imageUrl: imageUrl, ingridients: ingredients, difficulty: difficulty, servings: servings)
+                loadedRecipes.append(recipe)
+                dispatchGroup.leave()
             }
         }
+        dispatchGroup.notify(queue: .main) {
+            completion(Array(loadedRecipes.suffix(3)))
+        }
+    }
     }
     
     func fetchImageData(from url: String, completion: @escaping (Data?) -> Void) {
@@ -223,60 +239,25 @@ class APIService {
         }
     }
     
-    func fetchRecipes(completion: @escaping ([Recipe]) -> Void) {
-        db.collection("recipes").getDocuments { snapshot, error in
+    func saveRecipeImageUrl(recipeId: String, imageUrl: String) {
+        let db = Firestore.firestore()
+        db.collection("recipes").document(recipeId).updateData(["imageUrl": imageUrl]) { error in
             if let error = error {
-                print("Error fetching recipes: \(error)")
-                completion([])
-                return
+                print("Ошибка сохранения URL: \(error.localizedDescription)")
+            } else {
+                print("URL изображения сохранен!")
             }
-            
-            var recipes: [Recipe] = []
-            for document in snapshot?.documents ?? [] {
-                let data = document.data()
-                let recipe = Recipe(
-                    title: data["title"] as? String ?? "",
-                    calories: data["calories"] as? Int ?? 0,
-                    time: data["time"] as? Int ?? 0,
-                    description: data["description"] as? String ?? "",
-                    imageUrl: data["imageUrl"] as? String,
-                    ingridients: [],
-                    difficulty: data["difficulty"] as? String ?? "",
-                    servings: data["servings"] as? Int ?? 1
-                )
-                recipes.append(recipe)
-            }
-            
-            completion(recipes)
         }
     }
+
     
-    func fetchIngredients(for recipeId: String, completion: @escaping ([Ingridient]) -> Void) {
-        db.collection("recipes").document(recipeId).collection("ingredients").getDocuments { snapshot, error in
-            if let error = error {
-                print("Error fetching ingredients: \(error)")
-                completion([])
-                return
-            }
-            
-            var ingredients: [Ingridient] = []
-            for document in snapshot?.documents ?? [] {
-                let data = document.data()
-                let ingredient = Ingridient(
-                    name: data["name"] as? String ?? "",
-                    amount: data["amount"] as? Int ?? 0,
-                    unit: data["unit"] as? String ?? ""
-                )
-                ingredients.append(ingredient)
-            }
-            
-            completion(ingredients)
-        }
-    }
-    
+
     func addRecipe(recipe: Recipe) {
-        var recipeRef: DocumentReference? = nil
-        recipeRef = db.collection("recipes").addDocument(data: [
+        let recipeRef = db.collection("recipes").document() // создаем пустой документ и получаем его ID
+        let recipeId = recipeRef.documentID // Firestore сам генерирует ID
+
+        let recipeData: [String: Any] = [
+            "id": recipeId, // добавляем ID в документ
             "title": recipe.title,
             "calories": recipe.calories,
             "time": recipe.time,
@@ -284,13 +265,17 @@ class APIService {
             "imageUrl": recipe.imageUrl ?? "",
             "difficulty": recipe.difficulty,
             "servings": recipe.servings
-        ]) { err in
+        ]
+
+        recipeRef.setData(recipeData) { err in
             if let err = err {
                 print("Error adding document: \(err)")
             } else {
-                print("Document added with ID: \(recipeRef!.documentID)")
+                print("Document added with ID: \(recipeId)")
+                
+                // Добавляем ингредиенты в подколлекцию
                 for ingredient in recipe.ingridients {
-                    recipeRef?.collection("ingredients").addDocument(data: [
+                    recipeRef.collection("ingredients").addDocument(data: [
                         "name": ingredient.name,
                         "amount": ingredient.amount,
                         "unit": ingredient.unit
@@ -318,5 +303,83 @@ class APIService {
     //            }
     //        }
     //    }
+    
+    //    func fetchRecipes(completion: @escaping ([Recipe]) -> Void) {
+    //        db.collection("recipes").getDocuments { snapshot, error in
+    //            if let error = error {
+    //                print("Error fetching recipes: \(error)")
+    //                completion([])
+    //                return
+    //            }
+    //
+    //            var recipes: [Recipe] = []
+    //            for document in snapshot?.documents ?? [] {
+    //                let data = document.data()
+    //                let recipe = Recipe(
+    //                    title: data["title"] as? String ?? "",
+    //                    calories: data["calories"] as? Int ?? 0,
+    //                    time: data["time"] as? Int ?? 0,
+    //                    description: data["description"] as? String ?? "",
+    //                    imageUrl: data["imageUrl"] as? String,
+    //                    ingridients: [],
+    //                    difficulty: data["difficulty"] as? String ?? "",
+    //                    servings: data["servings"] as? Int ?? 1
+    //                )
+    //                recipes.append(recipe)
+    //            }
+    //
+    //            completion(recipes)
+    //        }
+    //    }
+        
+    //    func fetchIngredients(for recipeId: String, completion: @escaping ([Ingridient]) -> Void) {
+    //        db.collection("recipes").document(recipeId).collection("ingredients").getDocuments { snapshot, error in
+    //            if let error = error {
+    //                print("Error fetching ingredients: \(error)")
+    //                completion([])
+    //                return
+    //            }
+    //
+    //            var ingredients: [Ingridient] = []
+    //            for document in snapshot?.documents ?? [] {
+    //                let data = document.data()
+    //                let ingredient = Ingridient(
+    //                    name: data["name"] as? String ?? "",
+    //                    amount: data["amount"] as? Int ?? 0,
+    //                    unit: data["unit"] as? String ?? ""
+    //                )
+    //                ingredients.append(ingredient)
+    //            }
+    //
+    //            completion(ingredients)
+    //        }
+    //    }
+    
+//    func uploadImage(image: UIImage, recipeId: String, completion: @escaping (String?) -> Void) {
+//        let storageRef = Storage.storage().reference().child("recipe_images/\(recipeId).jpg")
+//        
+//        guard let imageData = image.jpegData(compressionQuality: 0.8) else {
+//            completion(nil)
+//            return
+//        }
+//
+//        let metadata = StorageMetadata()
+//        metadata.contentType = "image/jpeg"
+//
+//        storageRef.putData(imageData, metadata: metadata) { (_, error) in
+//            if let error = error {
+//                print("Ошибка загрузки изображения: \(error.localizedDescription)")
+//                completion(nil)
+//                return
+//            }
+//            
+//            // Получаем URL изображения
+//            storageRef.downloadURL { (url, error) in
+//                APIService.shared.saveRecipeImageUrl(recipeId: recipeId, imageUrl: url!.absoluteString)
+//                completion(url?.absoluteString)
+//            }
+//        }
+//    }
+        
 }
 
