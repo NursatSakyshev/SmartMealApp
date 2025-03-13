@@ -92,23 +92,7 @@ class FavoritesManager {
     private func saveFavoriteToFirebase(_ recipe: Recipe) async {
         guard let userId = Auth.auth().currentUser?.uid else { return }
 
-        do {
-            let recipeData: [String: Any] = [
-                "id": recipe.id,
-                "title": recipe.title,
-                "calories": recipe.calories,
-                "time": recipe.time,
-                "description": recipe.description,
-                "imageUrl": recipe.imageUrl ?? "",
-                "difficulty": recipe.difficulty,
-                "servings": recipe.servings
-            ]
-            
-            let favoritesRef = db.collection("users").document(userId).collection("favorites").document(recipe.id)
-            try await favoritesRef.setData(recipeData)
-        } catch {
-            print("Ошибка сохранения рецепта: \(error.localizedDescription)")
-        }
+        APIService.shared.saveFavoriteRecipe(userId: userId, recipe: recipe)
     }
     
     private func removeFavoriteFromFirebase(_ recipe: Recipe) async {
