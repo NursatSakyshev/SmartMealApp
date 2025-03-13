@@ -34,6 +34,18 @@ class APIService {
         return Array(recipes.suffix(3))
     }
     
+    func saveFavoriteRecipe(userId: String, recipe: Recipe) {
+        let db = Firestore.firestore()
+        let favoritesRef = db.collection("users").document(userId).collection("favorites").document(recipe.id)
+        
+        addRecipe(reference: favoritesRef, recipe: recipe)
+    }
+    
+    func getFavoriteRecipes(userId: String) async -> [Recipe] {
+        let favoritesRef = db.collection("users").document(userId).collection("favorites")
+        return await getRecipes(collection: favoritesRef)
+    }
+    
     func fetchUser(uid: String, completion: @escaping (User?) -> Void) {
         let db = Firestore.firestore()
         
@@ -117,18 +129,6 @@ class APIService {
             }
         }
         
-    }
-    
-    func saveFavoriteRecipe(userId: String, recipe: Recipe) {
-        let db = Firestore.firestore()
-        let favoritesRef = db.collection("users").document(userId).collection("favorites").document(recipe.id)
-        
-        addRecipe(reference: favoritesRef, recipe: recipe)
-    }
-    
-    func getFavoriteRecipes(userId: String) async -> [Recipe] {
-        let favoritesRef = db.collection("users").document(userId).collection("favorites")
-        return await getRecipes(collection: favoritesRef)
     }
     
     func getRecipes(collection: CollectionReference) async -> [Recipe] {
