@@ -101,7 +101,7 @@ class FavoritesManager {
          do {
              try await db.collection("users").document(userId).collection("favorites").document(recipe.id).delete()
          } catch {
-             print("Ошибка удаления рецепта: \(error.localizedDescription)")
+             print("\(error.localizedDescription)")
          }
      }
 }

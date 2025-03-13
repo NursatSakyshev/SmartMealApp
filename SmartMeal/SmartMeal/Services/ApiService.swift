@@ -14,44 +14,24 @@ class APIService {
     private let db = Firestore.firestore()
     
     func getRecommendations() async -> [Recipe] {
-        do {
-            let recipes = await getRecipes(collecion: "recipes")
-            return Array(recipes.prefix(3))
-            
-        } catch {
-            return []
-        }
+        let recipes = await getRecipes(collection: db.collection("recipes"))
+        return Array(recipes.prefix(3))
     }
     
     func getPopular() async -> [Recipe] {
-        do {
-            let recipes = await getRecipes(collecion: "recipes")
-            return recipes
-            
-        } catch {
-            return []
-        }
+        let recipes = await getRecipes(collection: db.collection("recipes"))
+        return recipes
     }
     
     
     func getQuickEasy() async -> [Recipe] {
-        do {
-            let recipes = await getRecipes(collecion: "recipes")
-            return Array(recipes.dropFirst(6).prefix(3))
-            
-        } catch {
-            return []
-        }
+        let recipes = await getRecipes(collection: db.collection("recipes"))
+        return Array(recipes.dropFirst(6).prefix(3))
     }
     
     func getHealthy() async -> [Recipe] {
-        do {
-            let recipes = await getRecipes(collecion: "recipes")
-            return Array(recipes.suffix(3))
-            
-        } catch {
-            return []
-        }
+        let recipes = await getRecipes(collection: db.collection("recipes"))
+        return Array(recipes.suffix(3))
     }
     
     func fetchUser(uid: String, completion: @escaping (User?) -> Void) {
@@ -71,7 +51,6 @@ class APIService {
                 let user = User(uid: uid, fullname: fullname, email: email)
                 completion(user)
             } else {
-                print("Документ не найден")
                 completion(nil)
             }
         }
@@ -87,9 +66,9 @@ class APIService {
         
         db.collection("users").document(uid).setData(userData) { error in
             if let error = error {
-                print("Ошибка при сохранении данных: \(error.localizedDescription)")
+                print("error: \(error.localizedDescription)")
             } else {
-                print("Данные пользователя успешно сохранены!")
+                print("user data saved")
             }
         }
     }
@@ -98,20 +77,20 @@ class APIService {
         let db = Firestore.firestore()
         db.collection("recipes").document(recipeId).updateData(["imageUrl": imageUrl]) { error in
             if let error = error {
-                print("Ошибка сохранения URL: \(error.localizedDescription)")
+                print("Error URL: \(error.localizedDescription)")
             } else {
-                print("URL изображения сохранен!")
+                print("URL saved")
             }
         }
     }
     
     
-    func addRecipe(recipe: Recipe) {
-        let recipeRef = db.collection("recipes").document() // создаем пустой документ и получаем его ID
-        let recipeId = recipeRef.documentID // Firestore сам генерирует ID
+    func addRecipe(reference: DocumentReference, recipe: Recipe) {
+//        let recipeRef = db.collection("recipes").document() // создаем пустой документ и получаем его ID
+//        let recipeId = recipeRef.documentID // Firestore сам генерирует ID
         
         let recipeData: [String: Any] = [
-            "id": recipeId, // добавляем ID в документ
+            "id": recipe.id, // добавляем ID в документ
             "title": recipe.title,
             "calories": recipe.calories,
             "time": recipe.time,
@@ -121,15 +100,15 @@ class APIService {
             "servings": recipe.servings
         ]
         
-        recipeRef.setData(recipeData) { err in
+        reference.setData(recipeData) { err in
             if let err = err {
                 print("Error adding document: \(err)")
             } else {
-                print("Document added with ID: \(recipeId)")
+                print("Document added with ID: \(recipe.id)")
                 
-                // Добавляем ингредиенты в подколлекцию
+                
                 for ingredient in recipe.ingridients {
-                    recipeRef.collection("ingredients").addDocument(data: [
+                    reference.collection("ingredients").addDocument(data: [
                         "name": ingredient.name,
                         "amount": ingredient.amount,
                         "unit": ingredient.unit
@@ -141,80 +120,21 @@ class APIService {
     }
     
     func saveFavoriteRecipe(userId: String, recipe: Recipe) {
-        // Ссылаемся на подколлекцию favorites для конкретного пользователя
         let db = Firestore.firestore()
         let favoritesRef = db.collection("users").document(userId).collection("favorites").document(recipe.id)
         
-        // Данные рецепта
-        let recipeData: [String: Any] = [
-            "id": recipe.id,
-            "title": recipe.title,
-            "calories": recipe.calories,
-            "time": recipe.time,
-            "description": recipe.description,
-            "imageUrl": recipe.imageUrl ?? "",
-            "difficulty": recipe.difficulty,
-            "servings": recipe.servings
-        ]
-        
-        favoritesRef.setData(recipeData) { err in
-            if let err = err {
-                print("Error adding document: \(err)")
-            } else {
-                print("Document added with ID: \(recipe.id)")
-                
-                // Добавляем ингредиенты в подколлекцию
-                for ingredient in recipe.ingridients {
-                    favoritesRef.collection("ingredients").addDocument(data: [
-                        "name": ingredient.name,
-                        "amount": ingredient.amount,
-                        "unit": ingredient.unit
-                    ])
-                }
-            }
-        }
+        addRecipe(reference: favoritesRef, recipe: recipe)
     }
     
     func getFavoriteRecipes(userId: String) async -> [Recipe] {
         let favoritesRef = db.collection("users").document(userId).collection("favorites")
-        do {
-
-            let snapshot = try await favoritesRef.getDocuments()
-            var loadedRecipes: [Recipe] = []
-
-
-            for document in snapshot.documents {
-                let data = document.data()
-                
-                let id = document.documentID
-                let title = data["title"] as? String ?? ""
-                let calories = data["calories"] as? Int ?? 0
-                let time = data["time"] as? Int ?? 0
-                let description = data["description"] as? String ?? ""
-                let imageUrl = data["imageUrl"] as? String
-                let difficulty = data["difficulty"] as? String ?? ""
-                let servings = data["servings"] as? Int ?? 0
-                
-
-                let ingredients = try await getIngredientsForRecipe(recipeId: id, collecion: favoritesRef)
-                
-
-                let recipe = Recipe(id: id, title: title, calories: calories, time: time, description: description, imageUrl: imageUrl, ingridients: ingredients, difficulty: difficulty, servings: servings)
-                loadedRecipes.append(recipe)
-            }
-            
-            return loadedRecipes
-            
-        } catch {
-            print("Ошибка загрузки: \(error.localizedDescription)")
-            return []
-        }
+        return await getRecipes(collection: favoritesRef)
     }
     
-    func getRecipes(collecion: String) async -> [Recipe] {
+    func getRecipes(collection: CollectionReference) async -> [Recipe] {
         do {
 
-            let snapshot = try await db.collection(collecion).getDocuments()
+            let snapshot = try await collection.getDocuments()
             var loadedRecipes: [Recipe] = []
 
 
@@ -231,7 +151,7 @@ class APIService {
                 let servings = data["servings"] as? Int ?? 0
                 
 
-                let ingredients = try await getIngredientsForRecipe(recipeId: id, collecion: db.collection(collecion))
+                let ingredients = try await getIngredientsForRecipe(recipeId: id, collecion: collection)
                 
 
                 let recipe = Recipe(id: id, title: title, calories: calories, time: time, description: description, imageUrl: imageUrl, ingridients: ingredients, difficulty: difficulty, servings: servings)
@@ -241,7 +161,7 @@ class APIService {
             return loadedRecipes
             
         } catch {
-            print("Ошибка загрузки: \(error.localizedDescription)")
+            print("\(error.localizedDescription)")
             return []
         }
     }
