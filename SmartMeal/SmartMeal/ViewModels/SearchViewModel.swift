@@ -29,9 +29,10 @@ class SearchViewModel {
     }
     
     func callFuncToGetData() {
-        APIService.shared.getQuickEasy { [weak self] in
-            self?.popularRecipes.value = $0
-            self?.updateCollectionViewModels()
+        Task {
+            let recipes = await APIService.shared.getPopular()
+            self.popularRecipes.value = recipes
+            self.updateCollectionViewModels()
         }
     }
 }

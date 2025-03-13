@@ -8,14 +8,6 @@
 import UIKit
 
 extension UIImageView {
-    func loadImage(from url: String) {
-        APIService.shared.fetchImageData(from: url) { data in
-            if let data = data, let image = UIImage(data: data) {
-                self.image = image
-            }
-        }
-    }
-    
     func downloaded(from url: String) {
         guard let url = URL(string: url) else { return }
         

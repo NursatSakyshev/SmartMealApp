@@ -52,7 +52,9 @@ class SearchViewController: UIViewController, Coordinated {
         NotificationCenter.default.addObserver(self, selector: #selector(reloadFavorites), name: .favoritesUpdated, object: nil)
         
         viewModel.popularRecipes.bind { _ in
-            self.collectionView.reloadData()
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
         }
     }
     

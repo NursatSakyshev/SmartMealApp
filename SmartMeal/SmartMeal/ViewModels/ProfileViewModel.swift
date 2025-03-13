@@ -19,10 +19,8 @@ class ProfileViewModel {
             
             APIService.shared.fetchUser(uid: uid) { [weak self] user in
                 if let user = user {
-//                    print("Имя: \(user.fullname), Email: \(user.email)")
                     self?.fullName.value = user.fullname
                     self?.email.value = user.email
-                    print("get data: \(user.fullname)")
                 } else {
                     print("Ошибка: пользователь не найден")
                 }
@@ -32,3 +30,4 @@ class ProfileViewModel {
         }
     }
 }
+

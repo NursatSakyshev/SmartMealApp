@@ -29,26 +29,30 @@ class HomeViewModel {
         
         group.enter()
         
-        APIService.shared.getRecommendations {
-            self.tableViewCellModels.append(TableCellViewModel(recipes: $0))
+        Task {
+            let recipes = await APIService.shared.getRecommendations()
+            self.tableViewCellModels.append(TableCellViewModel(recipes: recipes))
             group.leave()
         }
         
         group.enter()
-        APIService.shared.getPopular {
-            self.tableViewCellModels.append(TableCellViewModel(recipes: $0))
+        Task {
+            let recipes = await APIService.shared.getPopular()
+            self.tableViewCellModels.append(TableCellViewModel(recipes: recipes))
             group.leave()
         }
         
         group.enter()
-        APIService.shared.getHealthy {
-            self.tableViewCellModels.append(TableCellViewModel(recipes: $0))
+        Task {
+            let recipes = await APIService.shared.getQuickEasy()
+            self.tableViewCellModels.append(TableCellViewModel(recipes: recipes))
             group.leave()
         }
         
         group.enter()
-        APIService.shared.getQuickEasy {
-            self.tableViewCellModels.append(TableCellViewModel(recipes: $0))
+        Task {
+            let recipes = await APIService.shared.getHealthy()
+            self.tableViewCellModels.append(TableCellViewModel(recipes: recipes))
             group.leave()
         }
         
