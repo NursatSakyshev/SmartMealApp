@@ -12,6 +12,12 @@ class SearchViewController: UIViewController, Coordinated {
     var collectionView: UICollectionView!
     var viewModel: SearchViewModel!
     
+    private let activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
+    
     lazy var searchField: SearchTextField = {
         let textField = SearchTextField()
         textField.placeholder = "Enter products"
@@ -44,11 +50,22 @@ class SearchViewController: UIViewController, Coordinated {
         return layout
     }
     
+    func setupActivityIndicator() {
+        view.addSubview(activityIndicator)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+        ])
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupUI()
         setupCollectionView()
+        setupActivityIndicator()
         NotificationCenter.default.addObserver(self, selector: #selector(reloadFavorites), name: .favoritesUpdated, object: nil)
         
         viewModel.popularRecipes.bind { _ in
@@ -56,6 +73,19 @@ class SearchViewController: UIViewController, Coordinated {
                 self.collectionView.reloadData()
             }
         }
+        
+        viewModel.isLoading = { [weak self] isLoading in
+            DispatchQueue.main.async {
+                if isLoading {
+                    self?.activityIndicator.startAnimating()
+                }
+                else {
+                    self?.activityIndicator.stopAnimating()
+                }
+            }
+        }
+        
+        viewModel.callFuncToGetData()
     }
     
     @objc private func reloadFavorites() {

@@ -10,13 +10,14 @@ import Foundation
 class SearchViewModel {
     var collectionCellViewModels: [CollectionCellViewModel] = []
     var popularRecipes: Dynamic<[Recipe]> = Dynamic([])
+    var isLoading: ((Bool) -> Void)?
     
     func getCollectionCellViewModel(at indexPath: IndexPath) -> CollectionCellViewModel {
          return self.collectionCellViewModels[indexPath.row]
      }
     
     init() {
-        callFuncToGetData()
+//        callFuncToGetData()
         NotificationCenter.default.addObserver(self, selector: #selector(updateFavorites), name: .favoritesUpdated, object: nil)
     }
     
@@ -30,8 +31,10 @@ class SearchViewModel {
     
     func callFuncToGetData() {
         Task {
+            isLoading?(true)
             let recipes = await APIService.shared.getPopular()
             self.popularRecipes.value = recipes
+            isLoading?(false)
             self.updateCollectionViewModels()
         }
     }
