@@ -22,12 +22,9 @@ class HomeViewController: UIViewController {
         viewModel.isLoading = { [weak self] isLoading in
             DispatchQueue.main.async {
                 if isLoading {
-//                    self?.loadingView.isHidden = false
                     self?.activityIndicator.startAnimating()
-//                    self?.view.backgroundColor = .red
                 }
                 else {
-//                    self?.loadingView.isHidden = true
                     self?.activityIndicator.stopAnimating()
                 }
             }

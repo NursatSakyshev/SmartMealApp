@@ -13,6 +13,17 @@ class FavoritesViewController: UIViewController, Coordinated {
     weak var coordinator: Coordinator?
     var viewModel: FavoritesViewModel!
     
+    let emptyLabel: UILabel = {
+        let label = UILabel()
+        label.text = "You have no favorites yet"
+        label.textAlignment = .center
+        label.isHidden = true
+        label.textColor = .gray
+        label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     var collectionView: UICollectionView!
     
     private func setupCollectionView() {
@@ -46,8 +57,19 @@ class FavoritesViewController: UIViewController, Coordinated {
 //        NotificationCenter.default.addObserver(self, selector: #selector(reloadFavorites), name: .favoritesUpdated, object: nil)
         view.backgroundColor = .white
         setupCollectionView()
+        setupUI()
         bindViewModel()
         collectionView.collectionViewLayout.invalidateLayout()
+    }
+    
+    func setupUI() {
+        view.addSubview(emptyLabel)
+        emptyLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            emptyLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            emptyLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+        ])
     }
     
     @objc private func reloadFavorites() {
@@ -61,9 +83,16 @@ class FavoritesViewController: UIViewController, Coordinated {
     private func bindViewModel() {
         viewModel.collectionCellViewModels.bind { [weak self] _ in
             DispatchQueue.main.async {
+                if self?.viewModel.collectionCellViewModels.value.count == 0 {
+                    self?.emptyLabel.isHidden = false
+                }
+                else {
+                    self?.emptyLabel.isHidden = true
+                }
                 self?.collectionView.reloadData()
             }
         }
+        viewModel.loadFavorites()
     }
 }
 

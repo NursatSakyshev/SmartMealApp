@@ -18,7 +18,7 @@ class FavoritesViewModel {
     
     
     init() {
-        loadFavorites()
+//        loadFavorites()
         FavoritesManager.shared.onFavoritesUpdated = { [weak self] in
              self?.loadFavorites()
          }
