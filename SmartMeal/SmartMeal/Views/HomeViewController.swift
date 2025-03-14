@@ -9,15 +9,37 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
+    private let activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
+    
     var viewModel: HomeViewModel!
     weak var coordinator: Coordinator?
     
     private func bindViewModel() {
+        viewModel.isLoading = { [weak self] isLoading in
+            DispatchQueue.main.async {
+                if isLoading {
+//                    self?.loadingView.isHidden = false
+                    self?.activityIndicator.startAnimating()
+//                    self?.view.backgroundColor = .red
+                }
+                else {
+//                    self?.loadingView.isHidden = true
+                    self?.activityIndicator.stopAnimating()
+                }
+            }
+        }
+        
         viewModel.bind = { [weak self] in
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
             }
         }
+        
+        viewModel.callFuncToGetData()
     }
     
     private let tableView: UITableView = {
@@ -45,8 +67,8 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
         setupTableView()
+        setupUI()
         bindViewModel()
         NotificationCenter.default.addObserver(self, selector: #selector(reloadHomeScreen), name: .favoritesUpdated, object: nil)
     }
@@ -64,9 +86,16 @@ class HomeViewController: UIViewController {
 //    deinit {
 //        NotificationCenter.default.removeObserver(self, name: .favoritesUpdated, object: nil)
 //    }
-    
+        
     func setupUI() {
         view.backgroundColor = .white
+        view.addSubview(activityIndicator)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+        ])
     }
 }
 
@@ -80,7 +109,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource, Recipe
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.categories.count
+        return viewModel.categories?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -108,7 +137,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource, Recipe
         headerView.isUserInteractionEnabled = true
         
         let label = UILabel()
-        label.text = viewModel.categories[section]
+        label.text = viewModel.categories?[section]
         label.font = UIFont.boldSystemFont(ofSize: 23)
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false

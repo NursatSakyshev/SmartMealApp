@@ -11,7 +11,8 @@ import FirebaseStorage
 
 class HomeViewModel {
     var tableViewCellModels: [TableCellViewModel] = []
-    let categories = ["Recommendations", "Popular", "Quick & Easy", "Healthy Choices"]
+    var categories: [String]? 
+    var isLoading: ((Bool) -> Void)?
     
     var bind : (() -> Void) = {}
    
@@ -21,14 +22,14 @@ class HomeViewModel {
      }
     
     init() {
-        self.callFuncToGetData()
+//        self.callFuncToGetData()
     }
     
     func callFuncToGetData() {
         let group = DispatchGroup() 
         
+        isLoading?(true)
         group.enter()
-        
         Task {
             let recipes = await APIService.shared.getRecommendations()
             self.tableViewCellModels.append(TableCellViewModel(recipes: recipes))
@@ -57,6 +58,8 @@ class HomeViewModel {
         }
         
         group.notify(queue: .main) {
+            self.categories = ["Recommendations", "Popular", "Quick & Easy", "Healthy Choices"]
+            self.isLoading?(false)
             self.bind()
         }
     }

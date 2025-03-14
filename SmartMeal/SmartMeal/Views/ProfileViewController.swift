@@ -22,14 +22,12 @@ class ProfileViewController: UIViewController, Coordinated {
     
     private var emailLabel: UILabel = {
         let label = UILabel()
-        label.text = "email@gmail.com"
         label.font = UIFont.systemFont(ofSize: 12)
         return label
     }()
     
     private var nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "fullName"
         label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
         return label
     }()

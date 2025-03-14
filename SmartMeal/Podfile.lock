@@ -1429,6 +1429,7 @@ PODS:
   - SDWebImage (5.21.0):
     - SDWebImage/Core (= 5.21.0)
   - SDWebImage/Core (5.21.0)
+  - SkeletonView (1.30.4)
 
 DEPENDENCIES:
   - Firebase/Auth
@@ -1436,6 +1437,7 @@ DEPENDENCIES:
   - Firebase/Firestore
   - Firebase/Storage
   - SDWebImage
+  - SkeletonView
 
 SPEC REPOS:
   trunk:
@@ -1464,6 +1466,7 @@ SPEC REPOS:
     - PromisesObjC
     - RecaptchaInterop
     - SDWebImage
+    - SkeletonView
 
 SPEC CHECKSUMS:
   abseil: a05cc83bf02079535e17169a73c5be5ba47f714b
@@ -1491,7 +1494,8 @@ SPEC CHECKSUMS:
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   RecaptchaInterop: 11e0b637842dfb48308d242afc3f448062325aba
   SDWebImage: f84b0feeb08d2d11e6a9b843cb06d75ebf5b8868
+  SkeletonView: 5a050f6411e697abd4cda0a8d767013399dccd69
 
-PODFILE CHECKSUM: e00ce75ac32e19214ff71d7823799814df25436a
+PODFILE CHECKSUM: 7cb07d1902fcbf304edff308b74389c853a0aae7
 
 COCOAPODS: 1.16.2
