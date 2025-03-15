@@ -11,6 +11,7 @@
 		C80374EC2D8159AF00A5662C /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80374EB2D8159AF00A5662C /* HeaderView.swift */; };
 		C80374EE2D815EC400A5662C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80374ED2D815EC400A5662C /* User.swift */; };
 		C80374F02D82C9B600A5662C /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80374EF2D82C9B600A5662C /* TestViewController.swift */; };
+		C80374F92D85766D00A5662C /* ActivityIndicatorPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80374F82D85766D00A5662C /* ActivityIndicatorPresentable.swift */; };
 		C80735692D72FF4100531AB8 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80735682D72FF4100531AB8 /* DetailViewModel.swift */; };
 		C82B44592D740BEB009B020D /* NavigatorCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82B44582D740BEB009B020D /* NavigatorCoordinator.swift */; };
 		C82B445B2D7585AC009B020D /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82B445A2D7585AC009B020D /* SearchViewModel.swift */; };
@@ -70,6 +71,7 @@
 		C80374EB2D8159AF00A5662C /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		C80374ED2D815EC400A5662C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C80374EF2D82C9B600A5662C /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		C80374F82D85766D00A5662C /* ActivityIndicatorPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorPresentable.swift; sourceTree = "<group>"; };
 		C80735682D72FF4100531AB8 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		C82B44582D740BEB009B020D /* NavigatorCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigatorCoordinator.swift; sourceTree = "<group>"; };
 		C82B445A2D7585AC009B020D /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
@@ -147,6 +149,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		C80374F72D85765400A5662C /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				C80374F82D85766D00A5662C /* ActivityIndicatorPresentable.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		C83477052D6E12AC006ED330 = {
 			isa = PBXGroup;
 			children = (
@@ -168,6 +178,7 @@
 		C83477102D6E12AC006ED330 /* SmartMeal */ = {
 			isa = PBXGroup;
 			children = (
+				C80374F72D85765400A5662C /* Protocols */,
 				C89B86F42D7291C000C175CB /* Coordinators */,
 				C89B86F12D722C3300C175CB /* Extensions */,
 				C89B86E72D715D3300C175CB /* Services */,
@@ -466,6 +477,7 @@
 				C83477392D6EB985006ED330 /* RecipeCell.swift in Sources */,
 				C83477432D6F715F006ED330 /* HomeViewModel.swift in Sources */,
 				C89B86E42D70C65400C175CB /* SearchViewController.swift in Sources */,
+				C80374F92D85766D00A5662C /* ActivityIndicatorPresentable.swift in Sources */,
 				C83477352D6E3A64006ED330 /* HomeViewController.swift in Sources */,
 				C89B86E92D715D4100C175CB /* ApiService.swift in Sources */,
 				C83477122D6E12AC006ED330 /* AppDelegate.swift in Sources */,

@@ -7,13 +7,8 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
-    
-    private let activityIndicator: UIActivityIndicatorView = {
-        let indicator = UIActivityIndicatorView(style: .large)
-        indicator.hidesWhenStopped = true
-        return indicator
-    }()
+class LoginViewController: UIViewController, ActivityIndicatorPresentable {
+    var activityIndicator = UIActivityIndicatorView(style: .large)
     
     private let loadingView: UIView = {
         let view = UIView()
@@ -110,20 +105,24 @@ class LoginViewController: UIViewController {
         view.backgroundColor = .white
         
         setupUI()
+        setupActivityIndicator()
         setupBindings()
+    }
+    
+    func updateLoadingView(_ isLoading: Bool) {
+        if isLoading {
+            self.loadingView.isHidden = false
+        }
+        else {
+            self.loadingView.isHidden = true
+        }
     }
     
     private func setupBindings() {
         viewModel.isLoading = { [weak self] isLoading in
             DispatchQueue.main.async {
-                if isLoading {
-                    self?.loadingView.isHidden = false
-                    self?.activityIndicator.startAnimating()
-                }
-                else {
-                    self?.loadingView.isHidden = true
-                    self?.activityIndicator.stopAnimating()
-                }
+                self?.showLoading(isLoading)
+                self?.updateLoadingView(isLoading)
             }
         }
         
@@ -136,9 +135,10 @@ class LoginViewController: UIViewController {
     }
     
     func setupUI() {
+        activityIndicator.hidesWhenStopped = true
         signInButton.addTarget(self, action: #selector(signIn), for: .touchUpInside)
         textButton.addTarget(self, action: #selector(textButtonTapped), for: .touchUpInside)
-        [welcomeLabel, emailTextField, passwordTextField, signInButton, divider, stackView, signInView, activityIndicator].forEach {
+        [welcomeLabel, emailTextField, passwordTextField, signInButton, divider, stackView, signInView].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -188,9 +188,6 @@ class LoginViewController: UIViewController {
             
             signInView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             signInView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -60),
-            
-            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
     }
 }

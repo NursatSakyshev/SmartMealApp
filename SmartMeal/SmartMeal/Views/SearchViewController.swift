@@ -7,16 +7,12 @@
 
 import UIKit
 
-class SearchViewController: UIViewController, Coordinated {
+class SearchViewController: UIViewController, Coordinated, ActivityIndicatorPresentable {
+    var activityIndicator = UIActivityIndicatorView(style: .large)
+    
     weak var coordinator: Coordinator?
     var collectionView: UICollectionView!
     var viewModel: SearchViewModel!
-    
-    private let activityIndicator: UIActivityIndicatorView = {
-        let indicator = UIActivityIndicatorView(style: .large)
-        indicator.hidesWhenStopped = true
-        return indicator
-    }()
     
     lazy var searchField: SearchTextField = {
         let textField = SearchTextField()
@@ -50,16 +46,6 @@ class SearchViewController: UIViewController, Coordinated {
         return layout
     }
     
-    func setupActivityIndicator() {
-        view.addSubview(activityIndicator)
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-        ])
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -75,25 +61,21 @@ class SearchViewController: UIViewController, Coordinated {
         }
         
         viewModel.isLoading = { [weak self] isLoading in
-            DispatchQueue.main.async {
-                if isLoading {
-                    self?.activityIndicator.startAnimating()
-                }
-                else {
-                    self?.activityIndicator.stopAnimating()
-                }
-            }
+            self?.showLoading(isLoading)
         }
         
         viewModel.callFuncToGetData()
     }
     
     @objc private func reloadFavorites() {
-        self.collectionView.reloadData()
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
     }
     
     
     func setupUI() {
+        activityIndicator.hidesWhenStopped = true
         [searchField].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview($0)

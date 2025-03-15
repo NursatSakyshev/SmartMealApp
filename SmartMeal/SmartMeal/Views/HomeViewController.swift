@@ -7,27 +7,15 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
-    
-    private let activityIndicator: UIActivityIndicatorView = {
-        let indicator = UIActivityIndicatorView(style: .large)
-        indicator.hidesWhenStopped = true
-        return indicator
-    }()
-    
+class HomeViewController: UIViewController, ActivityIndicatorPresentable {
+    var activityIndicator = UIActivityIndicatorView(style: .large)
+
     var viewModel: HomeViewModel!
     weak var coordinator: Coordinator?
     
     private func bindViewModel() {
         viewModel.isLoading = { [weak self] isLoading in
-            DispatchQueue.main.async {
-                if isLoading {
-                    self?.activityIndicator.startAnimating()
-                }
-                else {
-                    self?.activityIndicator.stopAnimating()
-                }
-            }
+            self?.showLoading(isLoading)
         }
         
         viewModel.bind = { [weak self] in
@@ -66,6 +54,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         setupTableView()
         setupUI()
+        setupActivityIndicator()
         bindViewModel()
         NotificationCenter.default.addObserver(self, selector: #selector(reloadHomeScreen), name: .favoritesUpdated, object: nil)
     }
@@ -86,13 +75,7 @@ class HomeViewController: UIViewController {
         
     func setupUI() {
         view.backgroundColor = .white
-        view.addSubview(activityIndicator)
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-        ])
+        activityIndicator.hidesWhenStopped = true
     }
 }
 
