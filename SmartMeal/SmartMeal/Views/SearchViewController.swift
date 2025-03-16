@@ -52,12 +52,10 @@ class SearchViewController: UIViewController, Coordinated, ActivityIndicatorPres
         setupUI()
         setupCollectionView()
         setupActivityIndicator()
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadFavorites), name: .favoritesUpdated, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadRecipes), name: .favoritesUpdated, object: nil)
         
         viewModel.popularRecipes.bind { _ in
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
+            self.reloadRecipes()
         }
         
         viewModel.isLoading = { [weak self] isLoading in
@@ -67,7 +65,7 @@ class SearchViewController: UIViewController, Coordinated, ActivityIndicatorPres
         viewModel.callFuncToGetData()
     }
     
-    @objc private func reloadFavorites() {
+    @objc private func reloadRecipes() {
         DispatchQueue.main.async {
             self.collectionView.reloadData()
         }

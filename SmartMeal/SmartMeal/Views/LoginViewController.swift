@@ -130,7 +130,7 @@ class LoginViewController: UIViewController, ActivityIndicatorPresentable {
             self?.login?()
         }
         viewModel.onError = { errorMessage in
-            print("Ошибка: \(errorMessage)")
+            print("error: \(errorMessage)")
         }
     }
     

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SkeletonView
 
 class ProfileViewController: UIViewController, Coordinated {
     weak var coordinator: Coordinator?
@@ -28,6 +29,7 @@ class ProfileViewController: UIViewController, Coordinated {
     
     private var nameLabel: UILabel = {
         let label = UILabel()
+        label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
         return label
     }()
@@ -55,6 +57,11 @@ class ProfileViewController: UIViewController, Coordinated {
         view.backgroundColor = UIColor(red: 246/255, green: 246/255, blue: 246/255, alpha: 1)
         setupUI()
         setupBindings()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        nameLabel.showSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
     }
     
     func setupUI() {

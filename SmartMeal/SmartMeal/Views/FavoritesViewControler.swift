@@ -54,7 +54,6 @@ class FavoritesViewController: UIViewController, Coordinated {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        NotificationCenter.default.addObserver(self, selector: #selector(reloadFavorites), name: .favoritesUpdated, object: nil)
         view.backgroundColor = .white
         setupCollectionView()
         setupUI()
