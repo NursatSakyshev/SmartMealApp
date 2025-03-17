@@ -13,12 +13,7 @@ class SearchViewController: UIViewController, Coordinated, ActivityIndicatorPres
     weak var coordinator: Coordinator?
     var collectionView: UICollectionView!
     var viewModel: SearchViewModel!
-    
-    lazy var searchField: SearchTextField = {
-        let textField = SearchTextField()
-        textField.placeholder = "Enter products"
-        return textField
-    }()
+    private let searchController = UISearchController(searchResultsController: nil)
     
     private func setupCollectionView() {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: setupFlowLayout())
@@ -28,7 +23,7 @@ class SearchViewController: UIViewController, Coordinated, ActivityIndicatorPres
         
         
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: searchField.bottomAnchor, constant: 30),
+            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
@@ -46,9 +41,21 @@ class SearchViewController: UIViewController, Coordinated, ActivityIndicatorPres
         return layout
     }
     
+    private func setupSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.searchBar.placeholder = "Search"
+        
+        navigationItem.searchController = searchController
+        definesPresentationContext = false
+        navigationItem.hidesSearchBarWhenScrolling = false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        setupSearchController()
         setupUI()
         setupCollectionView()
         setupActivityIndicator()
@@ -74,17 +81,12 @@ class SearchViewController: UIViewController, Coordinated, ActivityIndicatorPres
     
     func setupUI() {
         activityIndicator.hidesWhenStopped = true
-        [searchField].forEach {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            view.addSubview($0)
-        }
-        
-        NSLayoutConstraint.activate([
-            searchField.topAnchor.constraint(equalTo: view.topAnchor, constant: 90),
-            searchField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 25),
-            searchField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -25),
-            searchField.heightAnchor.constraint(equalToConstant: 50),
-        ])
+    }
+}
+
+extension SearchViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        print(searchController.searchBar.text)
     }
 }
 
