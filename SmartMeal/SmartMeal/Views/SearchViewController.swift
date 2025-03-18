@@ -61,7 +61,7 @@ class SearchViewController: UIViewController, Coordinated, ActivityIndicatorPres
         setupActivityIndicator()
         NotificationCenter.default.addObserver(self, selector: #selector(reloadRecipes), name: .favoritesUpdated, object: nil)
         
-        viewModel.popularRecipes.bind { _ in
+        viewModel.collectionCellViewModels.bind { _ in
             self.reloadRecipes()
         }
         
@@ -86,13 +86,13 @@ class SearchViewController: UIViewController, Coordinated, ActivityIndicatorPres
 
 extension SearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        print(searchController.searchBar.text)
+        viewModel.updateSearchController(searchBarText: searchController.searchBar.text)
     }
 }
 
 extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel.collectionCellViewModels.count
+        return viewModel.collectionCellViewModels.value.count
     }
     
     
@@ -111,6 +111,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         guard let coordinator = coordinator as? SearchCoordinator else {
             return
         }
+        //problem
         coordinator.showDetail(for: viewModel.recipe)
     }
     
