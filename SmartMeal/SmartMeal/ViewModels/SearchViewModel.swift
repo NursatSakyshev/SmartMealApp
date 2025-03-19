@@ -19,21 +19,21 @@ class SearchViewModel {
      }
     
     init() {
-//        callFuncToGetData()
         NotificationCenter.default.addObserver(self, selector: #selector(updateFavorites), name: .favoritesUpdated, object: nil)
     }
     
     //problem
-    private func updateCollectionViewModels() {
-        collectionCellViewModels.value = popularRecipes.map { CollectionCellViewModel(recipe: $0) }
-    }
-    
-    private func updateFilteredCollectionViewModels() {
-        collectionCellViewModels.value = filteredRecipes.map({ CollectionCellViewModel(recipe: $0) })
+//    private func updateCollectionViewModels() {
+//        collectionCellViewModels.value = popularRecipes.map { CollectionCellViewModel(recipe: $0) }
+//    }
+//    
+    private func updateCollectionViewModels(with recipes: [Recipe]) {
+        collectionCellViewModels.value = recipes.map { CollectionCellViewModel(recipe: $0) }
     }
     
     @objc private func updateFavorites() {
-        updateCollectionViewModels()
+        let currentRecipes = filteredRecipes.isEmpty ? popularRecipes : filteredRecipes
+        updateCollectionViewModels(with: currentRecipes)
     }
     
     func callFuncToGetData() {
@@ -42,7 +42,7 @@ class SearchViewModel {
             let recipes = await APIService.shared.getPopular()
             self.popularRecipes = recipes
             isLoading?(false)
-            self.updateCollectionViewModels()
+            self.updateCollectionViewModels(with: popularRecipes)
         }
     }
 }
@@ -58,17 +58,12 @@ extension SearchViewModel {
     }
     
     public func updateSearchController(searchBarText: String?) {
-        
-        if let searchText = searchBarText?.lowercased() {
-            guard !searchText.isEmpty else {
-                updateCollectionViewModels()
-                return
-            }
-            
-            filteredRecipes = popularRecipes.filter({
-                $0.title.lowercased().contains(searchText)
-            })
+        if let searchText = searchBarText?.lowercased(), !searchText.isEmpty {
+            filteredRecipes = popularRecipes.filter { $0.title.lowercased().contains(searchText) }
+            updateCollectionViewModels(with: filteredRecipes)
+        } else {
+            filteredRecipes.removeAll()
+            updateCollectionViewModels(with: popularRecipes)
         }
-        updateFilteredCollectionViewModels()
     }
 }
