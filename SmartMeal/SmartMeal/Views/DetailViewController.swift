@@ -9,6 +9,9 @@ import UIKit
 
 class DetailViewController: UIViewController {
     var viewModel: DetailViewModel!
+    //MARK: Sticky header properties
+    var contentViewTopAnchor: NSLayoutConstraint!
+    var headerViewHeightAnchor: NSLayoutConstraint!
     
     lazy var imageView: UIImageView = {
         let imageView = UIImageView()
@@ -54,6 +57,7 @@ class DetailViewController: UIViewController {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.showsVerticalScrollIndicator = true
         scrollView.alwaysBounceVertical = true
+        scrollView.delegate = self
     }
     
     func updateUI() {
@@ -75,6 +79,7 @@ class DetailViewController: UIViewController {
     func prepareScrollView() {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
+        contentViewTopAnchor = contentView.topAnchor.constraint(equalTo: scrollView.topAnchor)
         
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -82,7 +87,7 @@ class DetailViewController: UIViewController {
             scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
-            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentViewTopAnchor,
             contentView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
             contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
@@ -147,11 +152,13 @@ class DetailViewController: UIViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
+        headerViewHeightAnchor = imageView.heightAnchor.constraint(equalToConstant: 300)
+        
         NSLayoutConstraint.activate([
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            imageView.heightAnchor.constraint(equalToConstant: 300),
+            headerViewHeightAnchor,
             
             nameLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16),
             nameLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10),
@@ -186,5 +193,18 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
         }
         cell.configure(ingridient: viewModel.ingridients[indexPath.row])
         return cell
+    }
+}
+
+
+//MARK: UIscrollView + extension
+extension DetailViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let contentOffsetheight = scrollView.contentOffset.y
+        if contentOffsetheight < 0 {
+            //change the anchors
+            contentViewTopAnchor.constant = contentOffsetheight
+            headerViewHeightAnchor.constant = 300 + (-contentOffsetheight)
+        }
     }
 }
