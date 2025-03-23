@@ -14,20 +14,40 @@ class ProfileViewModel {
     var email: Dynamic<String> = Dynamic("")
     
     func fetchUserData() {
-        if let currentUser = Auth.auth().currentUser {
-            let uid = currentUser.uid
-            
-            APIService.shared.fetchUser(uid: uid) { [weak self] user in
-                if let user = user {
-                    self?.fullName.value = user.fullname
-                    self?.email.value = user.email
-                } else {
-                    print("Ошибка: пользователь не найден")
-                }
-            }
-        } else {
-            print("Пользователь не авторизован")
+        guard let token = UserDefaults.standard.string(forKey: "authToken"),
+              let url = URL(string: "https://api.smartmeal.kz/v1/auth/me/") else {
+            return
         }
+        
+        var request = URLRequest(url: url)
+          request.httpMethod = "GET"
+          request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+               DispatchQueue.main.async {
+                   if let error = error {
+                       return
+                   }
+                   
+                   do {
+                       if let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any] {
+                           print("json")
+                           print(token)
+                           print(json)
+//                           let userName = json["username"]
+//                           let jsonEmail = json["email"]
+//                           self.fullName.value = userName as! String
+//                           self.email.value = jsonEmail as! String
+                       } else {
+                           print("error: profile")
+                       }
+                   } catch {
+                       print("error: profile")
+                   }
+               }
+           }
+           
+           task.resume()
     }
 }
 

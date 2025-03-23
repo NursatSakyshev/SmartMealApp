@@ -24,6 +24,8 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
     func start() {
         let hasSeenOnboarding = UserDefaults.standard.bool(forKey: "hasSeenOnboarding")
         let token = UserDefaults.standard.string(forKey: "authToken")
+//        UserDefaults.standard.set(nil, forKey: "authToken")
+        print(token)
         
         if !hasSeenOnboarding {
             showOnboardingScreen()
