@@ -15,15 +15,44 @@ class RegistrationViewModel {
     
     func register(fullname: String, email: String, password: String) {
         isLoading?(true)
-        FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password) { result, error in
-            self.isLoading?(false)
-            let uid = result?.user.uid
-            APIService.shared.saveUserToFirestore(uid: uid ?? "", fullname: fullname, email: email)
-            if error != nil {
-                self.onError?()
-            } else {
-                self.onSuccess?()
-            }
+        
+        guard let url = URL(string: "https://api.smartmeal.kz/v1/auth/register/") else {
+            isLoading?(false)
+            onError?()
+            return
         }
+        
+        var request = URLRequest(url: url)
+         request.httpMethod = "POST"
+         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let body: [String: Any] = [
+            "username": fullname,
+            "email": email,
+            "password": password
+        ]
+        
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: body, options: [])
+        } catch {
+            isLoading?(false)
+            onError?()
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+             DispatchQueue.main.async {
+                 self.isLoading?(false)
+                 if let error = error {
+                     print("Error: \(error.localizedDescription)")
+                     self.onError?()
+                     return
+                 }
+                 
+                 print("registration: \(data), response: \(response)")
+//                 self.onSuccess?()
+             }
+         }
+         task.resume()
     }
 }
