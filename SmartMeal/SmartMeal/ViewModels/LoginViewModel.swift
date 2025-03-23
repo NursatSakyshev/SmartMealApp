@@ -48,8 +48,10 @@ class LoginViewModel {
                 
                 do {
                     let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any]
-                    if let token = json?["access"] as? String {
-                        self.saveToken(token)
+                    if let access = json?["access"] as? String,
+                       let refresh = json?["refresh"] as? String
+                    {
+                        self.saveToken(access: access, refresh: refresh)
                         self.onSuccess?()
                     } else {
                         self.onError?("error 1")
@@ -62,7 +64,8 @@ class LoginViewModel {
         task.resume()
     }
     
-    private func saveToken(_ token: String) {
-        UserDefaults.standard.set(token, forKey: "authToken")
+    private func saveToken(access: String, refresh: String) {
+        UserDefaults.standard.set(access, forKey: "authToken")
+        UserDefaults.standard.set(refresh, forKey: "refreshToken")
     }
 }
