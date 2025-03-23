@@ -12,16 +12,57 @@ class LoginViewModel {
     var onSuccess: (() -> Void)?
     var onError: ((String) -> Void)?
     var isLoading: ((Bool) -> Void)?
-
-    func login(email: String, password: String) {
+    
+    func login(userName: String, password: String) {
         isLoading?(true)
-        Auth.auth().signIn(withEmail: email, password: password) { result, error in
-            self.isLoading?(false)
-            if let error = error {
-                self.onError?(error.localizedDescription)
-            } else {
-                self.onSuccess?()
+        
+        guard let url = URL(string: "https://api.smartmeal.kz/v1/auth/login/") else {
+            isLoading?(false)
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let body: [String: Any] = [
+            "username": userName,
+            "password": password
+        ]
+        
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: body, options: [])
+        } catch {
+            isLoading?(false)
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            DispatchQueue.main.async {
+                self.isLoading?(false)
+                if let error = error {
+                    print("Error: \(error.localizedDescription)")
+                    self.onError?(error.localizedDescription)
+                    return
+                }
+                
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any]
+                    if let token = json?["access"] as? String {
+                        self.saveToken(token)
+                        self.onSuccess?()
+                    } else {
+                        self.onError?("error 1")
+                    }
+                } catch {
+                    self.onError?("error 2")
+                }
             }
         }
+        task.resume()
+    }
+    
+    private func saveToken(_ token: String) {
+        UserDefaults.standard.set(token, forKey: "authToken")
     }
 }

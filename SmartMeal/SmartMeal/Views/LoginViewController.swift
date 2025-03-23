@@ -21,9 +21,9 @@ class LoginViewController: UIViewController, ActivityIndicatorPresentable {
     var coordinator: Coordinator?
     var login: (() -> ())?
     
-    lazy var emailTextField: CustomTextField = {
+    lazy var fullName: CustomTextField = {
         let textField = CustomTextField()
-        textField.placeholder = "Enter Username Or Email"
+        textField.placeholder = "Enter Username"
         return textField
     }()
     
@@ -138,7 +138,7 @@ class LoginViewController: UIViewController, ActivityIndicatorPresentable {
         activityIndicator.hidesWhenStopped = true
         signInButton.addTarget(self, action: #selector(signIn), for: .touchUpInside)
         textButton.addTarget(self, action: #selector(textButtonTapped), for: .touchUpInside)
-        [welcomeLabel, emailTextField, passwordTextField, signInButton, divider, stackView, signInView].forEach {
+        [welcomeLabel, fullName, passwordTextField, signInButton, divider, stackView, signInView].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -157,12 +157,12 @@ class LoginViewController: UIViewController, ActivityIndicatorPresentable {
             welcomeLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
             welcomeLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             
-            emailTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 26),
-            emailTextField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -26),
-            emailTextField.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor, constant: 50),
-            emailTextField.heightAnchor.constraint(equalToConstant: 80),
+            fullName.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 26),
+            fullName.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -26),
+            fullName.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor, constant: 50),
+            fullName.heightAnchor.constraint(equalToConstant: 80),
             
-            passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 25),
+            passwordTextField.topAnchor.constraint(equalTo: fullName.bottomAnchor, constant: 25),
             passwordTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 26),
             passwordTextField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -26),
             passwordTextField.heightAnchor.constraint(equalToConstant: 80),
@@ -194,11 +194,11 @@ class LoginViewController: UIViewController, ActivityIndicatorPresentable {
 
 extension LoginViewController {
     @objc func signIn(_ sender: UIButton) {
-        guard let email = emailTextField.text, !email.isEmpty,
+        guard let userName = fullName.text, !userName.isEmpty,
               let password = passwordTextField.text, !password.isEmpty else {
             return
         }
-        viewModel.login(email: email, password: password)
+        viewModel.login(userName: userName, password: password)
     }
     
     @objc func textButtonTapped() {

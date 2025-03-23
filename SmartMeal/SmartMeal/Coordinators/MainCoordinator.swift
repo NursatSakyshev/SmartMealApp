@@ -22,13 +22,12 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
     }
     
     func start() {
-//        try? Auth.auth().signOut()
         let hasSeenOnboarding = UserDefaults.standard.bool(forKey: "hasSeenOnboarding")
-        let user = FirebaseAuth.Auth.auth().currentUser
+        let token = UserDefaults.standard.string(forKey: "authToken")
         
         if !hasSeenOnboarding {
             showOnboardingScreen()
-        } else if user == nil {
+        } else if token == nil {
             showAuth()
         } else {
             navigateToTabBar()
