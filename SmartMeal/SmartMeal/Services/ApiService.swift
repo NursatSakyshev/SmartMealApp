@@ -182,6 +182,81 @@ class APIService {
         
         return ingredients
     }
+    
+    func refreshAccessToken(completion: @escaping (Bool) -> Void) {
+        guard let refreshToken = UserDefaults.standard.string(forKey: "refreshToken"),
+              let url = URL(string: "https://api.smartmeal.kz/v1/auth/token/refresh/") else {
+            completion(false)
+            return
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        let body: [String: Any] = ["refresh": refreshToken]
+        request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
+
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                completion(false)
+                return
+            }
+
+            do {
+                if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                   let newAccessToken = json["access"] as? String {
+                    UserDefaults.standard.set(newAccessToken, forKey: "authToken")
+                    completion(true)
+                } else {
+                    completion(false)
+                }
+            } catch {
+                completion(false)
+            }
+        }
+
+        task.resume()
+    }
+    
+    func validateToken(completion: @escaping (Bool) -> Void) {
+        guard let token = UserDefaults.standard.string(forKey: "authToken"),
+              let url = URL(string: "https://api.smartmeal.kz/v1/auth/me/") else {
+            completion(false)
+            return
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let httpResponse = response as? HTTPURLResponse {
+                if httpResponse.statusCode == 200 {
+                    completion(true)
+                } else if httpResponse.statusCode == 401 {
+                    self.refreshAccessToken { isRefreshed in
+                        if isRefreshed {
+                            self.validateToken(completion: completion)
+                        } else {
+                            DispatchQueue.main.async {
+                                UserDefaults.standard.removeObject(forKey: "authToken")
+                                UserDefaults.standard.removeObject(forKey: "refreshToken")
+                            }
+                            completion(false)
+                        }
+                    }
+                } else {
+                    completion(false)
+                }
+            } else {
+                completion(false)
+            }
+        }
+
+        task.resume()
+    }
+
 }
 
 

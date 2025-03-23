@@ -25,7 +25,6 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
         let hasSeenOnboarding = UserDefaults.standard.bool(forKey: "hasSeenOnboarding")
         let token = UserDefaults.standard.string(forKey: "authToken")
 //        UserDefaults.standard.set(nil, forKey: "authToken")
-        print(token)
         
         if !hasSeenOnboarding {
             showOnboardingScreen()
@@ -33,6 +32,13 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
             showAuth()
         } else {
             navigateToTabBar()
+            APIService.shared.validateToken { isValid in
+                DispatchQueue.main.async {
+                    if !isValid {
+                        self.showAuth()
+                    }
+                }
+            }
         }
     }
     
@@ -56,17 +62,17 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
         childCoordinators.append(tabBarVC)
     }
     
-        func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-            guard let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from) else { return }
-    
-            if navigationController.viewControllers.contains(fromViewController) {
-                return
-            }
-    
-            if let coordinatedVC = fromViewController as? UIViewController & Coordinated {
-                removeChild(coordinatedVC.coordinator)
-            }
+    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+        guard let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from) else { return }
+        
+        if navigationController.viewControllers.contains(fromViewController) {
+            return
         }
+        
+        if let coordinatedVC = fromViewController as? UIViewController & Coordinated {
+            removeChild(coordinatedVC.coordinator)
+        }
+    }
     
     func removeChild(_ coordinator: Coordinator?) {
         guard let coordinator = coordinator else { return }
