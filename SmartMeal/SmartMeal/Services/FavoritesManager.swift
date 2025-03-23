@@ -99,7 +99,7 @@ class FavoritesManager {
          guard let userId = Auth.auth().currentUser?.uid else { return }
 
          do {
-             try await db.collection("users").document(userId).collection("favorites").document(recipe.id).delete()
+//             try await db.collection("users").document(userId).collection("favorites").document(recipe.id).delete()
          } catch {
              print("\(error.localizedDescription)")
          }

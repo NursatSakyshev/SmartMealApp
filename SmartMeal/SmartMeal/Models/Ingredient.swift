@@ -7,8 +7,7 @@
 
 import Foundation
 
-struct Ingridient: Codable {
+struct Ingredient: Codable {
     let name: String
-    let amount: Int
-    let unit: String
+    let amount: String
 }

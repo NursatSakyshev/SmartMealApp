@@ -30,11 +30,15 @@ class HomeViewModel {
         
         isLoading?(true)
         group.enter()
-        Task {
-            let recipes = await APIService.shared.getRecommendations()
-            self.tableViewCellModels.append(TableCellViewModel(recipes: recipes))
+        
+//            let recipes = await APIService.shared.getRecommendations()
+//            let recipes = await APIService.shared.getPopular()
+            APIService.shared.fetchRecipes { recipes in
+                
+                self.tableViewCellModels.append(TableCellViewModel(recipes: recipes))
+            }
             group.leave()
-        }
+        
         
         group.enter()
         Task {

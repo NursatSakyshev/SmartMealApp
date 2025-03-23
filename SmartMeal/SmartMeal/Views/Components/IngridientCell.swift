@@ -51,8 +51,8 @@ class IngridientCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(ingridient: Ingridient) {
+    func configure(ingridient: Ingredient) {
         nameLabel.text = ingridient.name
-        amountLabel.text = "\(ingridient.amount) \(ingridient.unit)"
+        amountLabel.text = "\(ingridient.amount)"
     }
 }

@@ -35,7 +35,7 @@ class CollectionCellViewModel {
         return recipe.calories
     }
     
-    var time: Int {
+    var time: String {
         return recipe.time
     }
     

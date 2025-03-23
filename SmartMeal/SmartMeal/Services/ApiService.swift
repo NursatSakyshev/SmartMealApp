@@ -35,10 +35,10 @@ class APIService {
     }
     
     func saveFavoriteRecipe(userId: String, recipe: Recipe) {
-        let db = Firestore.firestore()
-        let favoritesRef = db.collection("users").document(userId).collection("favorites").document(recipe.id)
-        
-        addRecipe(reference: favoritesRef, recipe: recipe)
+//        let db = Firestore.firestore()
+//        let favoritesRef = db.collection("users").document(userId).collection("favorites").document(recipe.id)
+//        
+//        addRecipe(reference: favoritesRef, recipe: recipe)
     }
     
     func getFavoriteRecipes(userId: String) async -> [Recipe] {
@@ -98,8 +98,8 @@ class APIService {
     
     
     func addRecipe(reference: DocumentReference, recipe: Recipe) {
-//        let recipeRef = db.collection("recipes").document() // создаем пустой документ и получаем его ID
-//        let recipeId = recipeRef.documentID // Firestore сам генерирует ID
+        //        let recipeRef = db.collection("recipes").document() // создаем пустой документ и получаем его ID
+        //        let recipeId = recipeRef.documentID // Firestore сам генерирует ID
         
         let recipeData: [String: Any] = [
             "id": recipe.id, // добавляем ID в документ
@@ -123,7 +123,7 @@ class APIService {
                     reference.collection("ingredients").addDocument(data: [
                         "name": ingredient.name,
                         "amount": ingredient.amount,
-                        "unit": ingredient.unit
+//                        "unit": ingredient.unit
                     ])
                 }
             }
@@ -133,11 +133,11 @@ class APIService {
     
     func getRecipes(collection: CollectionReference) async -> [Recipe] {
         do {
-
+            
             let snapshot = try await collection.getDocuments()
             var loadedRecipes: [Recipe] = []
-
-
+            
+            
             for document in snapshot.documents {
                 let data = document.data()
                 
@@ -150,11 +150,11 @@ class APIService {
                 let difficulty = data["difficulty"] as? String ?? ""
                 let servings = data["servings"] as? Int ?? 0
                 
-
+                
                 let ingredients = try await getIngredientsForRecipe(recipeId: id, collecion: collection)
                 
-
-                let recipe = Recipe(id: id, title: title, calories: calories, time: time, description: description, imageUrl: imageUrl, ingridients: ingredients, difficulty: difficulty, servings: servings)
+                
+                let recipe = Recipe(id: 0, title: title, calories: calories, time: "", description: description, imageUrl: imageUrl, ingridients: ingredients, difficulty: difficulty, servings: servings)
                 loadedRecipes.append(recipe)
             }
             
@@ -166,17 +166,74 @@ class APIService {
         }
     }
     
-    func getIngredientsForRecipe(recipeId: String, collecion: CollectionReference) async throws -> [Ingridient] {
+    func fetchRecipes(completion: @escaping ([Recipe]) -> Void) {
+        let url = URL(string: "https://api.smartmeal.kz/v1/food/recipes/popular")!
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                print("Ошибка запроса: \(error.localizedDescription)")
+                completion([])
+                return
+            }
+            
+            guard let data = data else {
+                print("Нет данных в ответе")
+                completion([])
+                return
+            }
+            
+            do {
+                guard let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
+                    completion([])
+                    return
+                }
+                
+                var loadedRecipes = [Recipe]()
+                
+                if let results = json["results"] as? [[String: Any]] {
+                    for recipe in results {
+                        let id = recipe["id"] as? Int ?? 0
+                        let title = recipe["name"] as? String ?? ""
+                        let calories = recipe["calories"] as? Int ?? 0
+                        let time = recipe["cooking_time"] as? String ?? "0"
+                        let description = recipe["description"] as? String ?? ""
+                        let imageUrl = recipe["img_url"] as? String
+                        let difficulty = ""
+                        let servings = 0
+                        
+                        var parsedIngredients = [Ingredient]()
+                        let ingredients = recipe["ingredients"] as? [String] ?? []
+                        for ingredient in ingredients {
+                            parsedIngredients.append(self.parseIngredient(from: ingredient))
+                        }
+                        
+                        let recipe = Recipe(id: id, title: title, calories: calories, time: time, description: description, imageUrl: imageUrl, ingridients: parsedIngredients, difficulty: difficulty, servings: servings)
+                        
+                        loadedRecipes.append(recipe)
+                    }
+                } else {
+                    print("Не удалось получить рецепты")
+                }
+                completion(loadedRecipes)
+            }
+            catch {
+                
+            }
+            
+        }.resume()
+    }
+    
+    func getIngredientsForRecipe(recipeId: String, collecion: CollectionReference) async throws -> [Ingredient] {
         let snapshot = try await collecion.document(recipeId).collection("ingredients").getDocuments()
         
-        var ingredients: [Ingridient] = []
+        var ingredients: [Ingredient] = []
         
         for ingredientDoc in snapshot.documents {
             let ingredientData = ingredientDoc.data()
             let name = ingredientData["name"] as? String ?? ""
             let amount = ingredientData["amount"] as? Int ?? 0
             let unit = ingredientData["unit"] as? String ?? ""
-            let ingredient = Ingridient(name: name, amount: amount, unit: unit)
+            let ingredient = Ingredient(name: name, amount: "")
             ingredients.append(ingredient)
         }
         
@@ -189,20 +246,20 @@ class APIService {
             completion(false)
             return
         }
-
+        
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-
+        
         let body: [String: Any] = ["refresh": refreshToken]
         request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
-
+        
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
                 completion(false)
                 return
             }
-
+            
             do {
                 if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
                    let newAccessToken = json["access"] as? String {
@@ -215,7 +272,7 @@ class APIService {
                 completion(false)
             }
         }
-
+        
         task.resume()
     }
     
@@ -225,11 +282,11 @@ class APIService {
             completion(false)
             return
         }
-
+        
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-
+        
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let httpResponse = response as? HTTPURLResponse {
                 if httpResponse.statusCode == 200 {
@@ -253,7 +310,7 @@ class APIService {
                 completion(false)
             }
         }
-
+        
         task.resume()
     }
     
@@ -261,7 +318,13 @@ class APIService {
         UserDefaults.standard.set(access, forKey: "authToken")
         UserDefaults.standard.set(refresh, forKey: "refreshToken")
     }
-
+    
+    func parseIngredient(from text: String) -> Ingredient {
+        let parts = text.split(separator: "(")
+        let name = parts.first
+        let amount = parts.last?.dropLast()
+        return Ingredient(name: "\(name!)", amount: "\(amount!)")
+    }
 }
 
 

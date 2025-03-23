@@ -109,7 +109,7 @@ class RecipeCell: UICollectionViewCell {
     func configure(with viewModel: CollectionCellViewModel) {
         self.viewModel = viewModel
         nameLabel.text = viewModel.name
-        caloriesTimeLabel.text = "\(viewModel.calories) ккал | \(viewModel.time) мин"
+        caloriesTimeLabel.text = "\(viewModel.calories) ккал | \(viewModel.time)"
         imageView.sd_setImage(with: URL(string: viewModel.imageUrl))
         bindViewModel()
         updateFavoriteButton()

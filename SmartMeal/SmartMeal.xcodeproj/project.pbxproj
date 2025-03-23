@@ -31,7 +31,7 @@
 		C83477452D6F86FC006ED330 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83477442D6F86FC006ED330 /* DetailViewController.swift */; };
 		C83477472D6F8BF0006ED330 /* TextWithIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83477462D6F8BF0006ED330 /* TextWithIcon.swift */; };
 		C83477492D6F8E95006ED330 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C83477482D6F8E95006ED330 /* Assets.xcassets */; };
-		C834774B2D6F98F3006ED330 /* Ingridient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C834774A2D6F98F3006ED330 /* Ingridient.swift */; };
+		C834774B2D6F98F3006ED330 /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C834774A2D6F98F3006ED330 /* Ingredient.swift */; };
 		C834774D2D6F9BFC006ED330 /* IngridientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C834774C2D6F9BFC006ED330 /* IngridientCell.swift */; };
 		C83477512D70BC48006ED330 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83477502D70BC48006ED330 /* Resources.swift */; };
 		C83477532D70BC7D006ED330 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83477522D70BC7D006ED330 /* TabBarViewController.swift */; };
@@ -93,7 +93,7 @@
 		C83477442D6F86FC006ED330 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		C83477462D6F8BF0006ED330 /* TextWithIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextWithIcon.swift; sourceTree = "<group>"; };
 		C83477482D6F8E95006ED330 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		C834774A2D6F98F3006ED330 /* Ingridient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingridient.swift; sourceTree = "<group>"; };
+		C834774A2D6F98F3006ED330 /* Ingredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
 		C834774C2D6F9BFC006ED330 /* IngridientCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngridientCell.swift; sourceTree = "<group>"; };
 		C83477502D70BC48006ED330 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		C83477522D70BC7D006ED330 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
@@ -243,7 +243,7 @@
 			isa = PBXGroup;
 			children = (
 				C834773D2D6F70F0006ED330 /* Recipe.swift */,
-				C834774A2D6F98F3006ED330 /* Ingridient.swift */,
+				C834774A2D6F98F3006ED330 /* Ingredient.swift */,
 				C80374ED2D815EC400A5662C /* User.swift */,
 			);
 			path = Models;
@@ -472,7 +472,7 @@
 				C83477512D70BC48006ED330 /* Resources.swift in Sources */,
 				C89B87032D729C2200C175CB /* ProfileCoordinator.swift in Sources */,
 				C80735692D72FF4100531AB8 /* DetailViewModel.swift in Sources */,
-				C834774B2D6F98F3006ED330 /* Ingridient.swift in Sources */,
+				C834774B2D6F98F3006ED330 /* Ingredient.swift in Sources */,
 				C89B87052D72CEF600C175CB /* Coordinated.swift in Sources */,
 				C83477392D6EB985006ED330 /* RecipeCell.swift in Sources */,
 				C83477432D6F715F006ED330 /* HomeViewModel.swift in Sources */,

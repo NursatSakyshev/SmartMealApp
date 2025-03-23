@@ -11,11 +11,11 @@ import UIKit
 class DetailViewModel {
     var recipe: Recipe
     
-    var ingridients: [Ingridient] {
+    var ingridients: [Ingredient] {
         return recipe.ingridients
     }
     
-    var time: Int {
+    var time: String {
         return recipe.time
     }
     
