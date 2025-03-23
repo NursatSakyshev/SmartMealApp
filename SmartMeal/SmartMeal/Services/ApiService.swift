@@ -256,6 +256,11 @@ class APIService {
 
         task.resume()
     }
+    
+    func saveToken(access: String, refresh: String) {
+        UserDefaults.standard.set(access, forKey: "authToken")
+        UserDefaults.standard.set(refresh, forKey: "refreshToken")
+    }
 
 }
 

@@ -51,7 +51,7 @@ class LoginViewModel {
                     if let access = json?["access"] as? String,
                        let refresh = json?["refresh"] as? String
                     {
-                        self.saveToken(access: access, refresh: refresh)
+                        APIService.shared.saveToken(access: access, refresh: refresh)
                         self.onSuccess?()
                     } else {
                         self.onError?("error 1")
@@ -62,10 +62,5 @@ class LoginViewModel {
             }
         }
         task.resume()
-    }
-    
-    private func saveToken(access: String, refresh: String) {
-        UserDefaults.standard.set(access, forKey: "authToken")
-        UserDefaults.standard.set(refresh, forKey: "refreshToken")
     }
 }

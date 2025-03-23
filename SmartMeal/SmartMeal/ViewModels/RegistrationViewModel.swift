@@ -23,8 +23,8 @@ class RegistrationViewModel {
         }
         
         var request = URLRequest(url: url)
-         request.httpMethod = "POST"
-         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         let body: [String: Any] = [
             "username": fullname,
@@ -41,18 +41,33 @@ class RegistrationViewModel {
         }
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-             DispatchQueue.main.async {
-                 self.isLoading?(false)
-                 if let error = error {
-                     print("Error: \(error.localizedDescription)")
-                     self.onError?()
-                     return
-                 }
-                 
-                 print("registration: \(data), response: \(response)")
-//                 self.onSuccess?()
-             }
-         }
-         task.resume()
+            DispatchQueue.main.async {
+                self.isLoading?(false)
+                if let error = error {
+                    print("Error: \(error.localizedDescription)")
+                    self.onError?()
+                    return
+                }
+                
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any]
+                    let tokens = json?["tokens"] as? [String: Any]
+                    if let access = tokens?["access"] as? String,
+                       let refresh = tokens?["refresh"] as? String
+                    {
+                        APIService.shared.saveToken(access: access, refresh: refresh)
+                        self.onSuccess?()
+                    } else {
+                        self.onError?()
+                    }
+                } catch {
+                    self.onError?()
+                }
+                
+                
+                print("registration: \(data!), response: \(response!)")
+            }
+        }
+        task.resume()
     }
 }
