@@ -133,8 +133,8 @@ class APIService {
                         let time = recipe["cooking_time"] as? String ?? "0"
                         let description = recipe["description"] as? String ?? ""
                         let imageUrl = recipe["img_url"] as? String
-                        let difficulty = ""
-                        let servings = 0
+                        let dishType = recipe["dish_type"] as? String ?? ""
+                        let cuisine = recipe["cuisine"] as? String ?? ""
                         
                         var parsedIngredients = [Ingredient]()
                         let ingredients = recipe["ingredients"] as? [String] ?? []
@@ -142,7 +142,7 @@ class APIService {
                             parsedIngredients.append(self.parseIngredient(from: ingredient))
                         }
                         
-                        let recipe = Recipe(id: id, title: title, calories: calories, time: time, description: description, imageUrl: imageUrl, ingridients: parsedIngredients, difficulty: difficulty, servings: servings)
+                        let recipe = Recipe(id: id, title: title, calories: calories, time: time, description: description, imageUrl: imageUrl, ingridients: parsedIngredients, dishType: dishType, cuisine: cuisine)
                         
                         loadedRecipes.append(recipe)
                     }
@@ -189,8 +189,9 @@ class APIService {
                     let time = recipe["cooking_time"] as? String ?? "0"
                     let description = recipe["description"] as? String ?? ""
                     let imageUrl = recipe["img_url"] as? String
-                    let difficulty = ""
-                    let servings = 0
+                    let dishType = recipe["dish_type"] as? String ?? ""
+                    let rating = recipe["rating"] as? String ?? ""
+                    let cuisine = recipe["cuisine"] as? String ?? ""
                     
                     var parsedIngredients = [Ingredient]()
                     let ingredients = recipe["ingredients"] as? [String] ?? []
@@ -198,7 +199,7 @@ class APIService {
                         parsedIngredients.append(self.parseIngredient(from: ingredient))
                     }
                     
-                    let recipe = Recipe(id: id, title: title, calories: calories, time: time, description: description, imageUrl: imageUrl, ingridients: parsedIngredients, difficulty: difficulty, servings: servings)
+                    let recipe = Recipe(id: id, title: title, calories: calories, time: time, description: description, imageUrl: imageUrl, ingridients: parsedIngredients, dishType: dishType, cuisine: cuisine)
                     
                     loadedRecipes.append(recipe)
                 }

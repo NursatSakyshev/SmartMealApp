@@ -19,12 +19,12 @@ class DetailViewModel {
         return recipe.time
     }
     
-    var difficulty: String {
-        return recipe.difficulty
+    var dishType: String {
+        return recipe.dishType
     }
     
-    var servings: Int {
-        return recipe.servings
+    var cuisine: String {
+        return recipe.cuisine
     }
     
     init(recipe: Recipe) {

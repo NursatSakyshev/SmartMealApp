@@ -124,7 +124,7 @@ class DetailViewController: UIViewController {
     lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.alignment = .center
+        stackView.alignment = .leading
         stackView.distribution = .equalSpacing
         return stackView
     }()
@@ -145,9 +145,9 @@ class DetailViewController: UIViewController {
         navigationController?.navigationBar.isTranslucent = true
         scrollView.contentInsetAdjustmentBehavior = .never
         
-        timeLabel = TextWithIcon(text: "\(viewModel.time)", with: ImageAssets.clock)
-        difficultyLabel = TextWithIcon(text: "\(viewModel.difficulty) сложность", with: ImageAssets.difficulty)
-        servingsLabel = TextWithIcon(text: "\(viewModel.servings) порций", with: ImageAssets.users)
+        timeLabel = TextWithIcon(text: "\(viewModel.time)", with: ImageAssets.time)
+        difficultyLabel = TextWithIcon(text: "\(viewModel.dishType)", with: ImageAssets.dishType)
+        servingsLabel = TextWithIcon(text: "\(viewModel.cuisine)", with: ImageAssets.cuisine)
 
         [timeLabel, difficultyLabel, servingsLabel].forEach {
             stackView.addArrangedSubview($0)

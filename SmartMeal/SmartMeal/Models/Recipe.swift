@@ -15,8 +15,8 @@ struct Recipe: Codable {
     let description: String
     let imageUrl: String?
     let ingridients: [Ingredient]
-    let difficulty: String
-    let servings: Int
+    let dishType: String
+    let cuisine: String
 }
 
 //extension Recipe {

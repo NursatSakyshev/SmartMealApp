@@ -13,4 +13,7 @@ enum ImageAssets {
     static let clock = "clock"
     static let difficulty = "chef_hat"
     static let users = "users"
+    static let time = "time"
+    static let dishType = "dishType"
+    static let cuisine = "cuisine"
 }

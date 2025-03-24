@@ -53,8 +53,8 @@ class TextWithIcon: UIView {
             stackView.topAnchor.constraint(equalTo: topAnchor),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            imageView.heightAnchor.constraint(equalToConstant: 16),
-            imageView.widthAnchor.constraint(equalToConstant: 16),
+            imageView.heightAnchor.constraint(equalToConstant: 25),
+            imageView.widthAnchor.constraint(equalToConstant: 25),
         ])
     }
 }
