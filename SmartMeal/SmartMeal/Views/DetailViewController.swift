@@ -56,7 +56,7 @@ class DetailViewController: UIViewController {
     
     func configureScrollView() {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.showsVerticalScrollIndicator = true
+        scrollView.showsVerticalScrollIndicator = false
         scrollView.alwaysBounceVertical = true
         scrollView.delegate = self
     }
@@ -131,6 +131,7 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.tintColor = .black
         updateUI()
         configureScrollView()
         configureContentView()
@@ -144,7 +145,7 @@ class DetailViewController: UIViewController {
         navigationController?.navigationBar.isTranslucent = true
         scrollView.contentInsetAdjustmentBehavior = .never
         
-        timeLabel = TextWithIcon(text: "\(viewModel.time) мин", with: ImageAssets.clock)
+        timeLabel = TextWithIcon(text: "\(viewModel.time)", with: ImageAssets.clock)
         difficultyLabel = TextWithIcon(text: "\(viewModel.difficulty) сложность", with: ImageAssets.difficulty)
         servingsLabel = TextWithIcon(text: "\(viewModel.servings) порций", with: ImageAssets.users)
 
