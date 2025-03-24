@@ -13,25 +13,29 @@ class APIService {
     static let shared = APIService()
     private let db = Firestore.firestore()
     
-    func getRecommendations() async -> [Recipe] {
-        let recipes = await getRecipes(collection: db.collection("recipes"))
-        return Array(recipes.prefix(3))
+    func getRecommendations(completion: @escaping ([Recipe]) -> Void) {
+        fetchRandomRecipes(url: "https://api.smartmeal.kz/v1/food/recipes/random") { recipes in
+            completion(recipes)
+        }
     }
     
-    func getPopular() async -> [Recipe] {
-        let recipes = await getRecipes(collection: db.collection("recipes"))
-        return recipes
+    func getPopular(completion: @escaping ([Recipe]) -> Void) {
+        fetchRecipes(url: "https://api.smartmeal.kz/v1/food/recipes/popular") { recipes in
+            completion(recipes)
+        }
     }
     
     
-    func getQuickEasy() async -> [Recipe] {
-        let recipes = await getRecipes(collection: db.collection("recipes"))
-        return Array(recipes.dropFirst(6).prefix(3))
+    func getQuickEasy(completion: @escaping ([Recipe]) -> Void) {
+        fetchRandomRecipes(url: "https://api.smartmeal.kz/v1/food/recipes/random") { recipes in
+            completion(recipes)
+        }
     }
     
-    func getHealthy() async -> [Recipe] {
-        let recipes = await getRecipes(collection: db.collection("recipes"))
-        return Array(recipes.suffix(3))
+    func getHealthy(completion: @escaping ([Recipe]) -> Void) {
+        fetchRandomRecipes(url: "https://api.smartmeal.kz/v1/food/recipes/random") { recipes in
+            completion(recipes)
+        }
     }
     
     func saveFavoriteRecipe(userId: String, recipe: Recipe) {
@@ -42,8 +46,9 @@ class APIService {
     }
     
     func getFavoriteRecipes(userId: String) async -> [Recipe] {
-        let favoritesRef = db.collection("users").document(userId).collection("favorites")
-        return await getRecipes(collection: favoritesRef)
+//        let favoritesRef = db.collection("users").document(userId).collection("favorites")
+//        return await getRecipes(collection: favoritesRef)
+        return []
     }
     
     func fetchUser(uid: String, completion: @escaping (User?) -> Void) {
@@ -97,77 +102,8 @@ class APIService {
     }
     
     
-    func addRecipe(reference: DocumentReference, recipe: Recipe) {
-        //        let recipeRef = db.collection("recipes").document() // создаем пустой документ и получаем его ID
-        //        let recipeId = recipeRef.documentID // Firestore сам генерирует ID
-        
-        let recipeData: [String: Any] = [
-            "id": recipe.id, // добавляем ID в документ
-            "title": recipe.title,
-            "calories": recipe.calories,
-            "time": recipe.time,
-            "description": recipe.description,
-            "imageUrl": recipe.imageUrl ?? "",
-            "difficulty": recipe.difficulty,
-            "servings": recipe.servings
-        ]
-        
-        reference.setData(recipeData) { err in
-            if let err = err {
-                print("Error adding document: \(err)")
-            } else {
-                print("Document added with ID: \(recipe.id)")
-                
-                
-                for ingredient in recipe.ingridients {
-                    reference.collection("ingredients").addDocument(data: [
-                        "name": ingredient.name,
-                        "amount": ingredient.amount,
-//                        "unit": ingredient.unit
-                    ])
-                }
-            }
-        }
-        
-    }
-    
-    func getRecipes(collection: CollectionReference) async -> [Recipe] {
-        do {
-            
-            let snapshot = try await collection.getDocuments()
-            var loadedRecipes: [Recipe] = []
-            
-            
-            for document in snapshot.documents {
-                let data = document.data()
-                
-                let id = document.documentID
-                let title = data["title"] as? String ?? ""
-                let calories = data["calories"] as? Int ?? 0
-                let time = data["time"] as? Int ?? 0
-                let description = data["description"] as? String ?? ""
-                let imageUrl = data["imageUrl"] as? String
-                let difficulty = data["difficulty"] as? String ?? ""
-                let servings = data["servings"] as? Int ?? 0
-                
-                
-                let ingredients = try await getIngredientsForRecipe(recipeId: id, collecion: collection)
-                
-                
-                let recipe = Recipe(id: 0, title: title, calories: calories, time: "", description: description, imageUrl: imageUrl, ingridients: ingredients, difficulty: difficulty, servings: servings)
-                loadedRecipes.append(recipe)
-            }
-            
-            return loadedRecipes
-            
-        } catch {
-            print("\(error.localizedDescription)")
-            return []
-        }
-    }
-    
-    func fetchRecipes(completion: @escaping ([Recipe]) -> Void) {
-        let url = URL(string: "https://api.smartmeal.kz/v1/food/recipes/popular")!
+    func fetchRecipes(url: String, completion: @escaping ([Recipe]) -> Void) {
+        let url = URL(string: url)!
         
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
@@ -181,7 +117,6 @@ class APIService {
                 completion([])
                 return
             }
-            
             do {
                 guard let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
                     completion([])
@@ -223,21 +158,56 @@ class APIService {
         }.resume()
     }
     
-    func getIngredientsForRecipe(recipeId: String, collecion: CollectionReference) async throws -> [Ingredient] {
-        let snapshot = try await collecion.document(recipeId).collection("ingredients").getDocuments()
+    func fetchRandomRecipes(url: String, completion: @escaping ([Recipe]) -> Void) {
+        let url = URL(string: url)!
         
-        var ingredients: [Ingredient] = []
-        
-        for ingredientDoc in snapshot.documents {
-            let ingredientData = ingredientDoc.data()
-            let name = ingredientData["name"] as? String ?? ""
-            let amount = ingredientData["amount"] as? Int ?? 0
-            let unit = ingredientData["unit"] as? String ?? ""
-            let ingredient = Ingredient(name: name, amount: "")
-            ingredients.append(ingredient)
-        }
-        
-        return ingredients
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                print("Ошибка запроса: \(error.localizedDescription)")
+                completion([])
+                return
+            }
+            
+            guard let data = data else {
+                print("Нет данных в ответе")
+                completion([])
+                return
+            }
+            
+            do {
+                guard let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]] else {
+                    completion([])
+                    return
+                }
+                
+                var loadedRecipes = [Recipe]()
+                
+                for recipe in json {
+                    let id = recipe["id"] as? Int ?? 0
+                    let title = recipe["name"] as? String ?? ""
+                    let calories = recipe["calories"] as? Int ?? 0
+                    let time = recipe["cooking_time"] as? String ?? "0"
+                    let description = recipe["description"] as? String ?? ""
+                    let imageUrl = recipe["img_url"] as? String
+                    let difficulty = ""
+                    let servings = 0
+                    
+                    var parsedIngredients = [Ingredient]()
+                    let ingredients = recipe["ingredients"] as? [String] ?? []
+                    for ingredient in ingredients {
+                        parsedIngredients.append(self.parseIngredient(from: ingredient))
+                    }
+                    
+                    let recipe = Recipe(id: id, title: title, calories: calories, time: time, description: description, imageUrl: imageUrl, ingridients: parsedIngredients, difficulty: difficulty, servings: servings)
+                    
+                    loadedRecipes.append(recipe)
+                }
+                
+                completion(loadedRecipes)
+            } catch {
+                print("Ошибка при парсинге данных: \(error)")
+            }
+        }.resume()
     }
     
     func refreshAccessToken(completion: @escaping (Bool) -> Void) {
@@ -329,44 +299,3 @@ class APIService {
 
 
 
-
-
-//    func uploadImage(image: UIImage, recipeId: String, completion: @escaping (String?) -> Void) {
-//        let storageRef = Storage.storage().reference().child("recipe_images/\(recipeId).jpg")
-//
-//        guard let imageData = image.jpegData(compressionQuality: 0.8) else {
-//            completion(nil)
-//            return
-//        }
-//
-//        let metadata = StorageMetadata()
-//        metadata.contentType = "image/jpeg"
-//
-//        storageRef.putData(imageData, metadata: metadata) { (_, error) in
-//            if let error = error {
-//                print("Ошибка загрузки изображения: \(error.localizedDescription)")
-//                completion(nil)
-//                return
-//            }
-//
-//            // Получаем URL изображения
-//            storageRef.downloadURL { (url, error) in
-//                APIService.shared.saveRecipeImageUrl(recipeId: recipeId, imageUrl: url!.absoluteString)
-//                completion(url?.absoluteString)
-//            }
-//        }
-//    }
-
-
-
-//
-//                let image = UIImage(named: "dishImage\(index + 1)")
-////                print("index \(index + 1)")
-////                    guard let image = image else { print("image error at: \(index)"); return }
-//                if image == nil {
-//                    print("image error at: \(index + 1)"); return
-//                }
-//                uploadImage(image: image!, recipeId: id) { url in
-//                    print("url saved:\(index + 1)")
-////                    imageUrl = url
-//                }

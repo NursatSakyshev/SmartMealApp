@@ -33,7 +33,7 @@ class ProfileViewModel {
                        if let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any] {
                            let userName = json["username"]
                            let jsonEmail = json["email"]
-                           self.fullName.value = userName as! String
+                           self.fullName.value = userName as? String ?? ""
                            self.email.value = jsonEmail as! String
                        } else {
                            print("error: profile")

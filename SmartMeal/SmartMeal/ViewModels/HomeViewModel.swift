@@ -11,55 +11,53 @@ import FirebaseStorage
 
 class HomeViewModel {
     var tableViewCellModels: [TableCellViewModel] = []
-    var categories: [String]? 
+    var categories: [String]?
     var isLoading: ((Bool) -> Void)?
     
     var bind : (() -> Void) = {}
-   
+    
     func getTableCellModel(at indexPath: IndexPath) -> TableCellViewModel {
         guard indexPath.section < tableViewCellModels.count else { return TableCellViewModel(recipes: []) }
-          return tableViewCellModels[indexPath.section]
-     }
+        return tableViewCellModels[indexPath.section]
+    }
     
     init() {
-//        self.callFuncToGetData()
+        //        self.callFuncToGetData()
     }
     
     func callFuncToGetData() {
-        let group = DispatchGroup() 
+        let group = DispatchGroup()
         
         isLoading?(true)
         group.enter()
         
-//            let recipes = await APIService.shared.getRecommendations()
-//            let recipes = await APIService.shared.getPopular()
-            APIService.shared.fetchRecipes { recipes in
-                
-                self.tableViewCellModels.append(TableCellViewModel(recipes: recipes))
-            }
+        APIService.shared.getPopular { recipes in
+            self.tableViewCellModels.append(TableCellViewModel(recipes: recipes))
             group.leave()
+        }
         
         
         group.enter()
-        Task {
-            let recipes = await APIService.shared.getPopular()
+        APIService.shared.getRecommendations { recipes in
             self.tableViewCellModels.append(TableCellViewModel(recipes: recipes))
             group.leave()
         }
         
         group.enter()
-        Task {
-            let recipes = await APIService.shared.getQuickEasy()
+        
+        APIService.shared.getQuickEasy { recipes in
             self.tableViewCellModels.append(TableCellViewModel(recipes: recipes))
             group.leave()
         }
         
+        
         group.enter()
-        Task {
-            let recipes = await APIService.shared.getHealthy()
+        
+        APIService.shared.getHealthy { recipes in
             self.tableViewCellModels.append(TableCellViewModel(recipes: recipes))
             group.leave()
         }
+        
         
         group.notify(queue: .main) {
             self.categories = ["Recommendations", "Popular", "Quick & Easy", "Healthy Choices"]

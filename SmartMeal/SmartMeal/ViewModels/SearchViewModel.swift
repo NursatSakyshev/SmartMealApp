@@ -39,10 +39,13 @@ class SearchViewModel {
     func callFuncToGetData() {
         Task {
             isLoading?(true)
-            let recipes = await APIService.shared.getPopular()
-            self.popularRecipes = recipes
-            isLoading?(false)
-            self.updateCollectionViewModels(with: popularRecipes)
+//            let recipes = await APIService.shared.getHealthy()
+//            self.popularRecipes = recipes
+            APIService.shared.getHealthy { recipes in
+                self.popularRecipes = recipes
+                self.isLoading?(false)
+                self.updateCollectionViewModels(with: self.popularRecipes)
+            }
         }
     }
 }
