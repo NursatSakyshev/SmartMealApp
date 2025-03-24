@@ -25,6 +25,7 @@ class DetailViewController: UIViewController {
     private var nameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+        label.numberOfLines = 0
         return label
     }()
     
@@ -161,6 +162,7 @@ class DetailViewController: UIViewController {
             headerViewHeightAnchor,
             
             nameLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16),
+            nameLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -16),
             nameLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10),
             
             stackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
