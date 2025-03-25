@@ -113,6 +113,6 @@ class RecipeCell: UICollectionViewCell {
         imageView.sd_setImage(with: URL(string: viewModel.imageUrl))
         bindViewModel()
         updateFavoriteButton()
-        imageView.backgroundColor = .red
+        imageView.backgroundColor = .gray
     }
 }

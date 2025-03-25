@@ -11,6 +11,29 @@ import SkeletonView
 class ProfileViewController: UIViewController, Coordinated {
     weak var coordinator: Coordinator?
     var viewModel: ProfileViewModel!
+    
+    private let tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.backgroundColor = .white
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.separatorStyle = .none
+        return tableView
+    }()
+    
+    private func setupTableView() {
+        view.addSubview(tableView)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(ProfileViewCell.self, forCellReuseIdentifier: "ProfileViewCell")
+
+        
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: profileView.bottomAnchor, constant: 50),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+    }
 
     private let profileImageView: UIImageView = {
         let view = UIImageView()
@@ -52,11 +75,13 @@ class ProfileViewController: UIViewController, Coordinated {
         viewModel.fetchUserData()
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(red: 246/255, green: 246/255, blue: 246/255, alpha: 1)
         setupUI()
         setupBindings()
+        setupTableView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -87,5 +112,27 @@ class ProfileViewController: UIViewController, Coordinated {
             nameLabel.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 20),
             nameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
+    }
+}
+
+extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileViewCell", for: indexPath) as? ProfileViewCell else { return UITableViewCell() }
+        cell.configure(title: "sign out")
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        40
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        UserDefaults.standard.removeObject(forKey: "authToken")
+        UserDefaults.standard.removeObject(forKey: "refreshToken")
     }
 }

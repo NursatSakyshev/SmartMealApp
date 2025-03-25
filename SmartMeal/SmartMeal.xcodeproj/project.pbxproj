@@ -38,6 +38,7 @@
 		C83477552D70BCD2006ED330 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83477542D70BCD2006ED330 /* ProfileViewController.swift */; };
 		C83477572D70BCFA006ED330 /* FavoritesViewControler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83477562D70BCFA006ED330 /* FavoritesViewControler.swift */; };
 		C857ED9E2D8D3A060002E493 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C857ED9D2D8D3A060002E493 /* TestViewController.swift */; };
+		C857EDA02D913BF90002E493 /* ProfileViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C857ED9F2D913BF90002E493 /* ProfileViewCell.swift */; };
 		C89B86E42D70C65400C175CB /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89B86E32D70C65400C175CB /* SearchViewController.swift */; };
 		C89B86E62D714C5600C175CB /* RecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89B86E52D714C5600C175CB /* RecipeTableViewCell.swift */; };
 		C89B86E92D715D4100C175CB /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89B86E82D715D4100C175CB /* ApiService.swift */; };
@@ -100,6 +101,7 @@
 		C83477542D70BCD2006ED330 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		C83477562D70BCFA006ED330 /* FavoritesViewControler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewControler.swift; sourceTree = "<group>"; };
 		C857ED9D2D8D3A060002E493 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		C857ED9F2D913BF90002E493 /* ProfileViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewCell.swift; sourceTree = "<group>"; };
 		C89B86E32D70C65400C175CB /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		C89B86E52D714C5600C175CB /* RecipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeTableViewCell.swift; sourceTree = "<group>"; };
 		C89B86E82D715D4100C175CB /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 				C89B86E52D714C5600C175CB /* RecipeTableViewCell.swift */,
 				C8BB08132D7FDE2B00E6016E /* RoundedView.swift */,
 				C80374EB2D8159AF00A5662C /* HeaderView.swift */,
+				C857ED9F2D913BF90002E493 /* ProfileViewCell.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -483,6 +486,7 @@
 				C83477122D6E12AC006ED330 /* AppDelegate.swift in Sources */,
 				C83477572D70BCFA006ED330 /* FavoritesViewControler.swift in Sources */,
 				C834772B2D6E1A79006ED330 /* CustomTextField.swift in Sources */,
+				C857EDA02D913BF90002E493 /* ProfileViewCell.swift in Sources */,
 				C8EA4A972D769ADB00337A8E /* FavoritesManager.swift in Sources */,
 				C83477452D6F86FC006ED330 /* DetailViewController.swift in Sources */,
 			);
