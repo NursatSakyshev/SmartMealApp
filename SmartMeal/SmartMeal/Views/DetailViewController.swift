@@ -13,6 +13,11 @@ class DetailViewController: UIViewController {
     var contentViewTopAnchor: NSLayoutConstraint!
     var headerViewHeightAnchor: NSLayoutConstraint!
     
+    var stepsImageView: UIImageView = {
+        let imageView = UIImageView()
+        return imageView
+    }()
+    
     lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -21,6 +26,8 @@ class DetailViewController: UIViewController {
     }()
     
     var tableView: UITableView!
+    
+    var stepTableView: UITableView!
     
     private var nameLabel: UILabel = {
         let label = UILabel()
@@ -40,6 +47,13 @@ class DetailViewController: UIViewController {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
         label.text = "Ингридиенты"
+        return label
+    }()
+    
+    private var stepsLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
+        label.text = "Шаги"
         return label
     }()
     
@@ -71,7 +85,7 @@ class DetailViewController: UIViewController {
         contentView.translatesAutoresizingMaskIntoConstraints = false
         contentView.backgroundColor = .white
         
-        [imageView, nameLabel, stackView, descriptionLabel, recipeDescription, ingredientsLabel].forEach {
+        [imageView, nameLabel, stackView, descriptionLabel, recipeDescription, ingredientsLabel, stepsImageView].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             contentView.addSubview($0)
         }
@@ -100,6 +114,7 @@ class DetailViewController: UIViewController {
         tableView = UITableView()
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.tag = 1
         tableView.isUserInteractionEnabled = false
         tableView.register(IngridientCell.self, forCellReuseIdentifier: IngridientCell.identifier)
         
@@ -110,7 +125,7 @@ class DetailViewController: UIViewController {
             tableView.leftAnchor.constraint(equalTo: contentView.leftAnchor),
             tableView.rightAnchor.constraint(equalTo: contentView.rightAnchor),
             tableView.topAnchor.constraint(equalTo: ingredientsLabel.bottomAnchor, constant: 20),
-            tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+//            tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             tableView.heightAnchor.constraint(equalToConstant: CGFloat(viewModel.ingridients.count * 50)),
         ])
     }
@@ -138,6 +153,35 @@ class DetailViewController: UIViewController {
         prepareScrollView()
         setupUI()
         setupTableView()
+        setupSteps()
+    }
+    
+    func setupSteps() {
+        contentView.addSubview(stepsLabel)
+        stepsLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        stepTableView = UITableView()
+        stepTableView.dataSource = self
+        stepTableView.delegate = self
+        stepTableView.tag = 2
+        stepTableView.isUserInteractionEnabled = false
+        stepTableView.register(StepCell.self, forCellReuseIdentifier: StepCell.identifier)
+        
+        contentView.addSubview(stepTableView)
+        stepTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        stepTableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        NSLayoutConstraint.activate([
+            stepsLabel.topAnchor.constraint(equalTo: tableView.bottomAnchor),
+            stepsLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
+            
+            stepTableView.leftAnchor.constraint(equalTo: contentView.leftAnchor),
+            stepTableView.rightAnchor.constraint(equalTo: contentView.rightAnchor),
+            stepTableView.topAnchor.constraint(equalTo: stepsLabel.bottomAnchor, constant: 20),
+            stepTableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            stepTableView.heightAnchor.constraint(equalToConstant: CGFloat(viewModel.steps.count * 600)),
+        ])
     }
     
     func setupUI() {
@@ -187,15 +231,31 @@ class DetailViewController: UIViewController {
 //MARK: Extension
 extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.ingridients.count
+        tableView.tag == 1 ? viewModel.ingridients.count : 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: IngridientCell.identifier, for: indexPath) as? IngridientCell else {
-            return UITableViewCell()
+        if tableView.tag == 1 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: IngridientCell.identifier, for: indexPath) as? IngridientCell else {
+                return UITableViewCell()
+            }
+            cell.configure(ingridient: viewModel.ingridients[indexPath.row])
+            return cell
         }
-        cell.configure(ingridient: viewModel.ingridients[indexPath.row])
-        return cell
+        else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: StepCell.identifier, for: indexPath) as? StepCell else {
+                return UITableViewCell()
+            }
+            cell.configure(step: viewModel.steps[0])
+            return cell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if tableView.tag != 1 {
+            return 400
+        }
+        return 50
     }
 }
 

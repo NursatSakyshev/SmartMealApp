@@ -115,7 +115,7 @@ class FavoritesManager {
                 let recipe = Recipe(
                     id: id, title: title, calories: calories, time: time,
                     description: description, imageUrl: imageUrl,
-                    ingridients: parsedIngredients, dishType: dishType, cuisine: cuisine
+                    ingridients: parsedIngredients, dishType: dishType, cuisine: cuisine, steps: []
                 )
                 
                 loadedRecipes.append(recipe)
@@ -142,7 +142,6 @@ class FavoritesManager {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
         do {
-            
             let body: [String: Any] = ["recipe_id": recipe.id]
             request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
             
@@ -160,14 +159,32 @@ class FavoritesManager {
 
     
     private func removeFavoriteFromFirebase(_ recipe: Recipe) async {
-         guard let userId = Auth.auth().currentUser?.uid else { return }
+        print("")
+        guard let url = URL(string: "https://api.smartmeal.kz/v1/auth/saved-recipes/\(recipe.id)/") else {
+            return
+        }
+        guard let token = UserDefaults.standard.string(forKey: "authToken") else {
+            return
+        }
 
-         do {
-//             try await db.collection("users").document(userId).collection("favorites").document(recipe.id).delete()
-         } catch {
-             print("\(error.localizedDescription)")
-         }
-     }
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        
+        do {
+            let (_, response) = try await URLSession.shared.data(for: request)
+
+            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                print("delete error")
+                return
+            }
+            print("Рецепт успешно удален из избранного")
+        }
+        catch {
+            print("catch error")
+        }
+
+    }
 }
 
 

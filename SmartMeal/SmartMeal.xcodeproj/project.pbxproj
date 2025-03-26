@@ -12,6 +12,8 @@
 		C80374EE2D815EC400A5662C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80374ED2D815EC400A5662C /* User.swift */; };
 		C80374F92D85766D00A5662C /* ActivityIndicatorPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80374F82D85766D00A5662C /* ActivityIndicatorPresentable.swift */; };
 		C80735692D72FF4100531AB8 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80735682D72FF4100531AB8 /* DetailViewModel.swift */; };
+		C8276F122D93C56C007A6EC5 /* Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8276F112D93C56C007A6EC5 /* Step.swift */; };
+		C8276F142D93CAF0007A6EC5 /* stepsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8276F132D93CAF0007A6EC5 /* stepsCell.swift */; };
 		C82B44592D740BEB009B020D /* NavigatorCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82B44582D740BEB009B020D /* NavigatorCoordinator.swift */; };
 		C82B445B2D7585AC009B020D /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82B445A2D7585AC009B020D /* SearchViewModel.swift */; };
 		C82B445D2D758B8F009B020D /* DetailShowable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82B445C2D758B8F009B020D /* DetailShowable.swift */; };
@@ -73,6 +75,8 @@
 		C80374ED2D815EC400A5662C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C80374F82D85766D00A5662C /* ActivityIndicatorPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorPresentable.swift; sourceTree = "<group>"; };
 		C80735682D72FF4100531AB8 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
+		C8276F112D93C56C007A6EC5 /* Step.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step.swift; sourceTree = "<group>"; };
+		C8276F132D93CAF0007A6EC5 /* stepsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = stepsCell.swift; sourceTree = "<group>"; };
 		C82B44582D740BEB009B020D /* NavigatorCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigatorCoordinator.swift; sourceTree = "<group>"; };
 		C82B445A2D7585AC009B020D /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		C82B445C2D758B8F009B020D /* DetailShowable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailShowable.swift; sourceTree = "<group>"; };
@@ -238,6 +242,7 @@
 				C8BB08132D7FDE2B00E6016E /* RoundedView.swift */,
 				C80374EB2D8159AF00A5662C /* HeaderView.swift */,
 				C857ED9F2D913BF90002E493 /* ProfileViewCell.swift */,
+				C8276F132D93CAF0007A6EC5 /* stepsCell.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -248,6 +253,7 @@
 				C834773D2D6F70F0006ED330 /* Recipe.swift */,
 				C834774A2D6F98F3006ED330 /* Ingredient.swift */,
 				C80374ED2D815EC400A5662C /* User.swift */,
+				C8276F112D93C56C007A6EC5 /* Step.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -447,6 +453,7 @@
 				C8BB08142D7FDE2B00E6016E /* RoundedView.swift in Sources */,
 				C89B86EB2D7186F100C175CB /* TableCellViewModel.swift in Sources */,
 				C89B86FB2D7298F000C175CB /* TabBarCoordinator.swift in Sources */,
+				C8276F122D93C56C007A6EC5 /* Step.swift in Sources */,
 				C834773E2D6F70F0006ED330 /* Recipe.swift in Sources */,
 				C8F078CF2D7F0D3C0045FA4B /* RegistrationViewModel.swift in Sources */,
 				C83477532D70BC7D006ED330 /* TabBarViewController.swift in Sources */,
@@ -455,6 +462,7 @@
 				C834772D2D6E22A3006ED330 /* CustomButton.swift in Sources */,
 				C89B86F72D7291D600C175CB /* Coordinator.swift in Sources */,
 				C857ED9E2D8D3A060002E493 /* TestViewController.swift in Sources */,
+				C8276F142D93CAF0007A6EC5 /* stepsCell.swift in Sources */,
 				C82B44592D740BEB009B020D /* NavigatorCoordinator.swift in Sources */,
 				C8EA4A9B2D76CBF200337A8E /* FavoritesViewModel.swift in Sources */,
 				C80374EC2D8159AF00A5662C /* HeaderView.swift in Sources */,

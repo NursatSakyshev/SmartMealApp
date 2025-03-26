@@ -142,7 +142,7 @@ class APIService {
                             parsedIngredients.append(self.parseIngredient(from: ingredient))
                         }
                         
-                        let recipe = Recipe(id: id, title: title, calories: calories, time: time, description: description, imageUrl: imageUrl, ingridients: parsedIngredients, dishType: dishType, cuisine: cuisine)
+                        let recipe = Recipe(id: id, title: title, calories: calories, time: time, description: description, imageUrl: imageUrl, ingridients: parsedIngredients, dishType: dishType, cuisine: cuisine, steps: [])
                         
                         loadedRecipes.append(recipe)
                     }
@@ -199,7 +199,7 @@ class APIService {
                         parsedIngredients.append(self.parseIngredient(from: ingredient))
                     }
                     
-                    let recipe = Recipe(id: id, title: title, calories: calories, time: time, description: description, imageUrl: imageUrl, ingridients: parsedIngredients, dishType: dishType, cuisine: cuisine)
+                    let recipe = Recipe(id: id, title: title, calories: calories, time: time, description: description, imageUrl: imageUrl, ingridients: parsedIngredients, dishType: dishType, cuisine: cuisine, steps: [])
                     
                     loadedRecipes.append(recipe)
                 }

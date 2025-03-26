@@ -17,6 +17,7 @@ struct Recipe: Codable {
     let ingridients: [Ingredient]
     let dishType: String
     let cuisine: String
+    let steps: [Step]
 }
 
 //extension Recipe {

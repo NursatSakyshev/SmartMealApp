@@ -19,32 +19,36 @@ class ProfileViewModel {
             return
         }
         
-        var request = URLRequest(url: url)
-          request.httpMethod = "GET"
-          request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-               DispatchQueue.main.async {
-                   if let error = error {
-                       return
-                   }
-                   
-                   do {
-                       if let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any] {
-                           let userName = json["username"]
-                           let jsonEmail = json["email"]
-                           self.fullName.value = userName as? String ?? ""
-                           self.email.value = jsonEmail as! String
-                       } else {
+        APIService.shared.validateToken { _ in
+            var request = URLRequest(url: url)
+              request.httpMethod = "GET"
+              request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            
+            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                   DispatchQueue.main.async {
+                       if let error = error {
+                           print("error profile")
+                           return
+                       }
+                       
+                       do {
+                           if let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any] {
+                               let userName = json["username"]
+                               let jsonEmail = json["email"]
+                               self.fullName.value = userName as? String ?? ""
+                               self.email.value = jsonEmail as? String ?? ""
+                           } else {
+                               print("error: profile")
+                           }
+                           print("success profile")
+                       } catch {
                            print("error: profile")
                        }
-                   } catch {
-                       print("error: profile")
                    }
                }
-           }
-           
-           task.resume()
+               
+               task.resume()
+        }
     }
 }
 
