@@ -51,57 +51,6 @@ class APIService {
         return []
     }
     
-    func fetchUser(uid: String, completion: @escaping (User?) -> Void) {
-        let db = Firestore.firestore()
-        
-        db.collection("users").document(uid).getDocument { document, error in
-            if let error = error {
-                print("Ошибка при получении данных: \(error.localizedDescription)")
-                completion(nil)
-                return
-            }
-            
-            if let document = document, document.exists {
-                let data = document.data()
-                let fullname = data?["fullname"] as? String ?? ""
-                let email = data?["email"] as? String ?? ""
-                let user = User(uid: uid, fullname: fullname, email: email)
-                completion(user)
-            } else {
-                completion(nil)
-            }
-        }
-    }
-    
-    func saveUserToFirestore(uid: String, fullname: String, email: String) {
-        let db = Firestore.firestore()
-        
-        let userData: [String: Any] = [
-            "fullname": fullname,
-            "email": email
-        ]
-        
-        db.collection("users").document(uid).setData(userData) { error in
-            if let error = error {
-                print("error: \(error.localizedDescription)")
-            } else {
-                print("user data saved")
-            }
-        }
-    }
-    
-    func saveRecipeImageUrl(recipeId: String, imageUrl: String) {
-        let db = Firestore.firestore()
-        db.collection("recipes").document(recipeId).updateData(["imageUrl": imageUrl]) { error in
-            if let error = error {
-                print("Error URL: \(error.localizedDescription)")
-            } else {
-                print("URL saved")
-            }
-        }
-    }
-    
-    
     func fetchRecipes(url: String, completion: @escaping ([Recipe]) -> Void) {
         let url = URL(string: url)!
         

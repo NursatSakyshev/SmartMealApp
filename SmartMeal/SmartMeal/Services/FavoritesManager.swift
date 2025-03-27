@@ -23,7 +23,7 @@ class FavoritesManager {
     
     private init() {
         Task {
-            await syncFavoritesFromFirebase()
+            await syncFavorites()
             NotificationCenter.default.post(name: .favoritesUpdated, object: nil)
             onFavoritesUpdated?()
         }
@@ -55,7 +55,7 @@ class FavoritesManager {
         favorites.append(recipe)
         saveFavorites(favorites)
         Task {
-            await saveFavoriteToFirebase(recipe)
+            await saveFavorite(recipe)
         }
         NotificationCenter.default.post(name: .favoritesUpdated, object: nil)
         onFavoritesUpdated?()
@@ -68,14 +68,14 @@ class FavoritesManager {
         saveFavorites(favorites)
 
         Task {
-            await removeFavoriteFromFirebase(recipe)
+            await removeFavorite(recipe)
         }
 
         NotificationCenter.default.post(name: .favoritesUpdated, object: nil)
         onFavoritesUpdated?()
     }
 
-    func syncFavoritesFromFirebase() async {
+    func syncFavorites() async {
         guard let url = URL(string: "https://api.smartmeal.kz/v1/auth/saved-recipes/") else {
             print("url error")
             return  }
@@ -128,7 +128,7 @@ class FavoritesManager {
         }
     }
     
-    private func saveFavoriteToFirebase(_ recipe: Recipe) async {
+    private func saveFavorite(_ recipe: Recipe) async {
         guard let url = URL(string: "https://api.smartmeal.kz/v1/auth/saved-recipes/") else {
             return
         }
@@ -158,7 +158,7 @@ class FavoritesManager {
     }
 
     
-    private func removeFavoriteFromFirebase(_ recipe: Recipe) async {
+    private func removeFavorite(_ recipe: Recipe) async {
         print("")
         guard let url = URL(string: "https://api.smartmeal.kz/v1/auth/saved-recipes/") else {
             return
