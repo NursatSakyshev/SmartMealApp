@@ -54,7 +54,7 @@ class LoginViewModel {
                         APIService.shared.saveToken(access: access, refresh: refresh)
                         self.onSuccess?()
                     } else {
-                        self.onError?("error 1")
+                        self.onError?("wrong username or password")
                     }
                 } catch {
                     self.onError?("error 2")

@@ -44,6 +44,7 @@ class LoginViewController: UIViewController, ActivityIndicatorPresentable {
     lazy var passwordTextField: CustomTextField = {
         let textField = CustomTextField()
         textField.placeholder = "Password"
+        textField.isSecureTextEntry = true
         return textField
     }()
     
@@ -130,7 +131,7 @@ class LoginViewController: UIViewController, ActivityIndicatorPresentable {
             self?.login?()
         }
         viewModel.onError = { errorMessage in
-            print("error: \(errorMessage)")
+            self.showAlert(message: errorMessage)
         }
     }
     
@@ -196,9 +197,16 @@ extension LoginViewController {
     @objc func signIn(_ sender: UIButton) {
         guard let userName = fullName.text, !userName.isEmpty,
               let password = passwordTextField.text, !password.isEmpty else {
+            showAlert(message: "Full all fields")
             return
         }
         viewModel.login(userName: userName, password: password)
+    }
+    
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
+        self.present(alert, animated: true)
     }
     
     @objc func textButtonTapped() {

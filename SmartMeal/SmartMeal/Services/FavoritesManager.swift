@@ -89,7 +89,7 @@ class FavoritesManager {
             let (data, _) = try await URLSession.shared.data(for: request)
             
             guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]] else {
-                print("error")
+                print("get fav error")
                 return
             }
             
@@ -132,65 +132,72 @@ class FavoritesManager {
         guard let url = URL(string: "https://api.smartmeal.kz/v1/auth/saved-recipes/") else {
             return
         }
-        guard let token = UserDefaults.standard.string(forKey: "authToken") else {
-            return
-        }
-
+        
         var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        let body: [String: Any] = ["recipe_id": recipe.id]
+        let jsonData = try? JSONSerialization.data(withJSONObject: body, options: [])
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
-        do {
-            let body: [String: Any] = ["recipe_id": recipe.id]
-            request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
-            
-            let (data, response) = try await URLSession.shared.data(for: request)
-            
-            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-                return
+        performAuthorizedRequest(url: url, method: "POST", body: jsonData) { data, response, error in
+            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
+                print("saved successfully")
+            } else {
+                print("save fav: error")
             }
-            print("Рецепт  успешно добавлен в избранное")
-        }
-        catch {
-            
         }
     }
 
     
     private func removeFavorite(_ recipe: Recipe) async {
-        print("")
         guard let url = URL(string: "https://api.smartmeal.kz/v1/auth/saved-recipes/") else {
             return
         }
+        
+        var request = URLRequest(url: url)
+        let body: [String: Any] = ["recipe_id": recipe.id]
+        let jsonData = try? JSONSerialization.data(withJSONObject: body, options: [])
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        performAuthorizedRequest(url: url, method: "DELETE", body: jsonData) { data, response, error in
+            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
+                print("deleted successfully")
+            } else {
+                print("delete fav: error")
+            }
+        }
+    }
+    
+    func performAuthorizedRequest(url: URL, method: String, body: Data? = nil, completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
         guard let token = UserDefaults.standard.string(forKey: "authToken") else {
+            completion(nil, nil, NSError(domain: "AuthError", code: 401, userInfo: [NSLocalizedDescriptionKey: "No access token"]))
             return
         }
-
-        var request = URLRequest(url: url)
         
-        request.httpMethod = "DELETE"
+        var request = URLRequest(url: url)
+        request.httpMethod = method
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-       
-        do {
-            let body: [String: Any] = ["recipe_id": recipe.id]
-            request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
-            
-            
-            let (_, response) = try await URLSession.shared.data(for: request)
+        if let body = body {
+            request.httpBody = body
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        }
 
-            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-                print("delete error1")
-                return
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 401 {
+                APIService.shared.refreshAccessToken { success in
+                    if success {
+                        self.performAuthorizedRequest(url: url, method: method, body: body, completion: completion)
+                    } else {
+                        completion(nil, response, NSError(domain: "AuthError", code: 401, userInfo: [NSLocalizedDescriptionKey: "Failed to refresh token"]))
+                    }
+                }
+            } else {
+                completion(data, response, error)
             }
-            print("Рецепт успешно удален из избранного")
         }
-        catch {
-            print("delete error2")
-        }
-
+        
+        task.resume()
     }
+
 }
 
 

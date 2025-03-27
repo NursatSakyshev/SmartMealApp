@@ -125,7 +125,7 @@ class DetailViewController: UIViewController {
             tableView.leftAnchor.constraint(equalTo: contentView.leftAnchor),
             tableView.rightAnchor.constraint(equalTo: contentView.rightAnchor),
             tableView.topAnchor.constraint(equalTo: ingredientsLabel.bottomAnchor, constant: 20),
-//            tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             tableView.heightAnchor.constraint(equalToConstant: CGFloat(viewModel.ingridients.count * 50)),
         ])
     }
@@ -153,7 +153,7 @@ class DetailViewController: UIViewController {
         prepareScrollView()
         setupUI()
         setupTableView()
-        setupSteps()
+//        setupSteps()
     }
     
     func setupSteps() {

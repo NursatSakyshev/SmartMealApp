@@ -10,7 +10,7 @@ import FirebaseAuth
 
 class RegistrationViewModel {
     var onSuccess: (() -> Void)?
-    var onError: (() -> Void)?
+    var onError: ((String) -> Void)?
     var isLoading: ((Bool) -> Void)?
     
     func register(fullname: String, email: String, password: String) {
@@ -18,7 +18,7 @@ class RegistrationViewModel {
         
         guard let url = URL(string: "https://api.smartmeal.kz/v1/auth/register/") else {
             isLoading?(false)
-            onError?()
+            onError?("wrong url")
             return
         }
         
@@ -36,7 +36,7 @@ class RegistrationViewModel {
             request.httpBody = try JSONSerialization.data(withJSONObject: body, options: [])
         } catch {
             isLoading?(false)
-            onError?()
+            onError?("error3")
             return
         }
         
@@ -44,8 +44,8 @@ class RegistrationViewModel {
             DispatchQueue.main.async {
                 self.isLoading?(false)
                 if let error = error {
-                    print("Error: \(error.localizedDescription)")
-                    self.onError?()
+//                    print("Error: \(error.localizedDescription)")
+                    self.onError?(error.localizedDescription)
                     return
                 }
                 
@@ -58,10 +58,10 @@ class RegistrationViewModel {
                         APIService.shared.saveToken(access: access, refresh: refresh)
                         self.onSuccess?()
                     } else {
-                        self.onError?()
+                        self.onError?("user with this name already exists")
                     }
                 } catch {
-                    self.onError?()
+                    self.onError?("error2")
                 }
                 
                 

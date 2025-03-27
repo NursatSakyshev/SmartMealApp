@@ -143,8 +143,8 @@ class RegistrationViewController: UIViewController, ActivityIndicatorPresentable
         viewModel.onSuccess = { [weak self] in
             self?.login?()
         }
-        viewModel.onError = { [weak self] in
-            self?.showAlert(message: "error")
+        viewModel.onError = { [weak self] errorMessage in
+            self?.showAlert(message: errorMessage)
         }
     }
     
@@ -152,6 +152,7 @@ class RegistrationViewController: UIViewController, ActivityIndicatorPresentable
         guard let email = emailTextField.text, !email.isEmpty,
               let password = passwordTextField.text, !password.isEmpty,
               let fullName = nameTextField.text, !fullName .isEmpty else {
+            showAlert(message: "Full all fields")
             return
         }
         
@@ -236,4 +237,4 @@ extension RegistrationViewController {
         coordinator.goToLogin()
     }
 }
- 
+
