@@ -20,7 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow()
         coordinator = MainCoordinator(window: window ?? UIWindow(), navigationController: navController)
         coordinator?.start()
-//        window?.rootViewController = TestViewController()
         window?.makeKeyAndVisible()
         return true
     }
