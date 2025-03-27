@@ -160,7 +160,7 @@ class FavoritesManager {
     
     private func removeFavoriteFromFirebase(_ recipe: Recipe) async {
         print("")
-        guard let url = URL(string: "https://api.smartmeal.kz/v1/auth/saved-recipes/\(recipe.id)/") else {
+        guard let url = URL(string: "https://api.smartmeal.kz/v1/auth/saved-recipes/") else {
             return
         }
         guard let token = UserDefaults.standard.string(forKey: "authToken") else {
@@ -168,20 +168,26 @@ class FavoritesManager {
         }
 
         var request = URLRequest(url: url)
+        
         request.httpMethod = "DELETE"
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+       
         do {
+            let body: [String: Any] = ["recipe_id": recipe.id]
+            request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
+            
+            
             let (_, response) = try await URLSession.shared.data(for: request)
 
             guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-                print("delete error")
+                print("delete error1")
                 return
             }
             print("Рецепт успешно удален из избранного")
         }
         catch {
-            print("catch error")
+            print("delete error2")
         }
 
     }
