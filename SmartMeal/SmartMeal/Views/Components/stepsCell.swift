@@ -21,6 +21,8 @@ class StepCell: UITableViewCell {
     var stepImageView: UIImageView = {
         var imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.layer.cornerRadius = 10
+        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -42,8 +44,6 @@ class StepCell: UITableViewCell {
         [stepTextLabel, stepImageView, numberLabel].forEach {
             contentView.addSubview($0)
         }
-        
-        contentView.backgroundColor = .green
         
         NSLayoutConstraint.activate([
             // stepTextLabel constraints
@@ -71,6 +71,7 @@ class StepCell: UITableViewCell {
     func configure(step: Step) {
         stepTextLabel.text = step.text
         numberLabel.text = step.stepNumber
-        stepImageView.backgroundColor = .red  // Пример, можно заменить на изображение
+        stepImageView.sd_setImage(with: URL(string: step.imageURL))
+        stepImageView.backgroundColor = .gray
     }
 }

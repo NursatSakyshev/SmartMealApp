@@ -91,7 +91,21 @@ class APIService {
                             parsedIngredients.append(self.parseIngredient(from: ingredient))
                         }
                         
-                        let recipe = Recipe(id: id, title: title, calories: calories, time: time, description: description, imageUrl: imageUrl, ingridients: parsedIngredients, dishType: dishType, cuisine: cuisine, steps: [])
+                        var steps = [Step]()
+                        if let jsonSteps = recipe["steps"] as? [[String: Any]] {
+                            for step in jsonSteps {
+                                let text = step["text"] as? String ?? ""
+                                let image = step["image"] as? String ?? ""
+                                let stepNumber = step["step_number"] as? String ?? ""
+                                let step = Step(text: text, imageURL: image, stepNumber: stepNumber)
+                                steps.append(step)
+                            }
+                        }
+                        else {
+                            print("steps error")
+                        }
+                        
+                        let recipe = Recipe(id: id, title: title, calories: calories, time: time, description: description, imageUrl: imageUrl, ingridients: parsedIngredients, dishType: dishType, cuisine: cuisine, steps: steps)
                         
                         loadedRecipes.append(recipe)
                     }
