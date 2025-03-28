@@ -14,7 +14,7 @@ class APIService {
     private let db = Firestore.firestore()
     
     func getRecommendations(completion: @escaping ([Recipe]) -> Void) {
-        fetchRandomRecipes(url: "https://api.smartmeal.kz/v1/food/recipes/random") { recipes in
+        fetchRecipes(url: "https://api.smartmeal.kz/v1/food/recipes/random") { recipes in
             completion(recipes)
         }
     }
@@ -27,13 +27,13 @@ class APIService {
     
     
     func getQuickEasy(completion: @escaping ([Recipe]) -> Void) {
-        fetchRandomRecipes(url: "https://api.smartmeal.kz/v1/food/recipes/random") { recipes in
+        fetchRecipes(url: "https://api.smartmeal.kz/v1/food/recipes/random") { recipes in
             completion(recipes)
         }
     }
     
     func getHealthy(completion: @escaping ([Recipe]) -> Void) {
-        fetchRandomRecipes(url: "https://api.smartmeal.kz/v1/food/recipes/random") { recipes in
+        fetchRecipes(url: "https://api.smartmeal.kz/v1/food/recipes/random") { recipes in
             completion(recipes)
         }
     }
@@ -125,6 +125,7 @@ class APIService {
             
             do {
                 guard let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]] else {
+                    print("json ser: error")
                     completion([])
                     return
                 }

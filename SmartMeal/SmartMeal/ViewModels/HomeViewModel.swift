@@ -32,6 +32,7 @@ class HomeViewModel {
         group.enter()
         
         APIService.shared.getPopular { recipes in
+            print("1: \(recipes.count)")
             self.tableViewCellModels.append(TableCellViewModel(recipes: recipes))
             group.leave()
         }
@@ -39,6 +40,7 @@ class HomeViewModel {
         
         group.enter()
         APIService.shared.getRecommendations { recipes in
+            print("2: \(recipes.count)")
             self.tableViewCellModels.append(TableCellViewModel(recipes: recipes))
             group.leave()
         }
@@ -46,6 +48,7 @@ class HomeViewModel {
         group.enter()
         
         APIService.shared.getQuickEasy { recipes in
+            print("3: \(recipes.count)")
             self.tableViewCellModels.append(TableCellViewModel(recipes: recipes))
             group.leave()
         }
@@ -54,6 +57,7 @@ class HomeViewModel {
         group.enter()
         
         APIService.shared.getHealthy { recipes in
+            print("4: \(recipes.count)")
             self.tableViewCellModels.append(TableCellViewModel(recipes: recipes))
             group.leave()
         }

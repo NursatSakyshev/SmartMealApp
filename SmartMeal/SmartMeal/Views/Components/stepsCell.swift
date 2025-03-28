@@ -14,24 +14,24 @@ class StepCell: UITableViewCell {
         var textLabel = UILabel()
         textLabel.numberOfLines = 0
         textLabel.textAlignment = .left
+        textLabel.translatesAutoresizingMaskIntoConstraints = false
         return textLabel
     }()
     
     var stepImageView: UIImageView = {
         var imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
     var numberLabel: UILabel = {
         var label = UILabel()
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     static let identifier = "StepCell"
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -41,24 +41,26 @@ class StepCell: UITableViewCell {
     func setupUI() {
         [stepTextLabel, stepImageView, numberLabel].forEach {
             contentView.addSubview($0)
-            $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
         contentView.backgroundColor = .green
         
         NSLayoutConstraint.activate([
-            stepTextLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            stepTextLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            stepTextLabel.topAnchor.constraint(equalTo: topAnchor),
+            // stepTextLabel constraints
+            stepTextLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            stepTextLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            stepTextLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             
-            stepImageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
-            stepImageView.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
+            // stepImageView constraints
+            stepImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            stepImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             stepImageView.topAnchor.constraint(equalTo: stepTextLabel.bottomAnchor, constant: 10),
             stepImageView.heightAnchor.constraint(equalToConstant: 220),
             
+            // numberLabel constraints
             numberLabel.topAnchor.constraint(equalTo: stepImageView.bottomAnchor, constant: 10),
-            numberLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
-            numberLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
+            numberLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            numberLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
         ])
     }
     
@@ -69,6 +71,6 @@ class StepCell: UITableViewCell {
     func configure(step: Step) {
         stepTextLabel.text = step.text
         numberLabel.text = step.stepNumber
-        stepImageView.backgroundColor = .red
+        stepImageView.backgroundColor = .red  // Пример, можно заменить на изображение
     }
 }

@@ -8,56 +8,62 @@
 import UIKit
 
 class TestViewController: UIViewController {
+    var stepTableView: UITableView!
     
-    lazy var mainLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
-        label.text = "DELICOUS FOOD"
-        return label
-    }()
-    
-    lazy var subLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 0
-        label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 14)
-        label.text = "Healthy food is food that gives you all the nutrients you need to stay healthy, feel well and have plenty of energy"
-        return label
-    }()
-    
-    
-    lazy var imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "onboarding3")
-        imageView.contentMode = .scaleAspectFill
-        return imageView
-    }()
+    func setupSteps() {
+        
+        stepTableView = UITableView()
+        stepTableView.dataSource = self
+        stepTableView.delegate = self
+//        stepTableView.estimatedRowHeight = 100  // Оценочный размер (не влияет на реальный размер)
+//        stepTableView.rowHeight = UITableView.automaticDimension  // Автоматический расчет высоты
+        stepTableView.tag = 2
+        stepTableView.isUserInteractionEnabled = true
+        stepTableView.register(StepCell.self, forCellReuseIdentifier: StepCell.identifier)
+        
+        view.addSubview(stepTableView)
+        stepTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        stepTableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        NSLayoutConstraint.activate([
+            stepTableView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            stepTableView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            stepTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            stepTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
-        setupUI()
-    }
-    
-    func setupUI() {
-        [imageView, mainLabel, subLabel].forEach {
-            view.addSubview($0)
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        }
-        
-        NSLayoutConstraint.activate([
-            imageView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30),
-            imageView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30),
-            imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100),
-            imageView.heightAnchor.constraint(equalToConstant: 300),
-            
-            mainLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 40),
-            mainLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
-            subLabel.topAnchor.constraint(equalTo: mainLabel.bottomAnchor, constant: 20),
-            subLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 19),
-            subLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -19),
-        ])
+        view.backgroundColor = .green
+        setupSteps()
     }
 }
+
+
+
+extension TestViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        5
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: StepCell.identifier, for: indexPath) as? StepCell else { return UITableViewCell() }
+        let step = Step(text: "step1", imageURL: "asdf", stepNumber: "step1/2")
+        cell.configure(step: step)
+        return cell
+    }
+    
+    
+}
+
+
+
+
+/**
+ 
+ Healthy food is food that gives you all the nutrients you need to stay healthy, feel well and have plenty of energy
+ 
+ */
