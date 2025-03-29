@@ -12,6 +12,8 @@ class ProfileViewController: UIViewController, Coordinated {
     weak var coordinator: Coordinator?
     var viewModel: ProfileViewModel!
     
+    var signOut: (() -> ())?
+    
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.backgroundColor = .white
@@ -134,5 +136,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         UserDefaults.standard.removeObject(forKey: "authToken")
         UserDefaults.standard.removeObject(forKey: "refreshToken")
+        signOut?()
     }
 }

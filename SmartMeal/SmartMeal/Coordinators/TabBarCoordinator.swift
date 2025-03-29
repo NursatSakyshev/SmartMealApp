@@ -10,7 +10,9 @@ import UIKit
 class TabBarCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
     
     var childCoordinators = [Coordinator]()
+    var parentCoordinator: Coordinator?
     var window: UIWindow!
+    var profileUpdated: (() -> ())?
     
     func start() {
         let tabBar = TabBarController()
@@ -40,6 +42,10 @@ class TabBarCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
         profileNavigationController.delegate = self
         profileNavigationController.tabBarItem = UITabBarItem(title: Resources.Strings.TabBar.profile, image: Resources.Images.TabBar.profile, tag: Tabs.profile.rawValue)
         let profileCoordinator = ProfileCoordinator(navigationController: profileNavigationController)
+        profileCoordinator.profileUpdated = { [weak self] in
+            self?.parentCoordinator?.start()
+        }
+        profileCoordinator.parentCoordinator = self
         childCoordinators.append(profileCoordinator)
         profileCoordinator.start()
         

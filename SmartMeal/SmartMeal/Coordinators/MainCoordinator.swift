@@ -72,6 +72,7 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
     
     func navigateToTabBar(){
         let tabBarVC = TabBarCoordinator(window: window)
+        tabBarVC.parentCoordinator = self
         tabBarVC.start()
         childCoordinators.append(tabBarVC)
     }

@@ -27,7 +27,7 @@ enum Resources {
         enum TabBar {
             static var home = UIImage(systemName: "house.fill")
             static var search = UIImage(systemName: "magnifyingglass.circle.fill")
-            static var favorites = UIImage(systemName: "heart.fill")
+            static var favorites = UIImage(systemName: "bookmark.fill")
             static var profile = UIImage(systemName: "person.circle.fill")
         }
     }
