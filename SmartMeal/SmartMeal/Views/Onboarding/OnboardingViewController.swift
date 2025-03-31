@@ -127,9 +127,6 @@ class OnboardingViewController: UIViewController {
         let isLastPage = currentPage == onboardingPages.count - 1
         if isLastPage {
             onFinish?()
-//            print("Онбординг завершён")
-//            let signInVC = SignInViewController()
-//            navigationController?.pushViewController(signInVC, animated: true)
         } else {
             currentPage += 1
             let nextVC = onboardingPages[currentPage]
@@ -139,9 +136,6 @@ class OnboardingViewController: UIViewController {
 
     @objc private func skipButtonTapped() {
         onFinish?()
-//        print("Онбординг пропущен")
-//        let signInVC = SignInViewController()
-//        navigationController?.pushViewController(signInVC, animated: true)
     }
 }
 
