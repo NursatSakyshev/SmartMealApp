@@ -132,3 +132,5 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         return CGSize(width: collectionView.frame.width, height: 50)
     }
 }
+
+

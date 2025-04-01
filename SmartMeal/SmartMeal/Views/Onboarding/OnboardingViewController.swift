@@ -162,3 +162,7 @@ extension OnboardingViewController: UIPageViewControllerDelegate {
         }
     }
 }
+
+/**
+ Healthy food is food that gives you all the nutrients you need to stay healthy, feel well and have plenty of energy
+ */

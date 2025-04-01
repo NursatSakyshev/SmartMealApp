@@ -40,7 +40,6 @@
 		C83477552D70BCD2006ED330 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83477542D70BCD2006ED330 /* ProfileViewController.swift */; };
 		C83477572D70BCFA006ED330 /* FavoritesViewControler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83477562D70BCFA006ED330 /* FavoritesViewControler.swift */; };
 		C84027232D96B5B400F6F3DE /* DynamicTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84027222D96B5B400F6F3DE /* DynamicTableView.swift */; };
-		C857ED9E2D8D3A060002E493 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C857ED9D2D8D3A060002E493 /* TestViewController.swift */; };
 		C857EDA02D913BF90002E493 /* ProfileViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C857ED9F2D913BF90002E493 /* ProfileViewCell.swift */; };
 		C86AD92E2D95B08C009ACB1E /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86AD92D2D95B08C009ACB1E /* OnboardingPageViewController.swift */; };
 		C86AD9302D95B0C1009ACB1E /* CustomPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86AD92F2D95B0C1009ACB1E /* CustomPageControl.swift */; };
@@ -107,7 +106,6 @@
 		C83477542D70BCD2006ED330 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		C83477562D70BCFA006ED330 /* FavoritesViewControler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewControler.swift; sourceTree = "<group>"; };
 		C84027222D96B5B400F6F3DE /* DynamicTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicTableView.swift; sourceTree = "<group>"; };
-		C857ED9D2D8D3A060002E493 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		C857ED9F2D913BF90002E493 /* ProfileViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewCell.swift; sourceTree = "<group>"; };
 		C86AD92D2D95B08C009ACB1E /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
 		C86AD92F2D95B0C1009ACB1E /* CustomPageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPageControl.swift; sourceTree = "<group>"; };
@@ -218,7 +216,6 @@
 				C83477522D70BC7D006ED330 /* TabBarViewController.swift */,
 				C83477542D70BCD2006ED330 /* ProfileViewController.swift */,
 				C89B86E32D70C65400C175CB /* SearchViewController.swift */,
-				C857ED9D2D8D3A060002E493 /* TestViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -478,7 +475,6 @@
 				C834772F2D6E2574006ED330 /* DividerView.swift in Sources */,
 				C834772D2D6E22A3006ED330 /* CustomButton.swift in Sources */,
 				C89B86F72D7291D600C175CB /* Coordinator.swift in Sources */,
-				C857ED9E2D8D3A060002E493 /* TestViewController.swift in Sources */,
 				C8276F142D93CAF0007A6EC5 /* stepsCell.swift in Sources */,
 				C82B44592D740BEB009B020D /* NavigatorCoordinator.swift in Sources */,
 				C8EA4A9B2D76CBF200337A8E /* FavoritesViewModel.swift in Sources */,

@@ -75,10 +75,6 @@ class FavoritesViewController: UIViewController, Coordinated {
         viewModel.loadFavorites()
     }
     
-    deinit {
-//        NotificationCenter.default.removeObserver(self, name: .favoritesUpdated, object: nil)
-    }
-    
     private func bindViewModel() {
         viewModel.collectionCellViewModels.bind { [weak self] _ in
             DispatchQueue.main.async {
